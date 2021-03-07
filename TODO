@@ -1,5 +1,7 @@
 
-- inside-out mode for raptor
+- add $0s so that multiple instances of the patch can be run in concert
+
+- inside-out mode for raptor mode
 
 - looper
 
