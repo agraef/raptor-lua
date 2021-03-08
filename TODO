@@ -1,6 +1,4 @@
 
-- make MIDI output channel configurable
-
 - accommodate multiple voices running on different parameter sets
 
 - add a harmonicity sweep effect

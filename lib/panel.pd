@@ -1,4 +1,4 @@
-#N canvas 730 97 525 621 10;
+#N canvas 730 95 525 652 10;
 #X floatatom 102 51 6 0 127 2 minvel minvel -, f 6;
 #X msg 102 301 minvel \$1;
 #X floatatom 147 51 6 0 127 2 maxvel maxvel -, f 6;
@@ -35,10 +35,10 @@
 #X obj 273 20 tgl 15 0 empty hold hold -27 6 0 10 #fcfcfc #000000 #000000
 0 1;
 #X msg 273 301 hold \$1;
-#X floatatom 201 19 4 1 128 0 pgm pgm -, f 4;
-#X msg 201 390 pgm \$1;
-#X floatatom 147 19 4 -100 100 0 swing swing -, f 4;
-#X msg 147 390 swing \$1;
+#X floatatom 166 19 4 1 128 0 pgm pgm -, f 4;
+#X msg 166 520 pgm \$1;
+#X floatatom 112 19 4 -100 100 0 swing swing -, f 4;
+#X msg 112 520 swing \$1;
 #X obj 200 155 hsl 64 15 -100 100 0 0 empty hmod hmod -3 -12 0 10 #fcfcfc
 #000000 #000000 3150 1;
 #X msg 310 155 0;
@@ -67,19 +67,19 @@
 #000000 #000000;
 #X obj 100 260 tgl 15 0 empty uniq uniq -1 -10 0 10 #fcfcfc #000000
 #000000 1 1;
-#X msg 100 430 hmin \$1;
-#X msg 147 430 hmax \$1;
-#X msg 200 430 hmod \$1;
-#X msg 100 460 pref \$1;
-#X msg 200 460 prefmod \$1;
-#X msg 100 490 smin \$1;
-#X msg 147 490 smax \$1;
-#X msg 200 490 smod \$1;
-#X msg 100 520 uniq \$1;
-#X msg 147 520 nmax \$1;
-#X msg 200 520 nmod \$1;
+#X msg 100 390 hmin \$1;
+#X msg 147 390 hmax \$1;
+#X msg 200 390 hmod \$1;
+#X msg 100 420 pref \$1;
+#X msg 200 420 prefmod \$1;
+#X msg 100 450 smin \$1;
+#X msg 147 450 smax \$1;
+#X msg 200 450 smod \$1;
+#X msg 100 480 uniq \$1;
+#X msg 147 480 nmax \$1;
+#X msg 200 480 nmod \$1;
 #X obj 30 45 vradio 15 0 0 7 empty downval dn 0 -8 0 10 #fcfcfc #000000
-#000000 4;
+#000000 3;
 #X obj 50 45 vradio 15 0 0 7 empty upval up 0 -8 0 10 #fcfcfc #000000
 #000000 2;
 #N canvas 730 172 459 457 octave 0;
@@ -171,6 +171,8 @@
 #X connect 5 0 3 0;
 #X restore 30 330 pd mode;
 #X text 50 239 outs-in;
+#X floatatom 224 19 3 0 0 0 chan chan -, f 3;
+#X msg 224 520 chan \$1;
 #X connect 0 0 1 0;
 #X connect 1 0 4 0;
 #X connect 2 0 3 0;
@@ -235,4 +237,6 @@
 #X connect 62 0 63 1;
 #X connect 71 0 78 0;
 #X connect 77 0 78 1;
+#X connect 80 0 81 0;
+#X connect 81 0 4 0;
 #X coords 0 -1 1 1 266 267 1 25 15;

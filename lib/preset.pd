@@ -1,4 +1,4 @@
-#N canvas 105 110 610 526 10;
+#N canvas 105 110 610 528 10;
 #X obj 137 77 t b b b;
 #X msg 288 102 clear;
 #X msg 137 203 write \$1;
@@ -80,6 +80,7 @@ at loadbang time) and recalls it immediately, f 26;
 #X connect 2 0 3 0;
 #X restore 380 410 pd recall;
 #X obj 223 338 param \$1 raptor;
+#X obj 440 341 param \$1 chan;
 #X connect 0 0 5 0;
 #X connect 0 1 21 0;
 #X connect 0 2 1 0;
