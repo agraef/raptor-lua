@@ -59,15 +59,15 @@ function arpeggio:initialize(_, atoms)
    self.pattern = {}
    self.hold = nil
    self.down, self.up, self.mode = -1, 1, 0
-   self.minvel, self.maxvel, self.velmod = 60, 120, 100
-   self.pmin, self.pmax, self.pmod = 30, 100, 0
-   self.gate, self.gatemod = 100, 0
+   self.minvel, self.maxvel, self.velmod = 60, 120, 1
+   self.pmin, self.pmax, self.pmod = 0.3, 1, 0
+   self.gate, self.gatemod = 1, 0
    -- Raptor params, reasonable defaults
    self.nmax, self.nmod = 1, 0
-   self.hmin, self.hmax, self.hmod = 0, 100, 0
+   self.hmin, self.hmax, self.hmod = 0, 1, 0
    self.smin, self.smax, self.smod = 1, 7, 0
    self.uniq = 1
-   self.pref, self.prefmod = 100, 0
+   self.pref, self.prefmod = 1, 0
    -- Barlow meter, cf. barlow.pd_lua
    self.n = 7 -- subdivisions, seems to work reasonably well up to 7-toles
    if atoms[1] == "-n" then
@@ -179,23 +179,23 @@ function arpeggio:in_1_bang()
    local w1 = w/math.max(1,n-1)
    -- corresponding MIDI velocity
    local vel =
-      math.floor(mod_value(self.minvel, self.maxvel, self.velmod/100, w1))
+      math.floor(mod_value(self.minvel, self.maxvel, self.velmod, w1))
    self:outlet(3, "float", {n})
    self:outlet(2, "float", {w})
    if next(self.pattern) ~= nil then
       -- note filtering
-      local pmin, pmax = self.pmin/100, self.pmax/100
+      local pmin, pmax = self.pmin, self.pmax
       -- Calculate the filter probablity. We allow for negative pmod values
       -- here, in which case stronger pulses tend to be filtered out first
       -- rather than weaker ones.
-      local p = mod_value(pmin, pmax, self.pmod/100, w1)
+      local p = mod_value(pmin, pmax, self.pmod, w1)
       local r = math.random()
       if self.debug&4~=0 then
 	 pd.post(string.format("w = %g, p = %g, r = %g", w1, p, r))
       end
       if r <= p then
 	 -- modulated gate value
-	 local gate = mod_value(0, self.gate, self.gatemod/100, w1)
+	 local gate = mod_value(0, self.gate, self.gatemod, w1)
 	 -- output notes (there may be more than one in Raptor mode)
 	 local notes = cycle(self.pattern, self.idx+1)
 	 if self.debug&4~=0 then
@@ -278,11 +278,11 @@ function arpeggio:create_pattern(chord)
 	    local _dir
 	    cache[mode], _dir =
 	       rand_notes(w1,
-			  self.nmax, self.nmod/100,
-			  self.hmin/100, self.hmax/100, self.hmod/100,
-			  self.smin, self.smax, self.smod/100,
+			  self.nmax, self.nmod,
+			  self.hmin, self.hmax, self.hmod,
+			  self.smin, self.smax, self.smod,
 			  dir, mode, self.uniq ~= 0,
-			  self.pref/100, self.prefmod/100,
+			  self.pref, self.prefmod,
 			  cache[mode],
 			  chord, seq(a, b))
 	    pattern[i] = cache[mode]
@@ -306,11 +306,11 @@ function arpeggio:create_pattern(chord)
 	    local w1 = w/math.max(1,n-1)
 	    cache, dir =
 	       rand_notes(w1,
-			  self.nmax, self.nmod/100,
-			  self.hmin/100, self.hmax/100, self.hmod/100,
-			  self.smin, self.smax, self.smod/100,
+			  self.nmax, self.nmod,
+			  self.hmin, self.hmax, self.hmod,
+			  self.smin, self.smax, self.smod,
 			  dir, mode, self.uniq ~= 0,
-			  self.pref/100, self.prefmod/100,
+			  self.pref, self.prefmod,
 			  cache,
 			  chord, seq(a, b))
 	    pattern[i] = cache
@@ -438,42 +438,42 @@ end
 function arpeggio:in_1_velmod(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.velmod = math.max(-100, math.min(100, x))
+      self.velmod = math.max(-100, math.min(100, x))/100
    end
 end
 
 function arpeggio:in_1_gate(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.gate = math.max(0, math.min(1000, x))
+      self.gate = math.max(0, math.min(1000, x))/100
    end
 end
 
 function arpeggio:in_1_gatemod(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.gatemod = math.max(-100, math.min(100, x))
+      self.gatemod = math.max(-100, math.min(100, x))/100
    end
 end
 
 function arpeggio:in_1_pmin(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.pmin = math.max(0, math.min(100, x))
+      self.pmin = math.max(0, math.min(100, x))/100
    end
 end
 
 function arpeggio:in_1_pmax(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.pmax = math.max(0, math.min(100, x))
+      self.pmax = math.max(0, math.min(100, x))/100
    end
 end
 
 function arpeggio:in_1_pmod(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.pmod = math.max(-100, math.min(100, x))
+      self.pmod = math.max(-100, math.min(100, x))/100
    end
 end
 
@@ -491,7 +491,7 @@ end
 function arpeggio:in_1_nmod(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.nmod = math.max(-100, math.min(100, x))
+      self.nmod = math.max(-100, math.min(100, x))/100
       if self.raptor~=0 then
 	 self.pattern = self:create_pattern(self:get_chord())
       end
@@ -501,7 +501,7 @@ end
 function arpeggio:in_1_hmin(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.hmin = math.max(0, math.min(100, x))
+      self.hmin = math.max(0, math.min(100, x))/100
       if self.raptor~=0 then
 	 self.pattern = self:create_pattern(self:get_chord())
       end
@@ -511,7 +511,7 @@ end
 function arpeggio:in_1_hmax(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.hmax = math.max(0, math.min(100, x))
+      self.hmax = math.max(0, math.min(100, x))/100
       if self.raptor~=0 then
 	 self.pattern = self:create_pattern(self:get_chord())
       end
@@ -521,7 +521,7 @@ end
 function arpeggio:in_1_hmod(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.hmod = math.max(-100, math.min(100, x))
+      self.hmod = math.max(-100, math.min(100, x))/100
       if self.raptor~=0 then
 	 self.pattern = self:create_pattern(self:get_chord())
       end
@@ -551,7 +551,7 @@ end
 function arpeggio:in_1_smod(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.smod = math.max(-100, math.min(100, x))
+      self.smod = math.max(-100, math.min(100, x))/100
       if self.raptor~=0 then
 	 self.pattern = self:create_pattern(self:get_chord())
       end
@@ -571,7 +571,7 @@ end
 function arpeggio:in_1_pref(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.pref = math.max(-100, math.min(100, x))
+      self.pref = math.max(-100, math.min(100, x))/100
       if self.raptor~=0 then
 	 self.pattern = self:create_pattern(self:get_chord())
       end
@@ -581,7 +581,7 @@ end
 function arpeggio:in_1_prefmod(x)
    x = self:numarg(x)
    if type(x) == "number" then
-      self.prefmod = math.max(-100, math.min(100, x))
+      self.prefmod = math.max(-100, math.min(100, x))/100
       if self.raptor~=0 then
 	 self.pattern = self:create_pattern(self:get_chord())
       end
