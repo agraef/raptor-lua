@@ -58,7 +58,7 @@ function arpeggio:initialize(_, atoms)
    self.chord = {}
    self.pattern = {}
    self.hold = nil
-   self.down, self.up, self.mode = 1, 1, 0
+   self.down, self.up, self.mode = -1, 1, 0
    self.minvel, self.maxvel, self.velmod = 60, 120, 100
    self.pmin, self.pmax, self.pmod = 30, 100, 0
    self.gate, self.gatemod = 100, 0
@@ -239,11 +239,8 @@ end
 
 function arpeggio:create_pattern(chord)
    -- create a new pattern using the current settings
-   local pattern = chord
-   for i = 1, self.down do
-      pattern = tabcat(transp(chord, -i), pattern)
-   end
-   for i = 1, self.up do
+   local pattern = {}
+   for i = self.down, self.up do
       pattern = tabcat(pattern, transp(chord, i))
    end
    -- By default we do outside-in by alternating up-down (i.e., lo-hi), set
@@ -392,7 +389,7 @@ end
 function arpeggio:in_1_up(x)
    x = self:intarg(x)
    if type(x) == "number" then
-      self.up = math.max(0, math.min(3, x))
+      self.up = math.max(-3, math.min(3, x))
       self.pattern = self:create_pattern(self:get_chord())
    end
 end
@@ -400,7 +397,7 @@ end
 function arpeggio:in_1_down(x)
    x = self:intarg(x)
    if type(x) == "number" then
-      self.down = math.max(0, math.min(3, x))
+      self.down = math.max(-3, math.min(3, x))
       self.pattern = self:create_pattern(self:get_chord())
    end
 end

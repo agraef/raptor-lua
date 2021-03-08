@@ -24,4 +24,4 @@ maxvel 127;
 minvel 63;
 mode 5;
 up 2;
-down 1;
+down -1;
