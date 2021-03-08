@@ -228,9 +228,9 @@
 #X text 190 76 gatemod;
 #X text 190 91 swing;
 #X obj 290 320 preset default 1;
-#X obj 290 357 preset triplet 2;
-#X obj 290 394 preset weirdmod 3;
-#X obj 290 431 preset bla 4;
+#X obj 290 345 preset triplet 2;
+#X obj 290 370 preset weirdmod 3;
+#X obj 290 395 preset bla 4;
 #N canvas 275 230 330 312 input 0;
 #X obj 30 20 r arp;
 #X obj 30 70 s tempo;
@@ -319,7 +319,7 @@
 #X connect 3 2 5 0;
 #X restore 50 480 pd init;
 #X obj 170 110 control;
-#X obj 290 468 preset raptor 5;
+#X obj 290 420 preset raptor 5;
 #X obj 290 20 panel;
 #X obj 160 335 hsl 48 15 0 600 0 1 trace empty trace -2 -8 0 10 #fcfcfc
 #000000 #000000 2350 1;
