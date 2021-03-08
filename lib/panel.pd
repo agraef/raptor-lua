@@ -1,83 +1,176 @@
-#N canvas 685 95 363 584 10;
-#X floatatom 32 51 6 0 127 2 minvel minvel -, f 6;
-#X msg 32 301 minvel \$1;
-#X floatatom 77 51 6 0 127 2 maxvel maxvel -, f 6;
-#X msg 77 301 maxvel \$1;
-#X obj 290 430 s arp;
-#X obj 130 53 hsl 64 15 -100 100 0 0 empty velmod velmod -3 -12 0 10
-#fcfcfc #000000 #000000 0 1;
-#X msg 130 301 velmod \$1;
-#X msg 240 53 100;
-#X obj 202 53 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#N canvas 730 97 525 621 10;
+#X floatatom 102 51 6 0 127 2 minvel minvel -, f 6;
+#X msg 102 301 minvel \$1;
+#X floatatom 147 51 6 0 127 2 maxvel maxvel -, f 6;
+#X msg 147 301 maxvel \$1;
+#X obj 360 430 s arp;
+#X obj 200 53 hsl 64 15 -100 100 0 0 empty velmod velmod -3 -12 0 10
+#fcfcfc #000000 #000000 6300 1;
+#X msg 200 301 velmod \$1;
+#X msg 310 53 100;
+#X obj 272 53 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 130 87 hsl 64 15 -100 100 0 0 empty pmod pmod -3 -12 0 10 #fcfcfc
-#000000 #000000 0 1;
-#X msg 240 87 0;
-#X floatatom 30 87 6 0 100 2 pmin pmin -, f 6;
-#X floatatom 77 87 6 0 100 2 pmax pmax -, f 6;
-#X msg 30 330 pmin \$1;
-#X msg 77 330 pmax \$1;
-#X msg 130 330 pmod \$1;
-#X obj 202 87 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 200 87 hsl 64 15 -100 100 0 0 empty pmod pmod -3 -12 0 10 #fcfcfc
+#000000 #000000 3150 1;
+#X msg 310 87 0;
+#X floatatom 100 87 6 0 100 2 pmin pmin -, f 6;
+#X floatatom 147 87 6 0 100 2 pmax pmax -, f 6;
+#X msg 100 330 pmin \$1;
+#X msg 147 330 pmax \$1;
+#X msg 200 330 pmod \$1;
+#X obj 272 87 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 30 121 hsl 64 15 0 200 0 0 empty gate gate -1 -12 0 10 #fcfcfc
-#000000 #000000 0 1;
-#X msg 240 121 100;
-#X msg 30 360 gate \$1;
-#X obj 130 121 hsl 64 15 -100 100 0 0 empty gatemod gatemod -2 -12
-0 10 #fcfcfc #000000 #000000 0 1;
-#X msg 280 121 0;
-#X msg 130 360 gatemod \$1;
-#X obj 202 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 100 121 hsl 64 15 0 200 0 0 empty gate gate -1 -12 0 10 #fcfcfc
+#000000 #000000 3150 1;
+#X msg 310 121 100;
+#X msg 100 360 gate \$1;
+#X obj 200 121 hsl 64 15 -100 100 0 0 empty gatemod gatemod -2 -12
+0 10 #fcfcfc #000000 #000000 3150 1;
+#X msg 350 121 0;
+#X msg 200 360 gatemod \$1;
+#X obj 272 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 102 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 172 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 203 20 tgl 15 0 empty hold empty 17 7 0 10 #fcfcfc #000000 #000000
+#X obj 273 20 tgl 15 0 empty hold hold -27 6 0 10 #fcfcfc #000000 #000000
 0 1;
-#X msg 203 301 hold \$1;
-#X floatatom 171 19 4 1 128 0 pgm pgm -, f 4;
-#X msg 171 390 pgm \$1;
-#X floatatom 117 19 4 -100 100 0 swing swing -, f 4;
-#X msg 117 390 swing \$1;
-#X obj 130 155 hsl 64 15 -100 100 0 0 empty hmod hmod -3 -12 0 10 #fcfcfc
-#000000 #000000 0 1;
-#X msg 240 155 0;
-#X floatatom 30 155 6 0 100 2 hmin hmin -, f 6;
-#X floatatom 77 155 6 0 100 2 hmax hmax -, f 6;
-#X obj 202 155 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X msg 273 301 hold \$1;
+#X floatatom 201 19 4 1 128 0 pgm pgm -, f 4;
+#X msg 201 390 pgm \$1;
+#X floatatom 147 19 4 -100 100 0 swing swing -, f 4;
+#X msg 147 390 swing \$1;
+#X obj 200 155 hsl 64 15 -100 100 0 0 empty hmod hmod -3 -12 0 10 #fcfcfc
+#000000 #000000 3150 1;
+#X msg 310 155 0;
+#X floatatom 100 155 6 0 100 2 hmin hmin -, f 6;
+#X floatatom 147 155 6 0 100 2 hmax hmax -, f 6;
+#X obj 272 155 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 130 190 hsl 64 15 -100 100 0 0 empty prefmod prefmod -3 -12
-0 10 #fcfcfc #000000 #000000 0 1;
-#X msg 240 190 0;
-#X floatatom 30 190 6 -100 100 2 pref pref -, f 6;
-#X obj 202 190 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 200 190 hsl 64 15 -100 100 0 0 empty prefmod prefmod -3 -12
+0 10 #fcfcfc #000000 #000000 3150 1;
+#X msg 310 190 0;
+#X floatatom 100 190 6 -100 100 2 pref pref -, f 6;
+#X obj 272 190 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 130 225 hsl 64 15 -100 100 0 0 empty smod smod -3 -12 0 10 #fcfcfc
-#000000 #000000 0 1;
-#X msg 240 225 0;
-#X floatatom 30 225 6 -127 127 2 smin smin -, f 6;
-#X floatatom 77 225 6 -127 127 2 smax smax -, f 6;
-#X obj 202 225 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 200 225 hsl 64 15 -100 100 0 0 empty smod smod -3 -12 0 10 #fcfcfc
+#000000 #000000 3150 1;
+#X msg 310 225 0;
+#X floatatom 100 225 6 -127 127 2 smin smin -, f 6;
+#X floatatom 147 225 6 -127 127 2 smax smax -, f 6;
+#X obj 272 225 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 130 260 hsl 64 15 -100 100 0 0 empty nmod nmod -3 -12 0 10 #fcfcfc
-#000000 #000000 0 1;
-#X msg 240 260 0;
-#X floatatom 77 260 6 0 10 2 nmax nmax -, f 6;
-#X obj 202 260 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 200 260 hsl 64 15 -100 100 0 0 empty nmod nmod -3 -12 0 10 #fcfcfc
+#000000 #000000 3150 1;
+#X msg 310 260 0;
+#X floatatom 147 260 6 0 10 2 nmax nmax -, f 6;
+#X obj 272 260 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 30 260 tgl 15 0 empty uniq uniq -1 -10 0 10 #fcfcfc #000000
+#X obj 100 260 tgl 15 0 empty uniq uniq -1 -10 0 10 #fcfcfc #000000
+#000000 1 1;
+#X msg 100 430 hmin \$1;
+#X msg 147 430 hmax \$1;
+#X msg 200 430 hmod \$1;
+#X msg 100 460 pref \$1;
+#X msg 200 460 prefmod \$1;
+#X msg 100 490 smin \$1;
+#X msg 147 490 smax \$1;
+#X msg 200 490 smod \$1;
+#X msg 100 520 uniq \$1;
+#X msg 147 520 nmax \$1;
+#X msg 200 520 nmod \$1;
+#X obj 30 45 vradio 15 0 0 7 empty downval dn 0 -8 0 10 #fcfcfc #000000
+#000000 4;
+#X obj 50 45 vradio 15 0 0 7 empty upval up 0 -8 0 10 #fcfcfc #000000
+#000000 2;
+#N canvas 730 172 459 457 octave 0;
+#X obj 20 20 inlet;
+#X obj 190 200 s arp;
+#X obj 39 70 v downval;
+#X obj 20 100 t b f;
+#X obj 20 125 v upval;
+#X obj 20 150 min;
+#X obj 20 175 change;
+#X obj 20 200 s upval;
+#X obj 300 20 inlet;
+#X obj 300 100 t b f;
+#X obj 300 175 change;
+#X obj 319 70 v upval;
+#X obj 300 125 v downval;
+#X obj 300 150 max;
+#X obj 300 200 s downval;
+#X floatatom 80 175 5 0 0 0 - - -, f 5;
+#X floatatom 370 175 5 0 0 0 - - -, f 5;
+#X obj 120 20 r down;
+#X obj 120 70 s downval;
+#X obj 390 20 r up;
+#X obj 390 70 s upval;
+#X obj 20 45 t f f f;
+#X obj 80 100 expr 3-$f1;
+#X obj 370 100 expr 3-$f1;
+#X obj 300 45 t f f f;
+#X msg 80 125 down \$1;
+#X msg 370 125 up \$1;
+#X obj 120 45 expr max(0 \, min(6 \, 3-$f1));
+#X obj 390 45 expr max(0 \, min(6 \, 3-$f1));
+#X connect 0 0 21 0;
+#X connect 3 0 4 0;
+#X connect 3 1 5 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 5 0 15 0;
+#X connect 6 0 7 0;
+#X connect 8 0 24 0;
+#X connect 9 0 12 0;
+#X connect 9 1 13 1;
+#X connect 10 0 14 0;
+#X connect 12 0 13 0;
+#X connect 13 0 10 0;
+#X connect 13 0 16 0;
+#X connect 17 0 27 0;
+#X connect 19 0 28 0;
+#X connect 21 0 3 0;
+#X connect 21 1 2 0;
+#X connect 21 2 22 0;
+#X connect 22 0 25 0;
+#X connect 23 0 26 0;
+#X connect 24 0 9 0;
+#X connect 24 1 11 0;
+#X connect 24 2 23 0;
+#X connect 25 0 1 0;
+#X connect 26 0 1 0;
+#X connect 27 0 18 0;
+#X connect 28 0 20 0;
+#X restore 30 300 pd octave;
+#X text 70 45 +3;
+#X text 70 60 +2;
+#X text 70 75 +1;
+#X text 76 92 0;
+#X text 70 105 -1;
+#X text 70 120 -2;
+#X text 70 135 -3;
+#X obj 30 165 vradio 15 0 0 6 empty mode empty 0 -8 0 10 #fcfcfc #000000
+#000000 1;
+#X text 50 178 up;
+#X text 50 193 down;
+#X text 50 208 up-down;
+#X text 50 223 down-up;
+#X text 50 163 random;
+#X obj 30 259 tgl 15 0 empty raptor raptor 20 6 0 10 #fcfcfc #000000
 #000000 0 1;
-#X msg 30 430 hmin \$1;
-#X msg 77 430 hmax \$1;
-#X msg 130 430 hmod \$1;
-#X msg 30 460 pref \$1;
-#X msg 130 460 prefmod \$1;
-#X msg 30 490 smin \$1;
-#X msg 77 490 smax \$1;
-#X msg 130 490 smod \$1;
-#X msg 30 520 uniq \$1;
-#X msg 77 520 nmax \$1;
-#X msg 130 520 nmod \$1;
+#N canvas 740 245 455 407 mode 0;
+#X obj 30 20 inlet;
+#X obj 90 20 inlet;
+#X msg 30 42 mode \$1;
+#X obj 30 100 s arp;
+#X obj 90 46 != 0;
+#X msg 90 71 raptor \$1;
+#X connect 0 0 2 0;
+#X connect 1 0 4 0;
+#X connect 2 0 3 0;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X restore 30 330 pd mode;
+#X text 50 239 outs-in;
 #X connect 0 0 1 0;
 #X connect 1 0 4 0;
 #X connect 2 0 3 0;
@@ -138,4 +231,8 @@
 #X connect 58 0 4 0;
 #X connect 59 0 4 0;
 #X connect 60 0 4 0;
-#X coords 0 -1 1 1 199 268 1 25 15;
+#X connect 61 0 63 0;
+#X connect 62 0 63 1;
+#X connect 71 0 78 0;
+#X connect 77 0 78 1;
+#X coords 0 -1 1 1 266 267 1 25 15;

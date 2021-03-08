@@ -1,5 +1,11 @@
 
-- add $0s so that multiple instances of the patch can be run in concert
+- make MIDI output channel configurable
 
-- looper
+- accommodate multiple voices running on different parameter sets
+
+- add a harmonicity sweep effect
+
+- MIDI automation for the parameters
+
+- add a looper
 
