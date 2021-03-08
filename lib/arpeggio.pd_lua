@@ -246,43 +246,78 @@ function arpeggio:create_pattern(chord)
    for i = 1, self.up do
       pattern = tabcat(pattern, transp(chord, i))
    end
+   -- By default we do outside-in by alternating up-down (i.e., lo-hi), set
+   -- this flag to true to get something more Logic-like which goes down-up.
+   local logic_like = false
    if next(pattern) == nil then
       -- nothing to see here, move along...
       return pattern
    elseif self.raptor ~= 0 then
       -- Raptor mode: Pick random notes from the eligible range based on
       -- average Barlow harmonicities (cf. barlow.lua). This also combines
-      -- with mode 0..4, employing the corresponding Raptor arpeggiation
-      -- mode. Note that these patterns may contain notes that we're not
+      -- with mode 0..5, employing the corresponding Raptor arpeggiation
+      -- modes. Note that these patterns may contain notes that we're not
       -- actually playing, if they're harmonically related to the input
-      -- chord. Also, depending on its settings, Raptor can play chords rather
-      -- than just single notes.
+      -- chord. Raptor can also play chords rather than just single notes, and
+      -- with the right settings you can make it go from plain tonal to more
+      -- jazz-like and free to completely atonal, and everything in between.
       local n = self.beats
       local a, b = pattern[1], pattern[#pattern]
-      local cache = {}
       pattern = {}
-      -- Our Raptor implementation doesn't support mode 5 (outside-in) yet, so
-      -- use random mode in its place for now.
-      local mode = self.mode > 4 and 0 or self.mode
-      local dir = 0
-      if mode == 1 or mode == 3 then
-	 dir = 1
-      elseif mode == 2 or mode == 4 then
-	 dir = -1
-      end
-      for i = 1, n do
-	 local w = self.indisp[1][i]
-	 local w1 = w/math.max(1,n-1)
-	 cache, dir =
-	    rand_notes(w1,
-		       self.nmax, self.nmod/100,
-		       self.hmin/100, self.hmax/100, self.hmod/100,
-		       self.smin, self.smax, self.smod/100,
-		       dir, mode, self.uniq ~= 0,
-		       self.pref/100, self.prefmod/100,
-		       cache,
-		       chord, seq(a, b))
-	 pattern[i] = cache
+      if self.mode == 5 then
+	 -- Raptor by itself doesn't support mode 5 (outside-in), so we
+	 -- emulate it by alternating between mode 1 and 2. This isn't quite
+	 -- the same, but it's as close to outside-in as I can make it. You
+	 -- might also consider mode 0 (random) as a reasonable alternative
+	 -- instead.
+	 local cache = {{}, {}}
+	 local mode, dir = 1, 1
+	 if logic_like then
+	    mode, dir = 2, -1
+	 end
+	 for i = 1, n do
+	    local w = self.indisp[1][i]
+	    local w1 = w/math.max(1,n-1)
+	    local _dir
+	    cache[mode], _dir =
+	       rand_notes(w1,
+			  self.nmax, self.nmod/100,
+			  self.hmin/100, self.hmax/100, self.hmod/100,
+			  self.smin, self.smax, self.smod/100,
+			  dir, mode, self.uniq ~= 0,
+			  self.pref/100, self.prefmod/100,
+			  cache[mode],
+			  chord, seq(a, b))
+	    pattern[i] = cache[mode]
+	    if dir>0 then
+	       mode, dir = 2, -1
+	    else
+	       mode, dir = 1, 1
+	    end
+	 end
+      else
+	 local cache = {}
+	 local mode = self.mode
+	 local dir = 0
+	 if mode == 1 or mode == 3 then
+	    dir = 1
+	 elseif mode == 2 or mode == 4 then
+	    dir = -1
+	 end
+	 for i = 1, n do
+	    local w = self.indisp[1][i]
+	    local w1 = w/math.max(1,n-1)
+	    cache, dir =
+	       rand_notes(w1,
+			  self.nmax, self.nmod/100,
+			  self.hmin/100, self.hmax/100, self.hmod/100,
+			  self.smin, self.smax, self.smod/100,
+			  dir, mode, self.uniq ~= 0,
+			  self.pref/100, self.prefmod/100,
+			  cache,
+			  chord, seq(a, b))
+	    pattern[i] = cache
+	 end
       end
    elseif self.mode == 0 then
       -- random: this is just the run-of-the-mill random pattern permutation
@@ -311,8 +346,6 @@ function arpeggio:create_pattern(chord)
       -- outside-in
       local n, pat = #pattern, {}
       local p, q = n//2, n%2
-      -- set this to true to get something more like the Logic arpeggiator
-      local logic_like = false
       if logic_like then
 	 for i = 1, p do
 	    -- highest note first (a la Logic?)
