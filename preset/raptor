@@ -1,5 +1,5 @@
-outchan 1;
-inchan 0;
+outchan 4;
+inchan 1;
 pan 64;
 pgm 5;
 prefmod 100;
