@@ -182,7 +182,13 @@ function arpeggio:in_1_bang()
       math.floor(mod_value(self.minvel, self.maxvel, self.velmod, w1))
    self:outlet(3, "float", {n})
    self:outlet(2, "float", {w})
-   if next(self.pattern) ~= nil then
+   local notes = nil
+   if type(self.pattern) == "function" then
+      notes = self.pattern(w1)
+   elseif next(self.pattern) ~= nil then
+      notes = cycle(self.pattern, self.idx+1)
+   end
+   if notes ~= nil then
       -- note filtering
       local pmin, pmax = self.pmin, self.pmax
       -- Calculate the filter probablity. We allow for negative pmod values
@@ -197,7 +203,6 @@ function arpeggio:in_1_bang()
 	 -- modulated gate value
 	 local gate = mod_value(0, self.gate, self.gatemod, w1)
 	 -- output notes (there may be more than one in Raptor mode)
-	 local notes = cycle(self.pattern, self.idx+1)
 	 if self.debug&4~=0 then
 	    pd.post(string.format("idx = %g, notes = %s, vel = %g, gate = %g", self.idx, inspect(notes), vel, gate))
 	 end
@@ -258,9 +263,11 @@ function arpeggio:create_pattern(chord)
       -- chord. Raptor can also play chords rather than just single notes, and
       -- with the right settings you can make it go from plain tonal to more
       -- jazz-like and free to completely atonal, and everything in between.
-      local n = self.beats
       local a, b = pattern[1], pattern[#pattern]
-      pattern = {}
+      -- NOTE: As this kind of pattern is quite costly to compute, we
+      -- implement it as a closure which gets evaluated lazily for each pulse,
+      -- rather than precomputing the entire pattern at once as in the
+      -- deterministic modes.
       if self.mode == 5 then
 	 -- Raptor by itself doesn't support mode 5 (outside-in), so we
 	 -- emulate it by alternating between mode 1 and 2. This isn't quite
@@ -272,11 +279,9 @@ function arpeggio:create_pattern(chord)
 	 if logic_like then
 	    mode, dir = 2, -1
 	 end
-	 for i = 1, n do
-	    local w = self.indisp[1][i]
-	    local w1 = w/math.max(1,n-1)
-	    local _dir
-	    cache[mode], _dir =
+	 pattern = function(w1)
+	    local _
+	    cache[mode], _ =
 	       rand_notes(w1,
 			  self.nmax, self.nmod,
 			  self.hmin, self.hmax, self.hmod,
@@ -285,12 +290,13 @@ function arpeggio:create_pattern(chord)
 			  self.pref, self.prefmod,
 			  cache[mode],
 			  chord, seq(a, b))
-	    pattern[i] = cache[mode]
+	    local notes = cache[mode]
 	    if dir>0 then
 	       mode, dir = 2, -1
 	    else
 	       mode, dir = 1, 1
 	    end
+	    return notes
 	 end
       else
 	 local cache = {}
@@ -301,9 +307,7 @@ function arpeggio:create_pattern(chord)
 	 elseif mode == 2 or mode == 4 then
 	    dir = -1
 	 end
-	 for i = 1, n do
-	    local w = self.indisp[1][i]
-	    local w1 = w/math.max(1,n-1)
+	 pattern = function(w1)
 	    cache, dir =
 	       rand_notes(w1,
 			  self.nmax, self.nmod,
@@ -313,7 +317,7 @@ function arpeggio:create_pattern(chord)
 			  self.pref, self.prefmod,
 			  cache,
 			  chord, seq(a, b))
-	    pattern[i] = cache
+	    return cache
 	 end
       end
    elseif self.mode == 0 then
