@@ -301,7 +301,7 @@ end
 M.just = -- standard just intonation, a.k.a. the Ptolemaic (or Didymic) scale
    {  {1,1}, {16,15}, {9,8}, {6,5}, {5,4}, {4,3}, {45,32},
       {3,2}, {8,5}, {5,3}, {16,9}, {15,8}, {2,1}  }
-M.pyth = -- pythogorean (3-limit) scale
+M.pyth = -- pythagorean (3-limit) scale
    {  {1,1}, {2187,2048}, {9,8}, {32,27}, {81,64}, {4,3}, {729,512},
       {3,2}, {6561,4096}, {27,16}, {16,9}, {243,128}, {2,1}  }
 M.mean4 = -- 1/4 comma meantone scale, Barlow (re-)rationalization
@@ -414,8 +414,7 @@ end
 -- ms: candidate output notes (these will be filtered and participate in the
 -- random walk)
 
--- w: indispensability vector used to modulate the various parameters, this
--- also determines the number of beats and thereby the length of the pattern
+-- w: indispensability value used to modulate the various parameters
 
 -- nmax, nmod: range and modulation of the density (maximum number of notes
 -- in each step)
