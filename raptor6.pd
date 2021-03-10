@@ -1,4 +1,4 @@
-#N canvas 414 105 568 568 10;
+#N canvas 412 105 572 572 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 145 193 240;
@@ -56,7 +56,7 @@
 #X connect 15 0 14 0;
 #X coords 0 -1 1 1 180 37 1 26 22;
 #X restore 10 222 pd tempo;
-#N canvas 286 255 468 483 meter 0;
+#N canvas 311 137 469 510 meter 0;
 #X obj 30 100 inlet;
 #X obj 30 125 route float list;
 #X msg 30 250 meter \$1;
@@ -75,29 +75,29 @@
 #X obj 150 100 r \$0-meter;
 #X obj 100 275 s \$0-meter-set;
 #X obj 150 150 t a a b a;
-#N canvas 250 238 450 326 product 0;
+#N canvas 250 240 450 378 product 0;
 #X obj 20 20 inlet;
-#X obj 20 100 llist-drip;
 #X msg 100 100 1;
 #X obj 20 125 *;
 #X obj 50 125 f;
 #X obj 20 160 f;
 #X obj 20 45 t b a b;
-#X text 140 60 Calculate the product of a list. NOTE: We use the pd-lua
-version of drip here \, since presumably you already have that on the
-library path. If you don't then you can also replace llist-drip with
-the drip version from list-abs (list-drip) or zexy (drip)., f 44;
 #X obj 20 185 outlet;
-#X connect 0 0 6 0;
-#X connect 1 0 3 0;
-#X connect 2 0 3 1;
-#X connect 3 0 4 0;
-#X connect 3 0 5 1;
-#X connect 4 0 3 1;
-#X connect 5 0 8 0;
-#X connect 6 0 5 0;
-#X connect 6 1 1 0;
-#X connect 6 2 2 0;
+#X obj 20 100 zexy/drip;
+#X text 140 60 Calculate the product of a list. NOTE: We use the zexy
+version of drip here \, so you need to have that installed \, or replace
+it with a suitable replacement \, such as list-drip from list-abs.
+, f 44;
+#X connect 0 0 5 0;
+#X connect 1 0 2 1;
+#X connect 2 0 3 0;
+#X connect 2 0 4 1;
+#X connect 3 0 2 1;
+#X connect 4 0 6 0;
+#X connect 5 0 4 0;
+#X connect 5 1 7 0;
+#X connect 5 2 1 0;
+#X connect 7 0 2 0;
 #X restore 270 173 pd product;
 #X obj 30 40 hsl 128 15 1 17 0 0 empty \$0-meter-set empty -2 -8 0
 10 #fcfcfc #000000 #000000 11112 1;
@@ -564,7 +564,7 @@ the drip version from list-abs (list-drip) or zexy (drip)., f 44;
 #X obj 142 92 ctlin 94;
 #X obj 126 230 expr $f1/127*2;
 #X obj 72 162 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #N canvas 825 285 455 434 gate 0;
 #X obj 40 20 inlet;
 #X obj 217 20 inlet;
@@ -1219,9 +1219,9 @@ master., f 23;
 #X connect 51 1 53 0;
 #X coords 0 -1 1 1 254 136 1 15 0;
 #X restore 10 410 pd harm-sweep;
-#X obj 290 525 p \$0 scratch2 1;
 #X obj 290 500 p \$0 scratch1 1;
 #X text 220 124 sweep;
+#X obj 290 525 p \$0 scratch2 1;
 #X connect 0 0 29 0;
 #X connect 1 0 19 0;
 #X connect 2 0 19 0;
