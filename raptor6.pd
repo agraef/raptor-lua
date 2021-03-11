@@ -1,4 +1,4 @@
-#N canvas 410 105 575 578 10;
+#N canvas 466 97 579 584 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 145 193 240;
@@ -132,8 +132,8 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 200 50 vradio 15 0 1 6 empty empty mod-switch 0 -8 0 10 #fcfcfc
 #000000 #000000 5;
 #X text 220 50 velmod;
-#X text 220 64 pmod;
-#X text 220 79 gate;
+#X text 220 65 pmod;
+#X text 220 80 gate;
 #X text 220 96 gatemod;
 #X text 220 111 swing;
 #N canvas 90 68 465 704 init 0;
@@ -503,101 +503,86 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 87 2 88 0;
 #X coords 0 -1 1 1 167 52 1 127 307;
 #X restore 10 110 pd arp;
-#N canvas 623 48 516 710 control 0;
-#X obj 12 137 sel 0;
-#X obj 12 162 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#N canvas 500 29 529 743 control 0;
+#X obj 380 132 sel 0;
+#X obj 380 157 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 380 87 ctlin 81;
+#X obj 22 337 sel 0;
+#X obj 22 362 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 12 92 ctlin 81;
-#X obj 42 347 sel 0;
-#X obj 42 372 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 82 337 sel 0;
+#X obj 82 362 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 102 347 sel 0;
-#X obj 102 372 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 82 282 ctlin 65;
+#X obj 142 337 sel 0;
+#X obj 142 362 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 102 292 ctlin 65;
-#X obj 162 347 sel 0;
-#X obj 162 372 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 202 337 sel 0;
+#X obj 202 362 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 222 347 sel 0;
-#X obj 222 372 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 262 337 sel 0;
+#X obj 262 362 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 282 347 sel 0;
-#X obj 282 372 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 322 362 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 342 347 sel 0;
-#X obj 342 372 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X msg 42 395 0;
-#X msg 102 395 1;
-#X msg 162 395 2;
-#X msg 222 395 3;
-#X msg 282 395 4;
-#X msg 342 395 5;
-#X obj 162 292 ctlin 66;
-#X obj 222 292 ctlin 67;
-#X obj 282 292 ctlin 68;
-#X obj 342 292 ctlin 69;
-#X obj 212 92 ctlin 91;
-#X obj 212 162 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X msg 22 385 0;
+#X msg 82 385 1;
+#X msg 142 385 2;
+#X msg 202 385 3;
+#X msg 262 385 4;
+#X msg 322 385 5;
+#X obj 142 282 ctlin 66;
+#X obj 202 282 ctlin 67;
+#X obj 262 282 ctlin 68;
+#X obj 322 282 ctlin 69;
+#X obj 30 87 ctlin 91;
+#X obj 30 157 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 292 162 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 100 157 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 292 92 ctlin 92;
-#X obj 212 185 +;
-#X obj 292 185 +;
-#X floatatom 212 210 5 0 0 0 down - #0-down, f 5;
-#X floatatom 292 210 5 0 0 0 up - #0-up, f 5;
-#X obj 372 162 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 100 87 ctlin 92;
+#X floatatom 30 227 5 0 0 0 down - #0-down, f 5;
+#X floatatom 100 227 5 0 0 0 up - #0-up, f 5;
+#X obj 180 157 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 372 92 ctlin 93;
-#X obj 126 205 ctlin 7;
-#X floatatom 72 258 5 0 0 0 mod-switch - #0-mod-switch, f 5;
-#X text 50 70 start/stop \, octave \, gate - assumes D2 COLOR preset
-;
-#X obj 72 92 ctlin 80;
-#X obj 212 137 != 0;
-#X obj 292 137 != 0;
-#X obj 372 137 != 0;
-#X obj 72 137 == 0;
-#X obj 142 162 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 180 87 ctlin 93;
+#X obj 367 227 ctlin 7;
+#X floatatom 331 227 5 0 0 0 mod-switch - #0-mod-switch, f 5;
+#X obj 320 87 ctlin 80;
+#X obj 30 132 != 0;
+#X obj 100 132 != 0;
+#X obj 180 132 != 0;
+#X obj 320 132 == 0;
+#X obj 250 157 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 142 92 ctlin 94;
-#X obj 126 230 expr $f1/127*2;
-#X obj 72 162 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 250 87 ctlin 94;
+#X obj 367 248 expr $f1/127*2;
+#X obj 320 157 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#N canvas 825 285 455 434 gate 0;
-#X obj 40 20 inlet;
-#X obj 217 20 inlet;
-#X obj 40 70 outlet;
-#X obj 40 45 expr if($f2==0 \, 2-$f1 \, $f1);
-#X connect 0 0 3 0;
-#X connect 1 0 3 1;
-#X connect 3 0 2 0;
-#X restore 72 185 pd gate;
-#X obj 72 210 * 100;
-#X obj 72 234 int;
-#X obj 42 487 swap;
-#X obj 42 512 pack f f;
-#X floatatom 74 562 5 0 0 1 gate - #0-gate, f 5;
-#X floatatom 58 607 5 0 0 1 pmod - #0-pmod, f 5;
-#X obj 162 462 inlet;
-#X obj 142 137 != 0;
-#X obj 58 582 expr $f1-100;
-#X text 440 450 64 - HOLD;
-#X obj 440 530 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 290 205 * 100;
+#X obj 331 205 int;
+#X obj 22 487 swap;
+#X obj 22 512 pack f f;
+#X floatatom 54 562 5 0 0 1 gate - #0-gate, f 5;
+#X floatatom 38 607 5 0 0 1 pmod - #0-pmod, f 5;
+#X obj 142 462 inlet;
+#X obj 250 132 != 0;
+#X obj 38 582 expr $f1-100;
+#X obj 420 610 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 440 505 != 0;
-#X obj 440 480 ctlin 64;
-#X floatatom 162 487 5 0 0 0 - - -, f 5;
-#X floatatom 42 657 5 0 0 1 velmod - #0-velmod, f 5;
-#X obj 42 632 expr if($f1>=100 \, 200-$f1 \, $f1-100);
-#X floatatom 140 607 5 0 0 1 gatemod - #0-gatemod, f 5;
-#X obj 140 582 expr $f1-100;
-#X floatatom 239 602 5 0 0 1 swing - #0-swing, f 5;
-#X obj 239 552 expr $f1-100;
-#X obj 239 577 * 0.25;
-#X floatatom 272 522 5 0 1 0 - - -, f 5;
-#X text 179 509 adjust the swing factor to your liking, f 14;
+#X obj 420 585 != 0;
+#X obj 420 560 ctlin 64;
+#X floatatom 142 487 5 0 0 0 - - -, f 5;
+#X floatatom 240 632 5 0 0 1 velmod - #0-velmod, f 5;
+#X obj 22 632 expr if($f1>=100 \, 200-$f1 \, $f1-100);
+#X floatatom 120 607 5 0 0 1 gatemod - #0-gatemod, f 5;
+#X obj 120 582 expr $f1-100;
+#X floatatom 219 602 5 0 0 1 swing - #0-swing, f 5;
+#X obj 219 552 expr $f1-100;
+#X obj 219 577 * 0.25;
+#X floatatom 252 522 5 0 1 0 - - -, f 5;
+#X text 159 509 adjust the swing factor to your liking, f 14;
 #N canvas 662 242 458 432 swing 0;
 #X obj 20 20 r arp;
 #X obj 20 41 route swing;
@@ -612,151 +597,212 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 3 0 4 0;
 #X connect 5 1 6 0;
 #X connect 6 0 2 0;
-#X restore 272 492 pd swing;
-#X obj 42 292 ctlin 82;
-#X text 132 252 mode - assumes D3 KBDTL preset (with modifications
-\, see below), f 32;
-#X text 222 462 mod switcher;
-#X text 380 360 NOTE: CC64 remapped to CC82 on Pacer \, as CC64 conflicts
-with HOLD \, see below, f 19;
+#X restore 252 492 pd swing;
+#X obj 22 282 ctlin 82;
+#X obj 380 182 s \$0-play;
+#X obj 22 410 s \$0-mode;
+#X obj 420 633 s \$0-hold;
+#X obj 22 442 r \$0-mod-switch;
+#X obj 380 110 spigot;
+#X obj 320 110 spigot;
+#X obj 250 110 spigot;
+#X obj 30 110 spigot;
+#X obj 100 110 spigot;
+#X obj 180 110 spigot;
+#X obj 438 87 r \$0-master;
+#X obj 22 310 spigot;
+#X obj 82 310 spigot;
+#X obj 142 310 spigot;
+#X obj 202 310 spigot;
+#X obj 262 310 spigot;
+#X obj 438 282 r \$0-master;
+#X obj 322 310 spigot;
+#X obj 22 465 spigot;
+#X obj 130 442 r \$0-master;
+#X obj 22 537 route 0 1 2 3 4 5;
+#X obj 309 580 t b f;
+#X obj 336 628 tgl 15 0 \$0-part empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 309 605 bng 15 250 50 0 \$0-sweep empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 336 603 < 100;
+#X obj 309 552 sel 100;
+#X obj 30 205 moses 1;
+#X obj 80 205 * -1;
+#N canvas 825 285 455 461 mod 0;
+#X obj 40 20 inlet;
+#X obj 217 20 inlet;
+#X obj 40 70 outlet;
+#X obj 40 45 expr if($f2==0 \, 2-$f1 \, $f1);
+#X connect 0 0 3 0;
+#X connect 1 0 3 1;
+#X connect 3 0 2 0;
+#X restore 320 180 pd mod;
+#X text 225 180 mod shift -->;
+#X text 380 207 play/stop;
 #X text 12 12 NOTE: This control setup is for the Nektar PACER \, if
 you use a different MIDI controller \, you'll have to change the controls
 below accordingly. A suitably modified Pacer setup (.syx file) for
-this patch is included in the same folder!, f 72;
-#X text 272 632 This assumes that you have a hold pedal hooked up to
-Pd in some way (I have it as FS1 on my Pacer)., f 33;
-#X obj 12 187 s \$0-play;
-#X obj 42 420 s \$0-mode;
-#X obj 440 553 s \$0-hold;
-#X obj 42 442 r \$0-mod-switch;
-#X obj 12 115 spigot;
-#X obj 72 115 spigot;
-#X obj 142 115 spigot;
-#X obj 212 115 spigot;
-#X obj 292 115 spigot;
-#X obj 372 115 spigot;
-#X obj 430 92 r \$0-master;
-#X obj 42 320 spigot;
-#X obj 102 320 spigot;
-#X obj 162 320 spigot;
-#X obj 222 320 spigot;
-#X obj 282 320 spigot;
-#X obj 400 292 r \$0-master;
-#X obj 342 320 spigot;
-#X obj 42 465 spigot;
-#X obj 150 442 r \$0-master;
-#X text 350 190 NOTE: These are all disabled unless we are the time
-master., f 23;
-#X obj 42 537 route 0 1 2 3 4 5;
-#X obj 380 552 t b f;
-#X obj 407 600 tgl 15 0 \$0-part empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
-#X obj 380 577 bng 15 250 50 0 \$0-sweep empty empty 17 7 0 10 #fcfcfc
+this patch is included in the distribution!, f 80;
+#X text 140 207 <-- +1 octave;
+#X obj 180 180 + 1;
+#X obj 30 180 * 1;
+#X obj 100 180 * 1;
+#X text 110 260 R3ARP: arp mode - based on D3 KBDTL;
+#X text 30 67 R2MOD: octave \, mod \, start/stop - based on D2 COLOR
+;
+#X text 210 460 mod switcher - see R2MOD above;
+#X obj 397 362 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 397 385 s \$0-raptor;
+#X text 20 670 NOTE: To make CC64 (hold/raptor mode) work \, you need
+to have a hold pedal hooked up to Pd in some way (the custom PACER
+setup has it on FS1)., f 79;
+#X text 415 539 CC64 - HOLD;
+#X text 430 110 These are all disabled unless we are the time master.
+, f 12;
+#N canvas 100 369 452 352 long-press 0;
+#X obj 40 20 inlet;
+#X obj 40 70 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 40 93 sel 1 0;
+#X obj 40 118 timer;
+#X floatatom 40 143 0 0 0 0 - - -;
+#X obj 40 45 != 0;
+#X obj 40 168 moses 1000;
+#X obj 40 193 moses 500;
+#X obj 40 218 bng 15 250 50 0 empty empty short 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 90 218 bng 15 250 50 0 empty empty long 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 140 218 bng 15 250 50 0 empty empty cancel 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 407 575 < 100;
-#X obj 329 552 sel 100;
+#X obj 40 241 outlet;
+#X obj 90 241 outlet;
+#X connect 0 0 5 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 1 3 1;
+#X connect 3 0 4 0;
+#X connect 4 0 6 0;
+#X connect 5 0 1 0;
+#X connect 6 0 7 0;
+#X connect 6 1 10 0;
+#X connect 7 0 8 0;
+#X connect 7 1 9 0;
+#X connect 8 0 11 0;
+#X connect 9 0 12 0;
+#X restore 322 337 pd long-press;
+#X text 300 410 CC69 long-press (>= 500 ms) toggles raptor mode! An
+extra long press (>= 1000 ms) cancels., f 32;
 #X connect 0 1 1 0;
-#X connect 1 0 79 0;
-#X connect 2 0 83 0;
+#X connect 1 0 68 0;
+#X connect 2 0 72 0;
 #X connect 3 1 4 0;
-#X connect 4 0 16 0;
+#X connect 4 0 15 0;
 #X connect 5 1 6 0;
-#X connect 6 0 17 0;
-#X connect 7 0 91 0;
+#X connect 6 0 16 0;
+#X connect 7 0 80 0;
 #X connect 8 1 9 0;
-#X connect 9 0 18 0;
+#X connect 9 0 17 0;
 #X connect 10 1 11 0;
-#X connect 11 0 19 0;
+#X connect 11 0 18 0;
 #X connect 12 1 13 0;
-#X connect 13 0 20 0;
-#X connect 14 1 15 0;
-#X connect 15 0 21 0;
-#X connect 16 0 80 0;
-#X connect 17 0 80 0;
-#X connect 18 0 80 0;
-#X connect 19 0 80 0;
-#X connect 20 0 80 0;
-#X connect 21 0 80 0;
-#X connect 22 0 92 0;
-#X connect 23 0 93 0;
-#X connect 24 0 94 0;
-#X connect 25 0 96 0;
-#X connect 26 0 86 0;
-#X connect 27 0 30 0;
-#X connect 28 0 31 0;
-#X connect 29 0 87 0;
-#X connect 30 0 32 0;
-#X connect 31 0 33 0;
-#X connect 34 0 30 1;
-#X connect 34 0 31 1;
-#X connect 35 0 88 0;
-#X connect 36 0 46 0;
-#X connect 39 0 84 0;
-#X connect 40 0 27 0;
-#X connect 41 0 28 0;
-#X connect 42 0 34 0;
-#X connect 43 0 47 0;
-#X connect 44 0 48 1;
-#X connect 45 0 85 0;
-#X connect 46 0 49 0;
-#X connect 47 0 48 0;
-#X connect 48 0 49 0;
-#X connect 49 0 50 0;
-#X connect 50 0 37 0;
-#X connect 51 0 52 0;
-#X connect 51 1 52 1;
-#X connect 52 0 100 0;
-#X connect 55 0 62 0;
-#X connect 56 0 44 0;
-#X connect 57 0 54 0;
-#X connect 59 0 81 0;
+#X connect 13 0 19 0;
+#X connect 14 0 20 0;
+#X connect 15 0 69 0;
+#X connect 16 0 69 0;
+#X connect 17 0 69 0;
+#X connect 18 0 69 0;
+#X connect 19 0 69 0;
+#X connect 20 0 69 0;
+#X connect 21 0 81 0;
+#X connect 22 0 82 0;
+#X connect 23 0 83 0;
+#X connect 24 0 85 0;
+#X connect 25 0 75 0;
+#X connect 26 0 102 0;
+#X connect 27 0 103 0;
+#X connect 28 0 76 0;
+#X connect 31 0 101 0;
+#X connect 32 0 77 0;
+#X connect 33 0 42 0;
+#X connect 35 0 73 0;
+#X connect 36 0 26 0;
+#X connect 37 0 27 0;
+#X connect 38 0 31 0;
+#X connect 39 0 43 0;
+#X connect 40 0 96 1;
+#X connect 41 0 74 0;
+#X connect 42 0 44 0;
+#X connect 43 0 96 0;
+#X connect 44 0 45 0;
+#X connect 45 0 34 0;
+#X connect 46 0 47 0;
+#X connect 46 1 47 1;
+#X connect 47 0 88 0;
+#X connect 50 0 56 0;
+#X connect 51 0 40 0;
+#X connect 52 0 49 0;
+#X connect 53 0 70 0;
+#X connect 54 0 53 0;
+#X connect 55 0 54 0;
+#X connect 56 0 46 1;
+#X connect 58 0 57 0;
 #X connect 60 0 59 0;
-#X connect 61 0 60 0;
-#X connect 62 0 51 1;
-#X connect 64 0 63 0;
-#X connect 66 0 65 0;
-#X connect 68 0 69 0;
-#X connect 69 0 67 0;
-#X connect 70 0 69 1;
-#X connect 72 0 70 0;
-#X connect 73 0 90 0;
-#X connect 82 0 97 0;
-#X connect 83 0 0 0;
-#X connect 84 0 43 0;
-#X connect 85 0 56 0;
-#X connect 86 0 40 0;
-#X connect 87 0 41 0;
-#X connect 88 0 42 0;
-#X connect 89 0 88 1;
-#X connect 89 0 83 1;
-#X connect 89 0 87 1;
-#X connect 89 0 86 1;
-#X connect 89 0 85 1;
-#X connect 89 0 84 1;
-#X connect 90 0 3 0;
-#X connect 91 0 5 0;
-#X connect 92 0 8 0;
-#X connect 93 0 10 0;
-#X connect 94 0 12 0;
-#X connect 95 0 90 1;
-#X connect 95 0 94 1;
-#X connect 95 0 93 1;
-#X connect 95 0 92 1;
-#X connect 95 0 91 1;
-#X connect 95 0 96 1;
-#X connect 96 0 14 0;
-#X connect 97 0 51 0;
-#X connect 98 0 97 1;
-#X connect 100 0 64 0;
-#X connect 100 1 57 0;
-#X connect 100 2 53 0;
-#X connect 100 3 66 0;
-#X connect 100 4 68 0;
-#X connect 100 5 105 0;
-#X connect 101 0 103 0;
-#X connect 101 1 104 0;
-#X connect 104 0 102 0;
-#X connect 105 1 101 0;
+#X connect 62 0 63 0;
+#X connect 63 0 61 0;
+#X connect 64 0 63 1;
+#X connect 66 0 64 0;
+#X connect 67 0 79 0;
+#X connect 71 0 86 0;
+#X connect 72 0 0 0;
+#X connect 73 0 39 0;
+#X connect 74 0 51 0;
+#X connect 75 0 36 0;
+#X connect 76 0 37 0;
+#X connect 77 0 38 0;
+#X connect 78 0 77 1;
+#X connect 78 0 72 1;
+#X connect 78 0 76 1;
+#X connect 78 0 75 1;
+#X connect 78 0 74 1;
+#X connect 78 0 73 1;
+#X connect 79 0 3 0;
+#X connect 80 0 5 0;
+#X connect 81 0 8 0;
+#X connect 82 0 10 0;
+#X connect 83 0 12 0;
+#X connect 84 0 79 1;
+#X connect 84 0 83 1;
+#X connect 84 0 82 1;
+#X connect 84 0 81 1;
+#X connect 84 0 80 1;
+#X connect 84 0 85 1;
+#X connect 85 0 112 0;
+#X connect 86 0 46 0;
+#X connect 87 0 86 1;
+#X connect 88 0 58 0;
+#X connect 88 1 52 0;
+#X connect 88 2 48 0;
+#X connect 88 3 60 0;
+#X connect 88 4 62 0;
+#X connect 88 5 93 0;
+#X connect 89 0 91 0;
+#X connect 89 1 92 0;
+#X connect 92 0 90 0;
+#X connect 93 1 89 0;
+#X connect 94 0 29 0;
+#X connect 94 1 95 0;
+#X connect 95 0 29 0;
+#X connect 96 0 44 0;
+#X connect 101 0 102 1;
+#X connect 101 0 103 1;
+#X connect 102 0 94 0;
+#X connect 103 0 30 0;
+#X connect 107 0 108 0;
+#X connect 112 0 14 0;
+#X connect 112 1 107 0;
 #X restore 200 147 pd control;
 #N canvas 855 29 517 743 panel 0;
 #X obj 27 31 cnv 15 67 157 empty empty empty 20 12 0 14 #e0e0e0 #404040
@@ -940,7 +986,7 @@ master., f 23;
 #X msg 30 330 transp \$1;
 #X text 50 293 outside-in;
 #X obj 30 201 tgl 15 0 empty \$0-raptor raptor 20 6 0 10 #fcfcfc #000000
-#000000 0 1;
+#000000 1 1;
 #X obj 200 294 hsl 64 15 0 127 0 0 empty \$0-pan pan -3 -12 0 10 #fcfcfc
 #000000 #000000 3175 1;
 #X obj 272 294 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
@@ -1123,9 +1169,9 @@ master., f 23;
 #X floatatom 20 103 5 0 0 2 to #0-harm-to-val -, f 5;
 #X floatatom 60 103 5 0 0 2 to #0-pref-to-val -, f 5;
 #X obj 170 30 vradio 15 0 1 2 \$0-harm-sweep \$0-harm-sweep harm 0
--8 0 10 #fcfcfc #000000 #000000 0;
+-8 0 10 #fcfcfc #000000 #000000 1;
 #X obj 210 30 vradio 15 0 1 2 \$0-pref-sweep \$0-pref-sweep pref 0
--8 0 10 #fcfcfc #000000 #000000 0;
+-8 0 10 #fcfcfc #000000 #000000 1;
 #X text 235 27 up;
 #X text 235 44 down;
 #X obj 100 30 vradio 15 0 0 2 \$0-part \$0-part part -1 -10 0 10 #dcdcdc
@@ -1216,7 +1262,7 @@ master., f 23;
 #X connect 51 1 53 0;
 #X coords 0 -1 1 1 254 136 1 15 0;
 #X restore 10 410 pd harm-sweep;
-#X text 220 124 sweep;
+#X text 220 125 sweep;
 #X obj 290 500 p \$0 scratch1 7;
 #X obj 290 525 p \$0 scratch2 8;
 #X connect 0 0 29 0;
