@@ -1,4 +1,4 @@
-#N canvas 465 87 580 586 10;
+#N canvas 465 87 580 564 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 145 193 240;
@@ -128,7 +128,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 20 0 1 0;
 #X coords 0 -1 1 1 180 37 1 26 22;
 #X restore 10 347 pd meter;
-#X symbolatom 290 330 10 0 0 0 - #0-preset #0-preset-set, f 10;
+#X symbolatom 494 330 10 0 0 0 - #0-preset #0-preset-set, f 10;
 #X obj 200 50 vradio 15 0 1 6 empty empty mod-switch 0 -8 0 10 #fcfcfc
 #000000 #000000 5;
 #X text 220 50 velmod;
@@ -136,7 +136,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X text 220 80 gate;
 #X text 220 96 gatemod;
 #X text 220 111 swing;
-#N canvas 90 68 465 704 init 0;
+#N canvas 90 41 465 731 init 0;
 #X obj 70 20 loadbang;
 #X obj 210 20 declare -path lib;
 #X obj 97 70 f \$0;
@@ -152,14 +152,18 @@ it with a suitable replacement \, such as list-drip from list-abs.
 100 \; \$1-pmin 30 \; \$1-pmax 100 \; \$1-pmod 0 \; \$1-gate 100 \;
 \$1-gatemod 0 \; \$1-pan 64 \; \$1-pgm 1 \; \$1-inchan 1 \; \$1-outchan
 1 \; \$1-down -1 \; \$1-up 1 \; \$1-transp 0;
+#X msg 70 350 default;
+#X obj 70 375 outlet;
 #X connect 0 0 3 0;
 #X connect 2 0 4 0;
 #X connect 3 0 6 0;
+#X connect 3 0 9 0;
 #X connect 3 1 2 0;
 #X connect 4 0 5 0;
 #X connect 4 1 8 0;
 #X connect 6 0 7 0;
-#X restore 510 330 pd init;
+#X connect 9 0 10 0;
+#X restore 290 330 pd init;
 #N canvas 56 29 798 743 arp 0;
 #X floatatom 20 398 5 0 0 0 - - -, f 5;
 #X floatatom 66 398 5 0 0 0 - - -, f 5;
@@ -556,10 +560,10 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 180 132 != 0;
 #X obj 320 132 == 0;
 #X obj 250 157 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X obj 250 87 ctlin 94;
 #X obj 320 157 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X obj 290 205 * 100;
 #X obj 331 205 int;
 #X obj 22 487 swap;
@@ -622,7 +626,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 22 537 route 0 1 2 3 4 5;
 #X obj 329 600 t b f;
 #X obj 356 625 tgl 15 0 \$0-part empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X obj 329 625 bng 15 250 50 0 \$0-sweep empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X obj 30 205 moses 1;
@@ -997,7 +1001,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X obj 30 201 tgl 15 0 empty \$0-raptor raptor 20 6 0 10 #fcfcfc #000000
 #000000 0 1;
 #X obj 200 294 hsl 64 15 0 127 0 0 empty \$0-pan pan -3 -12 0 10 #fcfcfc
-#000000 #000000 3175 1;
+#000000 #000000 2976 1;
 #X obj 272 294 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X msg 310 294 64;
@@ -1184,7 +1188,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X text 235 27 up;
 #X text 235 44 down;
 #X obj 100 30 vradio 15 0 0 2 \$0-part \$0-part part -1 -10 0 10 #dcdcdc
-#000000 #000000 1;
+#000000 #000000 0;
 #X text 124 44 all;
 #X obj 100 70 vradio 15 0 0 3 \$0-target \$0-target target -1 53 0
 10 #dcdcdc #000000 #000000 0;
@@ -1294,6 +1298,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X connect 19 0 7 0;
 #X connect 20 0 39 0;
 #X connect 22 0 30 0;
+#X connect 28 0 32 0;
 #X connect 38 0 29 0;
 #X connect 38 1 29 1;
 #X connect 40 0 20 0;
