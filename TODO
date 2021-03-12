@@ -1,7 +1,8 @@
 
 - better presets (port Raptor 5 presets?)
 
-- MIDI automation for the parameters
+- MIDI clock sync
 
-- add a looper
+- OSC control
 
+- looper
