@@ -1,4 +1,8 @@
 
+- alternative harm-sweep control to manually perform the sweep via EXP2
+
+- store harm-sweep params in presets?
+
 - better presets (port Raptor 5 presets?)
 
 - MIDI clock sync
