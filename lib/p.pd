@@ -1,4 +1,4 @@
-#N canvas 491 81 728 607 10;
+#N canvas 490 82 730 608 10;
 #X obj 137 77 t b b b;
 #X msg 288 102 clear;
 #X msg 137 203 write \$1;
@@ -68,7 +68,8 @@ at loadbang time) and recalls it immediately, f 26;
 #X connect 5 0 2 0;
 #X restore 510 63 pd select;
 #X obj 510 40 r \$1-arp;
-#X obj 20 360 param \$0 \$1 pan 8;
+#X obj 20 360 param \$0 \$1 gain 7;
+#X obj 200 360 param \$0 \$1 pan 8;
 #X obj 20 380 param \$0 \$1 down 16 -64;
 #X obj 200 380 param \$0 \$1 up 17 -64;
 #X obj 400 380 param \$0 \$1 transp 18 -64;

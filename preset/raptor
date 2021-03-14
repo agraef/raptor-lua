@@ -1,7 +1,6 @@
 outchan 4;
 inchan 1;
 pgm 5;
-pan 64;
 uniq 0;
 nmod -100;
 nmax 3;
@@ -29,3 +28,5 @@ mode 0;
 transp 0;
 up 1;
 down -2;
+pan 64;
+gain 0;

@@ -1,4 +1,4 @@
-#N canvas 480 100 590 581 10;
+#N canvas 480 100 590 587 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 145 193 240;
@@ -32,7 +32,7 @@
 #X obj 204 118 r \$0-n;
 #X obj 30 130 t f f;
 #X obj 30 40 hsl 128 15 40 480 0 0 empty empty empty -25 5 0 10 #fcfcfc
-#000000 #000000 1732 1;
+#000000 #000000 2309 1;
 #X floatatom 170 40 5 40 480 0 - #0-tempo -, f 5;
 #X obj 80 210 v \$0-ms;
 #X obj 30 270 r \$0-ms;
@@ -109,7 +109,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 8 0 2 0;
 #X restore 270 173 pd product;
 #X obj 30 40 hsl 128 15 1 17 0 0 empty \$0-meter-set empty -2 -8 0
-10 #fcfcfc #000000 #000000 11112 1;
+10 #fcfcfc #000000 #000000 8731 1;
 #X floatatom 170 40 5 1 17 0 - #0-meter-set -, f 5;
 #X connect 0 0 1 0;
 #X connect 1 0 7 0;
@@ -145,7 +145,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X text 220 80 gate;
 #X text 220 96 gatemod;
 #X text 220 111 swing;
-#N canvas 90 29 465 743 init 0;
+#N canvas 2025 29 466 717 init 0;
 #X obj 70 20 loadbang;
 #X obj 210 20 declare -path lib;
 #X obj 97 70 f \$0;
@@ -156,24 +156,24 @@ it with a suitable replacement \, such as list-drip from list-abs.
 1 \; \$1-nmax 1 \; \$1-nmod 0;
 #X msg 70 300 set default;
 #X obj 70 325 s \$0-preset;
+#X msg 70 350 default;
+#X obj 70 375 outlet;
 #X msg 194 120 \; \$1-tempo 100 \; \$1-meter 15 \; \$1-swing 0 \; \$1-mode
 1 \; \$1-raptor 0 \; \$1-minvel 60 \; \$1-maxvel 120 \; \$1-velmod
 100 \; \$1-pmin 30 \; \$1-pmax 100 \; \$1-pmod 0 \; \$1-gate 100 \;
-\$1-gatemod 0 \; \$1-pan 64 \; \$1-pgm 1 \; \$1-inchan 1 \; \$1-outchan
-1 \; \$1-down -1 \; \$1-up 1 \; \$1-transp 0;
-#X msg 70 350 default;
-#X obj 70 375 outlet;
+\$1-gatemod 0 \; \$1-gain 0 \; \$1-pan 64 \; \$1-pgm 1 \; \$1-inchan
+1 \; \$1-outchan 1 \; \$1-down -1 \; \$1-up 1 \; \$1-transp 0;
 #X connect 0 0 3 0;
 #X connect 2 0 4 0;
 #X connect 3 0 6 0;
-#X connect 3 0 9 0;
+#X connect 3 0 8 0;
 #X connect 3 1 2 0;
 #X connect 4 0 5 0;
-#X connect 4 1 8 0;
+#X connect 4 1 10 0;
 #X connect 6 0 7 0;
-#X connect 9 0 10 0;
+#X connect 8 0 9 0;
 #X restore 290 330 pd init;
-#N canvas 557 29 815 743 arp 0;
+#N canvas 149 107 816 593 arp 0;
 #X floatatom 20 398 5 0 0 0 - - -, f 5;
 #X floatatom 66 398 5 0 0 0 - - -, f 5;
 #X obj 20 442 makenote 127 160;
@@ -235,7 +235,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 360 225 t f f f;
 #X obj 510 221 sel 1;
 #X obj 230 310 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
-#000000 #000000 127 1;
+#000000 #000000 0 1;
 #X obj 650 231 sel 0;
 #X obj 650 261 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -409,14 +409,16 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 18 1 19 0;
 #X connect 19 0 20 0;
 #X restore 200 70 pd notefilter;
-#X obj 20 70 route tempo swing meter pgm pan transp inchan outchan
-, f 27;
 #X obj 190 425 route pgm outchan pan;
 #X obj 352 505 ctlout 8;
 #X obj 206 340 hsl 25 15 0 127 0 0 empty \$0-gain gain -2 -8 0 10 #fcfcfc
 #000000 #000000 0 1;
 #X obj 360 425 t a b;
 #X obj 465 425 v \$0-ms;
+#X obj 20 70 route tempo swing meter gain pan transp inchan outchan
+pgm, f 29;
+#X msg 270 370 gain \$1;
+#X obj 270 395 s \$0-arp;
 #X connect 0 0 7 0;
 #X connect 1 0 75 0;
 #X connect 2 0 8 0;
@@ -431,7 +433,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 10 0 8 2;
 #X connect 10 1 9 1;
 #X connect 10 2 12 2;
-#X connect 10 2 87 2;
+#X connect 10 2 86 2;
 #X connect 10 3 11 0;
 #X connect 11 0 12 0;
 #X connect 14 0 72 0;
@@ -456,7 +458,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 30 0 82 0;
 #X connect 31 0 32 0;
 #X connect 31 1 32 1;
-#X connect 33 0 89 0;
+#X connect 33 0 88 0;
 #X connect 34 0 38 0;
 #X connect 35 0 36 1;
 #X connect 36 0 25 0;
@@ -496,8 +498,8 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 62 2 44 0;
 #X connect 66 0 67 0;
 #X connect 67 0 65 0;
-#X connect 68 0 85 0;
-#X connect 73 0 86 0;
+#X connect 68 0 90 0;
+#X connect 73 0 85 0;
 #X connect 74 0 37 1;
 #X connect 75 0 2 1;
 #X connect 77 0 78 0;
@@ -509,20 +511,22 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 83 0 19 0;
 #X connect 84 0 16 0;
 #X connect 84 1 16 1;
-#X connect 85 0 71 0;
-#X connect 85 1 14 0;
-#X connect 85 2 19 1;
-#X connect 85 8 19 0;
-#X connect 86 0 9 0;
-#X connect 86 1 10 0;
-#X connect 86 2 87 0;
-#X connect 88 0 16 3;
-#X connect 89 0 31 0;
-#X connect 89 1 90 0;
-#X connect 90 0 31 2;
+#X connect 85 0 9 0;
+#X connect 85 1 10 0;
+#X connect 85 2 86 0;
+#X connect 87 0 91 0;
+#X connect 88 0 31 0;
+#X connect 88 1 89 0;
+#X connect 89 0 31 2;
+#X connect 90 0 71 0;
+#X connect 90 1 14 0;
+#X connect 90 2 19 1;
+#X connect 90 3 16 3;
+#X connect 90 9 19 0;
+#X connect 91 0 92 0;
 #X coords 0 -1 1 1 167 52 1 127 307;
 #X restore 10 110 pd arp;
-#N canvas 360 29 535 743 control 0;
+#N canvas 620 29 536 717 control 0;
 #X obj 380 115 sel 0;
 #X obj 380 140 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -700,9 +704,6 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X obj 322 290 ctrl 69;
 #X obj 380 213 ctrl 11;
 #X obj 438 550 ctrl 64;
-#X obj 438 470 ctrl 7;
-#X obj 438 495 s \$0-gain;
-#X text 430 445 CC7 - gain;
 #X obj 450 90 r \$0-master;
 #X obj 450 115 spigot;
 #X obj 380 90 ctlin 81;
@@ -804,12 +805,11 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X connect 98 0 77 0;
 #X connect 99 0 83 0;
 #X connect 100 0 41 0;
-#X connect 101 0 102 0;
-#X connect 104 0 105 1;
-#X connect 105 0 0 0;
-#X connect 106 0 105 0;
+#X connect 101 0 102 1;
+#X connect 102 0 0 0;
+#X connect 103 0 102 0;
 #X restore 200 147 pd control;
-#N canvas 1798 29 518 717 panel 0;
+#N canvas 852 29 520 743 panel 0;
 #X obj 27 31 cnv 15 67 157 empty empty empty 20 12 0 14 #e0e0e0 #404040
 0;
 #X obj 27 197 cnv 15 67 113 empty empty empty 20 12 0 14 #e0e0e0 #404040
@@ -893,7 +893,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X msg 147 540 nmax \$1;
 #X msg 200 540 nmod \$1;
 #X obj 30 45 vradio 15 0 0 7 empty \$0-downval dn 0 -8 0 10 #fcfcfc
-#000000 #000000 4;
+#000000 #000000 3;
 #X obj 50 45 vradio 15 0 0 7 empty \$0-upval up 0 -8 0 10 #fcfcfc #000000
 #000000 2;
 #N canvas 526 202 589 302 octave 0;
