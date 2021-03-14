@@ -1,4 +1,4 @@
-#N canvas 430 90 585 572 10;
+#N canvas 484 99 586 574 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 145 193 240;
@@ -164,7 +164,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 6 0 7 0;
 #X connect 9 0 10 0;
 #X restore 290 330 pd init;
-#N canvas 425 68 799 547 arp 0;
+#N canvas 162 72 800 573 arp 0;
 #X floatatom 20 398 5 0 0 0 - - -, f 5;
 #X floatatom 66 398 5 0 0 0 - - -, f 5;
 #X obj 20 442 makenote 127 160;
@@ -188,9 +188,9 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 7 0 5 1;
 #X restore 113 398 pd gate;
 #X obj 20 370 unpack f f f;
-#X floatatom 250 340 5 0 0 0 - #0-vel -, f 5;
-#X obj 230 340 tgl 15 1 empty \$0-veltracker vel-tracker -2 -8 0 10
-#fcfcfc #000000 #000000 1 1;
+#X floatatom 259 340 5 0 0 0 - #0-vel -, f 5;
+#X obj 239 340 tgl 15 1 empty \$0-veltracker veltrk -2 -8 0 10 #fcfcfc
+#000000 #000000 1 1;
 #X obj 20 421 pipe;
 #X obj 20 480 noteout;
 #X obj 190 480 pgmout;
@@ -231,7 +231,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 360 225 t f f f;
 #X obj 510 221 sel 1;
 #X obj 230 310 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
-#000000 #000000 127 1;
+#000000 #000000 0 1;
 #X obj 650 231 sel 0;
 #X obj 650 261 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -287,9 +287,9 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X text 100 180 - arpeggiator external -;
 #X obj 130 340 hsl 48 15 0 600 0 1 \$0-trace empty trace -2 -8 0 10
 #fcfcfc #000000 #000000 2350 1;
-#X obj 190 340 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 186 340 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X msg 190 360 300;
+#X msg 186 360 300;
 #X obj 20 45 r \$0-arp;
 #X obj 200 134 s \$0-arp;
 #X obj 251 134 s \$0-vel;
@@ -297,7 +297,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 57 161 s \$0-swing;
 #X obj 190 400 r \$0-arp;
 #X obj 453 146 r \$0-n;
-#N canvas 505 150 453 378 veltracker 0;
+#N canvas 505 150 454 405 veltracker 0;
 #X obj 100 120 /;
 #X obj 155 120 /;
 #X floatatom 100 142 5 0 0 0 - - -, f 5;
@@ -407,7 +407,8 @@ it with a suitable replacement \, such as list-drip from list-abs.
 , f 27;
 #X obj 190 425 route pgm outchan pan;
 #X obj 352 505 ctlout 8;
-#X obj 280 90 r \$0-gain;
+#X obj 206 340 hsl 25 15 0 127 0 0 empty \$0-gain gain -2 -8 0 10 #fcfcfc
+#000000 #000000 0 1;
 #X connect 0 0 7 0;
 #X connect 1 0 75 0;
 #X connect 2 0 8 0;
@@ -511,7 +512,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 89 0 16 3;
 #X coords 0 -1 1 1 167 52 1 127 307;
 #X restore 10 110 pd arp;
-#N canvas 360 30 535 717 control 0;
+#N canvas 360 29 535 717 control 0;
 #X obj 380 115 sel 0;
 #X obj 380 140 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -554,7 +555,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 250 140 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
 #X obj 320 140 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X obj 290 188 * 100;
 #X obj 331 188 int;
 #X obj 22 467 swap;
