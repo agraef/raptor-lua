@@ -1,4 +1,4 @@
-#N canvas 480 100 590 587 10;
+#N canvas 480 100 590 593 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 145 193 240;
@@ -32,7 +32,7 @@
 #X obj 204 118 r \$0-n;
 #X obj 30 130 t f f;
 #X obj 30 40 hsl 128 15 40 480 0 0 empty empty empty -25 5 0 10 #fcfcfc
-#000000 #000000 2309 1;
+#000000 #000000 1732 1;
 #X floatatom 170 40 5 40 480 0 - #0-tempo -, f 5;
 #X obj 80 210 v \$0-ms;
 #X obj 30 270 r \$0-ms;
@@ -109,7 +109,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 8 0 2 0;
 #X restore 270 173 pd product;
 #X obj 30 40 hsl 128 15 1 17 0 0 empty \$0-meter-set empty -2 -8 0
-10 #fcfcfc #000000 #000000 8731 1;
+10 #fcfcfc #000000 #000000 11112 1;
 #X floatatom 170 40 5 1 17 0 - #0-meter-set -, f 5;
 #X connect 0 0 1 0;
 #X connect 1 0 7 0;
@@ -173,7 +173,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 6 0 7 0;
 #X connect 8 0 9 0;
 #X restore 290 330 pd init;
-#N canvas 149 107 816 593 arp 0;
+#N canvas 145 71 820 701 arp 0;
 #X floatatom 20 398 5 0 0 0 - - -, f 5;
 #X floatatom 66 398 5 0 0 0 - - -, f 5;
 #X obj 20 442 makenote 127 160;
@@ -235,7 +235,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 360 225 t f f f;
 #X obj 510 221 sel 1;
 #X obj 230 310 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
-#000000 #000000 0 1;
+#000000 #000000 127 1;
 #X obj 650 231 sel 0;
 #X obj 650 261 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -299,12 +299,12 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X msg 186 360 300;
 #X obj 20 45 r \$0-arp;
 #X obj 200 134 s \$0-arp;
-#X obj 251 134 s \$0-vel;
+#X obj 256 134 s \$0-vel;
 #X obj 20 110 s \$0-tempo;
 #X obj 57 161 s \$0-swing;
 #X obj 190 400 r \$0-arp;
 #X obj 453 146 r \$0-n;
-#N canvas 505 150 454 405 veltracker 0;
+#N canvas 505 150 455 513 veltracker 0;
 #X obj 100 120 /;
 #X obj 155 120 /;
 #X floatatom 100 142 5 0 0 0 - - -, f 5;
@@ -372,7 +372,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 140 110 route 0;
 #X msg 140 135 1;
 #X obj 90 55 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
-0 1;
+1 1;
 #X obj 179 135 ==;
 #X obj 30 105 unpack f f;
 #X obj 140 80 pack f f;
@@ -893,7 +893,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X msg 147 540 nmax \$1;
 #X msg 200 540 nmod \$1;
 #X obj 30 45 vradio 15 0 0 7 empty \$0-downval dn 0 -8 0 10 #fcfcfc
-#000000 #000000 3;
+#000000 #000000 4;
 #X obj 50 45 vradio 15 0 0 7 empty \$0-upval up 0 -8 0 10 #fcfcfc #000000
 #000000 2;
 #N canvas 526 202 589 302 octave 0;

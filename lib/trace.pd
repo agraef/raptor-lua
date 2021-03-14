@@ -1,4 +1,4 @@
-#N canvas 644 147 441 453 10;
+#N canvas 635 112 455 469 10;
 #X obj 27 37 inlet;
 #X obj 72 37 inlet;
 #X obj 131 37 inlet;
@@ -10,33 +10,67 @@
 #X msg 27 191 \$1 0;
 #X obj 27 246 outlet;
 #X obj 210 37 loadbang;
-#X obj 210 132 v gain;
-#X obj 210 195 t b f;
-#X obj 210 245 expr gain*$f1+(1-gain)*$f2;
-#X obj 210 350 outlet;
-#X obj 210 170 moses 10;
-#X obj 210 270 t f f;
-#X text 270 170 calculate MIDI envelope for velocity tracking, f 24
+#X obj 200 425 outlet;
+#X obj 200 345 t f f;
+#X text 270 200 calculate MIDI envelope for velocity tracking, f 24
 ;
 #X obj 210 110 expr exp(-1/$f1);
-#X floatatom 280 132 5 0 0 0 - - -, f 5;
+#X floatatom 210 132 5 0 0 0 - - -, f 5;
 #X text 90 166 delay incoming note-offs, f 14;
 #X floatatom 210 87 5 0 0 0 - - -, f 5;
 #X obj 210 62 f 3;
-#X text 290 10 Attack/release time of the envelope follower. We have
-musical time here \, i.e. \, measured in beats. 3 works best for me
-\, YMMV., f 21;
-#X text 320 132 filter gain;
+#X text 250 132 filter gain;
 #X obj 72 62 t f f;
-#X obj 210 220 f 64;
-#X floatatom 380 279 5 0 0 0 - - -, f 5;
-#X obj 210 320 expr $f1+(127-$f1)/127*$f2;
-#X obj 380 303 t b f;
-#X text 60 310 CC7 = global input "gain" \, use this to boost your
+#X floatatom 378 329 5 0 0 0 - - -, f 5;
+#X obj 200 395 expr $f1+(127-$f1)/127*$f2;
+#X obj 378 353 t b f;
+#X text 50 320 CC7 = global input "gain" \, use this to boost your
 input velocities for the velocitiy tracker if needed, f 23;
-#X obj 380 254 inlet;
+#X obj 378 304 inlet;
+#X obj 378 378 spigot;
+#X obj 99 92 moses 1;
+#X obj 200 270 t b f;
+#X obj 418 304 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 200 295 f;
+#X obj 200 320 expr $f3*$f1+(1-$f3)*$f2;
+#X text 290 10 Attack/release time of the envelope follower. We have
+musical time here \, i.e. \, measured in pulses. 3 works for me \,
+YMMV., f 21;
+#N canvas 820 302 454 407 init-filter 0;
+#X obj 30 50 swap;
+#X obj 30 75 pack f f;
+#X obj 30 100 route 0 1;
+#X obj 30 20 inlet;
+#X obj 30 125 t b f f;
+#X obj 30 150 outlet;
+#X obj 80 150 outlet;
+#X obj 80 20 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 130 150 t b b;
+#X obj 130 175 outlet;
+#X text 30 200 Non-standard order: During initialization \, outlet
+#2 gets the current value \, then outlet #1 \, and finally outlet #3
+gets a bang to enable the gain control.;
+#X text 100 70 Branch 0 is only run once \, when we haven't received
+any velocity values yet \, to get the filter initialized via outlet
+#2. Subsequently \, on branch 1 the current value is simply passed
+through on outlet #1., f 56;
+#X connect 0 0 1 0;
+#X connect 0 1 1 1;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 2 1 5 0;
+#X connect 3 0 0 0;
+#X connect 4 0 8 0;
+#X connect 4 1 5 0;
+#X connect 4 2 6 0;
+#X connect 7 0 0 1;
+#X connect 8 0 9 0;
+#X connect 8 1 7 0;
+#X restore 200 240 pd init-filter;
 #X connect 0 0 3 0;
-#X connect 1 0 25 0;
+#X connect 1 0 20 0;
 #X connect 2 0 7 1;
 #X connect 3 0 4 0;
 #X connect 4 0 5 0;
@@ -45,22 +79,27 @@ input velocities for the velocitiy tracker if needed, f 23;
 #X connect 6 0 9 0;
 #X connect 7 0 8 0;
 #X connect 8 0 9 0;
-#X connect 10 0 22 0;
-#X connect 12 0 26 0;
-#X connect 12 1 13 1;
-#X connect 13 0 16 0;
-#X connect 15 1 12 0;
-#X connect 16 0 28 0;
-#X connect 16 1 26 1;
-#X connect 18 0 11 0;
-#X connect 18 0 19 0;
-#X connect 21 0 18 0;
-#X connect 22 0 21 0;
-#X connect 25 0 3 1;
-#X connect 25 1 15 0;
-#X connect 26 0 13 0;
-#X connect 27 0 29 0;
-#X connect 28 0 14 0;
-#X connect 29 0 28 0;
-#X connect 29 1 28 1;
-#X connect 31 0 27 0;
+#X connect 10 0 18 0;
+#X connect 12 0 22 0;
+#X connect 12 1 30 1;
+#X connect 14 0 15 0;
+#X connect 15 0 31 2;
+#X connect 17 0 14 0;
+#X connect 18 0 17 0;
+#X connect 20 0 3 1;
+#X connect 20 1 27 0;
+#X connect 21 0 23 0;
+#X connect 22 0 11 0;
+#X connect 23 0 26 0;
+#X connect 23 1 22 1;
+#X connect 25 0 21 0;
+#X connect 26 0 22 0;
+#X connect 27 1 33 0;
+#X connect 28 0 30 0;
+#X connect 28 1 31 1;
+#X connect 29 0 26 1;
+#X connect 30 0 31 0;
+#X connect 31 0 12 0;
+#X connect 33 0 28 0;
+#X connect 33 1 30 1;
+#X connect 33 2 29 0;
