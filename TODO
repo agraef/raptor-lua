@@ -10,3 +10,8 @@
 - OSC control
 
 - looper
+
+- Our implementation has the capability to do fractional pulses in order to
+  quickly enable subdivisions of the meter up to septuplets, which isn't used
+  in Raptor right now. We might want to employ this facility in some way, but
+  how?
