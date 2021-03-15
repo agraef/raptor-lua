@@ -2,7 +2,9 @@
 
 **NOTE:** While the controls discussed below can be used from a DAW, they are really designed for live performance. All Raptor parameters also have bindings better suited for MIDI automation, please see the Control section in the toplevel README file for details.
 
-The Nektar PACER makes for a great hands-free controller for live performances with Raptor, especially if you're playing MIDI guitar. This directory contains my custom PACER setup for Raptor, raptor-D1-3.syx, consisting of modified presets D1-D3 (these are the only presets contained in the sysex dump). You can load these into the PACER using François Georgy's web-based [PACER Editor][], or any sysex librarian such as [SimpleSysexxer][].
+<img src="/home/ag/Sources/bitbucket/raptor-lua/pacer/nektar-pacer.png" alt="nektar-pacer" style="zoom:75%;" />
+
+The [Nektar PACER][] makes for a great hands-free controller for live performances with Raptor, especially if you're playing MIDI guitar. This directory contains my custom PACER setup for Raptor, raptor-D1-3.syx, consisting of modified presets D1-D3 (these are the only presets contained in the sysex dump). You can load these into the PACER using François Georgy's web-based [PACER Editor][], or any sysex librarian such as [SimpleSysexxer][].
 
 The three presets are based on the A1, D2, and D3 factory presets of the PACER. They provide the following functions within Raptor:
 
@@ -19,5 +21,6 @@ The three presets are based on the A1, D2, and D3 factory presets of the PACER. 
 
 **Keyboard operation:** As already mentioned above, the "mod" and "hold" parameters have bindings to the standard CC1 (modulation wheel) and CC64 (sustain pedal) controls, which will give you at least some minimal controls for live performance on your MIDI keyboard when using Raptor without the PACER.
 
+[Nektar PACER]: https://nektartech.com/pacer-midi-daw-footswitch-controller/
 [PACER Editor]: https://studiocode.dev/pacer-editor
 [SimpleSysexxer]: http://archive.today/cD4KR

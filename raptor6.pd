@@ -137,7 +137,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X restore 10 347 pd meter;
 #X symbolatom 494 330 10 0 0 0 - #0-preset #0-preset-set, f 10;
 #X obj 200 30 vradio 15 0 1 7 empty empty mod-switch 0 -8 0 10 #fcfcfc
-#000000 #000000 6;
+#000000 #000000 5;
 #X text 220 30 velmod;
 #X text 220 45 pmod;
 #X text 220 60 gate;
@@ -171,10 +171,10 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 6 0 7 0;
 #X connect 8 0 9 0;
 #X restore 290 330 pd init;
-#N canvas 338 108 822 585 arp 0;
-#X floatatom 20 398 5 0 0 0 - - -, f 5;
-#X floatatom 66 398 5 0 0 0 - - -, f 5;
-#X obj 20 442 makenote 127 160;
+#N canvas 541 53 831 719 arp 0;
+#X floatatom 20 428 5 0 0 0 - - -, f 5;
+#X floatatom 66 428 5 0 0 0 - - -, f 5;
+#X obj 20 472 makenote 127 160;
 #N canvas 725 185 465 481 gate 0;
 #X obj 50 20 inlet;
 #X obj 50 120 * 1;
@@ -188,25 +188,25 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 4 0 1 0;
 #X connect 4 1 5 0;
 #X connect 5 0 1 1;
-#X restore 113 398 pd gate;
-#X obj 20 370 unpack f f f;
-#X floatatom 259 340 5 0 0 0 - #0-vel -, f 5;
-#X obj 239 340 tgl 15 1 empty \$0-veltracker veltrk -2 -8 0 10 #fcfcfc
+#X restore 113 428 pd gate;
+#X obj 20 400 unpack f f f;
+#X floatatom 259 370 5 0 0 0 - #0-vel -, f 5;
+#X obj 239 370 tgl 15 1 empty \$0-veltracker veltrk -2 -8 0 10 #fcfcfc
 #000000 #000000 1 1;
-#X obj 20 421 pipe;
-#X obj 20 480 noteout;
-#X obj 192 480 pgmout;
-#X obj 233 450 t f f f b;
-#X msg 284 480 0;
-#X obj 284 505 ctlout 123;
-#X text 20 310 - output -;
+#X obj 20 451 pipe;
+#X obj 20 510 noteout;
+#X obj 192 510 pgmout;
+#X obj 233 480 t f f f b;
+#X msg 284 510 0;
+#X obj 284 535 ctlout 123;
+#X text 20 340 - output -;
 #X obj 48 136 change;
 #X obj 230 40 notein;
 #X obj 230 112 trace 300;
 #X floatatom 264 90 5 0 0 0 - #0-trace -, f 5;
 #X text 20 20 - input -;
-#X obj 140 240 arpeggio 15;
-#X obj 140 210 inlet;
+#X obj 140 290 arpeggio 15;
+#X obj 140 260 inlet;
 #X obj 580 146 change;
 #X floatatom 580 170 5 0 0 0 - - #0-n, f 5;
 #X floatatom 400 126 5 0 0 0 - - -, f 5;
@@ -214,7 +214,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 470 298 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
 #X obj 400 349 spigot;
-#X obj 276 310 tgl 15 1 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 276 340 tgl 15 1 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 1 1;
 #X floatatom 400 201 5 0 0 0 - - -, f 5;
 #X obj 400 250 expr rint($f1*60)+60;
@@ -227,13 +227,13 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 540 251 expr $f1>$f2;
 #X obj 400 176 expr ($f1+1)/$f2;
 #X msg 640 206 0.4;
-#X obj 258 310 bng 15 150 10 0 empty empty empty 17 7 0 10 #a0a0a0
+#X obj 258 340 bng 15 150 10 0 empty empty empty 17 7 0 10 #a0a0a0
 #202020 #202020;
 #X obj 550 196 expr $f1==1;
 #X obj 400 225 t f f f;
 #X obj 550 221 sel 1;
-#X obj 230 310 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
-#000000 #000000 0 1;
+#X obj 230 340 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
+#000000 #000000 127 1;
 #X obj 690 231 sel 0;
 #X obj 690 261 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -289,12 +289,12 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 460 349 t f f;
 #X obj 400 150 t f f f;
 #X text 400 80 - time -;
-#X text 100 180 - arpeggiator external -;
-#X obj 130 340 hsl 48 15 0 600 0 1 \$0-trace empty trace -2 -8 0 10
+#X text 100 230 - arpeggiator external -;
+#X obj 130 370 hsl 48 15 0 600 0 1 \$0-trace empty trace -2 -8 0 10
 #fcfcfc #000000 #000000 2350 1;
-#X obj 186 340 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 186 370 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X msg 186 360 300;
+#X msg 186 390 300;
 #X obj 20 45 r \$0-arp;
 #X obj 281 158 s \$0-vel;
 #X obj 20 110 s \$0-tempo;
@@ -349,7 +349,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 19 1 8 1;
 #X connect 20 0 10 0;
 #X connect 21 0 0 1;
-#X restore 66 420 pd veltracker;
+#X restore 66 450 pd veltracker;
 #X obj 690 359 s \$0-metro;
 #X obj 760 210 r stop;
 #X obj 760 235 t b b;
@@ -357,7 +357,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 760 295 s \$0-play;
 #X obj 450 275 r \$0-master;
 #X obj 400 299 spigot;
-#X obj 180 210 r all-arp;
+#X obj 180 260 r all-arp;
 #N canvas 1515 109 451 514 notefilter 0;
 #X obj 30 30 inlet;
 #X obj 75 30 inlet;
@@ -368,7 +368,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 140 110 route 0;
 #X msg 140 135 1;
 #X obj 90 55 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
-0 1;
+1 1;
 #X obj 179 135 ==;
 #X obj 30 105 unpack f f;
 #X obj 140 80 pack f f;
@@ -404,19 +404,28 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 19 0 5 1;
 #X connect 20 0 15 0;
 #X restore 230 70 pd notefilter;
-#X obj 192 425 route pgm outchan pan;
-#X obj 274 530 ctlout 8;
-#X obj 206 340 hsl 25 15 0 127 0 0 empty \$0-gain gain -2 -8 0 10 #fcfcfc
+#X obj 192 455 route pgm outchan pan;
+#X obj 274 560 ctlout 8;
+#X obj 206 370 hsl 25 15 0 127 0 0 empty \$0-gain gain -2 -8 0 10 #fcfcfc
 #000000 #000000 0 1;
 #X obj 400 425 t a b;
 #X obj 505 425 v \$0-ms;
-#X msg 270 370 gain \$1;
-#X obj 270 395 s \$0-arp;
+#X msg 270 400 gain \$1;
+#X obj 270 425 s \$0-arp;
 #X obj 20 70 route tempo swing meter gain transp inchan, f 29;
 #X obj 162 136 s \$0-inch;
-#X obj 70 210 r \$0-myarp;
+#X obj 70 260 r \$0-myarp;
 #X obj 230 136 s \$0-myarp;
-#X obj 315 450 s \$0-myarp;
+#X obj 315 480 s \$0-myarp;
+#N canvas 165 250 455 405 harm-sweep 0;
+#X text 20 10 harm-sweep messages - filtered out;
+#X obj 20 40 inlet;
+#X obj 20 65 route harm-from harm-to pref-from pref-to harm-time pref-time
+harm-sweep pref-sweep part target;
+#X obj 20 103 outlet;
+#X connect 1 0 2 0;
+#X connect 2 10 3 0;
+#X restore 192 161 pd harm-sweep;
 #X connect 0 0 7 0;
 #X connect 1 0 73 0;
 #X connect 2 0 8 0;
@@ -523,9 +532,10 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 90 3 16 3;
 #X connect 90 4 82 3;
 #X connect 90 5 91 0;
-#X connect 90 6 83 0;
+#X connect 90 6 95 0;
 #X connect 92 0 19 0;
-#X coords 0 -1 1 1 167 52 1 127 307;
+#X connect 95 0 83 0;
+#X coords 0 -1 1 1 167 52 1 127 337;
 #X restore 10 110 pd arp;
 #N canvas 1799 29 543 717 control 0;
 #X obj 380 115 sel 0;
@@ -834,7 +844,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X connect 104 0 85 0;
 #X connect 104 0 90 0;
 #X restore 200 147 pd control;
-#N canvas 1797 29 521 717 panel 0;
+#N canvas 847 29 525 743 panel 0;
 #X obj 27 31 cnv 15 67 157 empty empty empty 20 12 0 14 #e0e0e0 #404040
 0;
 #X obj 27 197 cnv 15 67 113 empty empty empty 20 12 0 14 #e0e0e0 #404040
@@ -1016,7 +1026,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X msg 30 330 transp \$1;
 #X text 50 293 outside-in;
 #X obj 30 201 tgl 15 0 empty \$0-raptor raptor 20 6 0 10 #fcfcfc #000000
-#000000 0 1;
+#000000 1 1;
 #X obj 200 294 hsl 64 15 0 127 0 0 empty \$0-pan pan -3 -12 0 10 #fcfcfc
 #000000 #000000 3175 1;
 #X obj 272 294 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
@@ -1193,29 +1203,29 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X msg 198 330 5 2;
 #X msg 230 330 7 2;
 #X text 70 280 meter;
-#N canvas 655 117 550 551 harm-sweep 0;
-#X floatatom 20 30 5 0 0 2 hmin #0-harm-val -, f 5;
-#X floatatom 60 30 5 0 0 2 pref #0-pref-val -, f 5;
-#X floatatom 20 70 5 0 0 2 from #0-harm-from-val -, f 5;
-#X floatatom 60 70 5 0 0 2 from #0-pref-from-val -, f 5;
-#X floatatom 20 103 5 0 0 2 to #0-harm-to-val -, f 5;
-#X floatatom 60 103 5 0 0 2 to #0-pref-to-val -, f 5;
-#X obj 170 30 vradio 15 0 0 2 \$0-harm-sweep \$0-harm-sweep harm 0
--8 0 10 #fcfcfc #000000 #000000 1;
-#X obj 210 30 vradio 15 0 0 2 \$0-pref-sweep \$0-pref-sweep pref 0
--8 0 10 #fcfcfc #000000 #000000 1;
+#N canvas 300 65 570 639 harm-sweep 0;
+#X floatatom 20 30 5 0 100 2 hmin #0-harm-val -, f 5;
+#X floatatom 60 30 5 -100 100 2 pref #0-pref-val -, f 5;
+#X floatatom 20 70 5 0 100 2 from #0-harm-from -, f 5;
+#X floatatom 60 70 5 -100 100 2 from #0-pref-from -, f 5;
+#X floatatom 20 103 5 0 100 2 to #0-harm-to -, f 5;
+#X floatatom 60 103 5 -100 100 2 to #0-pref-to -, f 5;
+#X obj 170 30 vradio 15 0 0 2 \$0-harm-sweep-s \$0-harm-sweep harm
+0 -8 0 10 #fcfcfc #000000 #000000 0;
+#X obj 210 30 vradio 15 0 0 2 \$0-pref-sweep-s \$0-pref-sweep pref
+0 -8 0 10 #fcfcfc #000000 #000000 0;
 #X text 235 27 up;
 #X text 235 44 down;
-#X obj 100 30 vradio 15 0 0 2 \$0-part \$0-part part -1 -10 0 10 #dcdcdc
-#000000 #000000 0;
+#X obj 100 30 vradio 15 0 0 2 \$0-part-s \$0-part part -1 -10 0 10
+#dcdcdc #000000 #000000 0;
 #X text 124 44 all;
-#X obj 100 70 vradio 15 0 0 3 \$0-target \$0-target target -1 53 0
-10 #dcdcdc #000000 #000000 0;
+#X obj 100 70 vradio 15 0 0 3 \$0-target-s \$0-target target -1 53
+0 10 #dcdcdc #000000 #000000 0;
 #X text 125 67 both;
 #X text 125 84 harm;
 #X text 125 100 pref;
-#X floatatom 170 84 5 0 0 2 time #0-harm-time-val -, f 5;
-#X floatatom 210 84 5 0 0 2 time #0-pref-time-val -, f 5;
+#X floatatom 170 84 5 0 64 2 time #0-harm-time -, f 5;
+#X floatatom 210 84 5 0 64 2 time #0-pref-time -, f 5;
 #X obj 250 84 bng 15 250 50 0 empty \$0-sweep empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X obj 20 140 v \$0-harm-from;
@@ -1224,95 +1234,125 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X obj 60 200 v \$0-pref-to;
 #X obj 170 140 v \$0-harm-time;
 #X obj 210 160 v \$0-pref-time;
-#X obj 170 180 r \$0-harm-sweep;
 #X obj 170 200 v \$0-harm-sweep;
-#X obj 270 180 r \$0-pref-sweep;
-#X obj 270 200 v \$0-pref-sweep;
-#X obj 250 300 sweep \$0 harm;
-#X obj 360 300 sweep \$0 pref;
-#X obj 250 280 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 280 200 v \$0-pref-sweep;
+#X obj 250 380 sweep \$0 harm;
+#X obj 360 380 sweep \$0 pref;
+#X obj 250 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 360 280 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 360 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 370 180 r \$0-part;
-#X obj 370 200 v \$0-part;
-#X obj 450 180 r \$0-target;
-#X obj 450 200 v \$0-target;
-#X obj 250 230 v \$0-target;
-#X obj 250 255 sel 1 2;
-#X obj 20 260 t b f;
-#X obj 20 285 v \$0-part;
-#X obj 20 310 pack f f;
-#X obj 20 335 route 0 1;
-#X obj 20 360 s \$0-hmin;
-#X obj 90 360 s all-hmin;
-#X obj 170 260 t b f;
-#X obj 170 285 v \$0-part;
-#X obj 170 310 pack f f;
-#X obj 170 335 route 0 1;
-#X obj 170 360 s \$0-pref;
-#X obj 240 360 s all-pref;
+#X obj 390 200 v \$0-part;
+#X obj 470 200 v \$0-target;
+#X obj 250 310 v \$0-target;
+#X obj 250 335 sel 1 2;
+#X obj 20 340 t b f;
+#X obj 20 365 v \$0-part;
+#X obj 20 390 pack f f;
+#X obj 20 415 route 0 1;
+#X obj 20 440 s \$0-hmin;
+#X obj 90 440 s all-hmin;
+#X obj 170 340 t b f;
+#X obj 170 365 v \$0-part;
+#X obj 170 390 pack f f;
+#X obj 170 415 route 0 1;
+#X obj 170 440 s \$0-pref;
+#X obj 240 440 s all-pref;
 #X text 125 27 this;
-#N canvas 596 155 456 513 harm-sweep-defaults 0;
+#N canvas 625 182 465 359 harm-sweep-defaults 0;
 #X obj 20 20 loadbang;
 #X obj 20 45 f \$0;
 #X msg 20 70 \; \$1-part 0 \; \$1-target 0 \; \$1-harm-sweep 1 \; \$1-pref-sweep
-1 \; \$1-harm-from-val 4 \; \$1-pref-from-val -80 \; \$1-harm-to-val
-12 \; \$1-pref-to-val 80 \; \$1-harm-time-val 12 \; \$1-pref-time-val
-12 \; \$1-harm-val set 12 \; \$1-pref-val set 80 \; \$1-sweep-val set
-1;
+1 \; \$1-harm-from 4 \; \$1-pref-from -80 \; \$1-harm-to 12 \; \$1-pref-to
+80 \; \$1-harm-time 12 \; \$1-pref-time 12 \; \$1-harm-val set 12 \;
+\$1-pref-val set 80 \; \$1-sweep-val set 1;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X restore 300 10 pd harm-sweep-defaults;
-#X obj 380 330 t b f;
-#X obj 380 355 v \$0-target;
-#X obj 380 380 pack f f;
-#X obj 380 405 route 0 1 2;
-#X obj 330 435 sweep2 \$0 harm;
-#X obj 450 435 sweep2 \$0 pref;
+#X obj 380 410 t b f;
+#X obj 380 435 v \$0-target;
+#X obj 380 460 pack f f;
+#X obj 380 485 route 0 1 2;
+#X obj 330 515 sweep2 \$0 harm;
+#X obj 450 515 sweep2 \$0 pref;
 #X obj 228 117 hsl 32 15 0 1 0 0 empty \$0-sweep-val empty -2 -8 0
-10 #fcfcfc #000000 #000000 3100 1;
-#X connect 0 0 39 0;
-#X connect 1 0 45 0;
+10 #fcfcfc #000000 #000000 0 1;
+#X msg 20 220 harm-from \$1;
+#X msg 20 240 harm-to \$1;
+#X msg 60 260 pref-from \$1;
+#X msg 60 280 pref-to \$1;
+#X msg 170 220 harm-time \$1;
+#X msg 210 240 pref-time \$1;
+#X msg 170 260 harm-sweep \$1;
+#X msg 280 260 pref-sweep \$1;
+#X msg 390 240 part \$1;
+#X msg 470 240 target \$1;
+#X obj 190 300 s \$0-arp;
+#X obj 170 180 r \$0-harm-sweep-s;
+#X obj 280 180 r \$0-pref-sweep-s;
+#X obj 390 180 r \$0-part-s;
+#X obj 470 180 r \$0-target-s;
+#X connect 0 0 35 0;
+#X connect 1 0 41 0;
 #X connect 2 0 19 0;
+#X connect 2 0 56 0;
 #X connect 3 0 21 0;
+#X connect 3 0 58 0;
 #X connect 4 0 20 0;
+#X connect 4 0 57 0;
 #X connect 5 0 22 0;
+#X connect 5 0 59 0;
 #X connect 16 0 23 0;
+#X connect 16 0 60 0;
 #X connect 17 0 24 0;
-#X connect 18 0 37 0;
-#X connect 25 0 26 0;
-#X connect 27 0 28 0;
-#X connect 31 0 29 0;
-#X connect 32 0 30 0;
+#X connect 17 0 61 0;
+#X connect 18 0 33 0;
+#X connect 29 0 27 0;
+#X connect 30 0 28 0;
 #X connect 33 0 34 0;
+#X connect 34 0 29 0;
+#X connect 34 1 30 0;
+#X connect 34 2 29 0;
+#X connect 34 2 30 0;
 #X connect 35 0 36 0;
+#X connect 35 1 37 1;
+#X connect 36 0 37 0;
 #X connect 37 0 38 0;
-#X connect 38 0 31 0;
-#X connect 38 1 32 0;
-#X connect 38 2 31 0;
-#X connect 38 2 32 0;
-#X connect 39 0 40 0;
-#X connect 39 1 41 1;
-#X connect 40 0 41 0;
+#X connect 38 0 39 0;
+#X connect 38 1 40 0;
 #X connect 41 0 42 0;
+#X connect 41 1 43 1;
 #X connect 42 0 43 0;
-#X connect 42 1 44 0;
-#X connect 45 0 46 0;
-#X connect 45 1 47 1;
-#X connect 46 0 47 0;
-#X connect 47 0 48 0;
-#X connect 48 0 49 0;
-#X connect 48 1 50 0;
-#X connect 53 0 54 0;
-#X connect 53 1 55 1;
-#X connect 54 0 55 0;
-#X connect 55 0 56 0;
-#X connect 56 0 57 0;
-#X connect 56 0 58 0;
-#X connect 56 1 57 0;
-#X connect 56 2 58 0;
-#X connect 59 0 53 0;
+#X connect 43 0 44 0;
+#X connect 44 0 45 0;
+#X connect 44 1 46 0;
+#X connect 49 0 50 0;
+#X connect 49 1 51 1;
+#X connect 50 0 51 0;
+#X connect 51 0 52 0;
+#X connect 52 0 53 0;
+#X connect 52 0 54 0;
+#X connect 52 1 53 0;
+#X connect 52 2 54 0;
+#X connect 55 0 49 0;
+#X connect 56 0 66 0;
+#X connect 57 0 66 0;
+#X connect 58 0 66 0;
+#X connect 59 0 66 0;
+#X connect 60 0 66 0;
+#X connect 61 0 66 0;
+#X connect 62 0 66 0;
+#X connect 63 0 66 0;
+#X connect 64 0 66 0;
+#X connect 65 0 66 0;
+#X connect 67 0 25 0;
+#X connect 67 0 62 0;
+#X connect 68 0 26 0;
+#X connect 68 0 63 0;
+#X connect 69 0 31 0;
+#X connect 69 0 64 0;
+#X connect 70 0 32 0;
+#X connect 70 0 65 0;
 #X coords 0 -1 1 1 254 136 1 15 0;
 #X restore 10 410 pd harm-sweep;
 #X text 220 105 sweep;
