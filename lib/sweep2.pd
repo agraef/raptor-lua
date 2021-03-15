@@ -1,0 +1,14 @@
+#N canvas 610 205 452 303 12;
+#X obj 20 50 t f b b;
+#X obj 20 75 expr (1-$f1)*$f2+$f1*$f3;
+#X obj 20 20 inlet;
+#X obj 70 50 v \$1-\$2-from;
+#X obj 20 100 s \$1-\$2-val;
+#X obj 160 50 v \$1-\$2-to;
+#X connect 0 0 1 0;
+#X connect 0 1 3 0;
+#X connect 0 2 5 0;
+#X connect 1 0 4 0;
+#X connect 2 0 0 0;
+#X connect 3 0 1 1;
+#X connect 5 0 1 2;
