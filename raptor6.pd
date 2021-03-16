@@ -1,4 +1,4 @@
-#N canvas 475 95 566 564 10;
+#N canvas 475 95 568 568 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 145 193 240;
@@ -19,7 +19,7 @@
 #X msg 110 330 3 2 2;
 #X msg 154 330 2 3 2;
 #X obj 10 20 tgl 20 0 empty \$0-play play -1 -11 0 10 #69be77 #000000
-#000000 0 1;
+#000000 1 1;
 #N canvas 670 160 470 552 tempo 0;
 #X obj 30 10 inlet;
 #X obj 30 105 change;
@@ -171,7 +171,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 6 0 7 0;
 #X connect 8 0 9 0;
 #X restore 290 330 pd init;
-#N canvas 320 69 833 692 arp 0;
+#N canvas 535 29 837 743 arp 0;
 #X floatatom 20 428 5 0 0 0 - - -, f 5;
 #X floatatom 66 428 5 0 0 0 - - -, f 5;
 #X obj 20 472 makenote 127 160;
@@ -368,7 +368,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 140 110 route 0;
 #X msg 140 135 1;
 #X obj 90 55 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
-1 1;
+0 1;
 #X obj 179 135 ==;
 #X obj 30 105 unpack f f;
 #X obj 140 80 pack f f;
@@ -553,7 +553,7 @@ harm-sweep pref-sweep part target;
 #X connect 99 0 97 2;
 #X coords 0 -1 1 1 167 52 1 127 337;
 #X restore 10 110 pd arp;
-#N canvas 1799 29 543 717 control 0;
+#N canvas 827 29 545 743 control 0;
 #X obj 380 115 sel 0;
 #X obj 380 140 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -596,7 +596,7 @@ harm-sweep pref-sweep part target;
 #X obj 250 140 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
 #X obj 320 140 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#000000 1 1;
 #X obj 290 188 * 100;
 #X obj 331 188 int;
 #X obj 22 467 swap;
@@ -1137,14 +1137,14 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X obj 290 425 p \$0 bla 4;
 #X obj 290 450 p \$0 raptor 5;
 #X obj 290 475 p \$0 tr808 6;
-#N canvas 895 29 477 743 time 0;
+#N canvas 570 191 481 407 time 0;
 #X obj 350 160 inlet;
-#X obj 200 20 tgl 15 1 empty \$0-master-toggle M 17 7 0 10 #fcfcfc
+#X obj 232 20 tgl 15 1 empty \$0-master-toggle M 17 7 0 10 #fcfcfc
 #000000 #000000 1 1;
 #X obj 40 113 bng 15 50 10 0 pulse empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 230 20 tgl 15 0 empty \$0-metro empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 262 20 tgl 15 0 empty \$0-metro empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
 #X obj 40 92 metro 160;
 #X obj 170 100 != 0;
 #X obj 260 100 == 0;
@@ -1157,14 +1157,14 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X obj 230 235 sel \$0;
 #X msg 263 260 0;
 #X obj 40 36 spigot;
-#X obj 250 20 bng 15 50 10 0 empty pulse empty 17 7 0 10 #fcfcfc #000000
+#X obj 282 20 bng 15 50 10 0 empty pulse empty 17 7 0 10 #fcfcfc #000000
 #000000;
 #X obj 350 210 outlet;
 #X obj 170 235 spigot;
 #X msg 170 260 1;
 #X obj 400 240 s \$0-me;
 #X obj 170 210 r \$0-me;
-#X obj 250 43 outlet;
+#X obj 282 43 outlet;
 #X obj 230 210 r all-master;
 #X obj 350 100 s stop;
 #X obj 170 290 s \$0-master-toggle;
@@ -1213,13 +1213,13 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X connect 35 3 20 0;
 #X connect 36 0 37 0;
 #X connect 38 0 4 1;
-#X coords 0 -1 1 1 134 21 1 134 17;
+#X coords 0 -1 1 1 167 21 1 134 17;
 #X restore 10 50 pd time;
 #X msg 195 384;
 #X msg 198 330 5 2;
 #X msg 230 330 7 2;
 #X text 70 280 meter;
-#N canvas 300 65 570 639 harm-sweep 0;
+#N canvas 300 52 570 720 harm-sweep 0;
 #X floatatom 20 30 5 0 100 2 hmin #0-harm-val -, f 5;
 #X floatatom 60 30 5 -100 100 2 pref #0-pref-val -, f 5;
 #X floatatom 20 70 5 0 100 2 from #0-harm-from -, f 5;
@@ -1253,10 +1253,10 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X obj 170 200 v \$0-harm-sweep;
 #X obj 280 200 v \$0-pref-sweep;
 #X obj 250 380 sweep \$0 harm;
-#X obj 360 380 sweep \$0 pref;
+#X obj 289 400 sweep \$0 pref;
 #X obj 250 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 360 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 289 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X obj 390 200 v \$0-part;
 #X obj 470 200 v \$0-target;
@@ -1291,8 +1291,8 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X obj 380 485 route 0 1 2;
 #X obj 330 515 sweep2 \$0 harm;
 #X obj 450 515 sweep2 \$0 pref;
-#X obj 228 117 hsl 32 15 0 1 0 0 empty \$0-sweep-val empty -2 -8 0
-10 #fcfcfc #000000 #000000 3100 1;
+#X obj 170 117 hsl 90 15 0 1 0 0 empty \$0-sweep-val sweep -2 -8 0
+10 #fcfcfc #000000 #000000 4361 1;
 #X msg 20 220 harm-from \$1;
 #X msg 20 240 harm-to \$1;
 #X msg 60 260 pref-from \$1;
@@ -1308,6 +1308,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X obj 280 180 r \$0-pref-sweep-s;
 #X obj 390 180 r \$0-part-s;
 #X obj 470 180 r \$0-target-s;
+#X obj 380 380 expr rint($f1*100)/100;
 #X connect 0 0 35 0;
 #X connect 1 0 41 0;
 #X connect 2 0 19 0;
@@ -1350,7 +1351,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X connect 52 0 54 0;
 #X connect 52 1 53 0;
 #X connect 52 2 54 0;
-#X connect 55 0 49 0;
+#X connect 55 0 71 0;
 #X connect 56 0 66 0;
 #X connect 57 0 66 0;
 #X connect 58 0 66 0;
@@ -1369,6 +1370,7 @@ extra long press (>= 1000 ms) cancels., f 32;
 #X connect 69 0 64 0;
 #X connect 70 0 32 0;
 #X connect 70 0 65 0;
+#X connect 71 0 49 0;
 #X coords 0 -1 1 1 254 136 1 15 0;
 #X restore 10 410 pd harm-sweep;
 #X text 220 105 sweep;
