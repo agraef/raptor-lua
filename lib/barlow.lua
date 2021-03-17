@@ -531,6 +531,7 @@ function M.step_filter(w, smin, smax, smod, dir, mode, cache, ms)
       end
       if next(res) == nil then
 	 -- we ran out of notes, restart the pattern
+	 -- pd.post("raptor: no notes to play, restart!")
 	 cache = {}
 	 if mode==0 then
 	    dir = 0

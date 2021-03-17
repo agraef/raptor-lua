@@ -274,14 +274,24 @@ function arpeggio:create_pattern(chord)
 	 -- the same, but it's as close to outside-in as I can make it. You
 	 -- might also consider mode 0 (random) as a reasonable alternative
 	 -- instead.
-	 local cache = {{}, {}}
-	 local mode, dir = 1, 1
-	 if logic_like then
-	    mode, dir = 2, -1
+	 local cache, mode, dir
+	 local function restart()
+	    -- pd.post("raptor: restart")
+	    cache = {{}, {}}
+	    if logic_like then
+	       mode, dir = 2, -1
+	    else
+	       mode, dir = 1, 1
+	    end
 	 end
+	 restart()
 	 pattern = function(w1)
-	    local _
-	    cache[mode], _ =
+	    local notes, _
+	    if w1 == 1 then
+	       -- beginning of bar, restart pattern
+	       restart()
+	    end
+	    notes, _ =
 	       rand_notes(w1,
 			  self.nmax, self.nmod,
 			  self.hmin, self.hmax, self.hmod,
@@ -290,7 +300,9 @@ function arpeggio:create_pattern(chord)
 			  self.pref, self.prefmod,
 			  cache[mode],
 			  chord, seq(a, b))
-	    local notes = cache[mode]
+	    if next(notes) ~= nil then
+	       cache[mode] = notes
+	    end
 	    if dir>0 then
 	       mode, dir = 2, -1
 	    else
@@ -299,16 +311,26 @@ function arpeggio:create_pattern(chord)
 	    return notes
 	 end
       else
-	 local cache = {}
-	 local mode = self.mode
-	 local dir = 0
-	 if mode == 1 or mode == 3 then
-	    dir = 1
-	 elseif mode == 2 or mode == 4 then
-	    dir = -1
+	 local cache, mode, dir
+	 local function restart()
+	    -- pd.post("raptor: restart")
+	    cache = {}
+	    mode = self.mode
+	    dir = 0
+	    if mode == 1 or mode == 3 then
+	       dir = 1
+	    elseif mode == 2 or mode == 4 then
+	       dir = -1
+	    end
 	 end
+	 restart()
 	 pattern = function(w1)
-	    cache, dir =
+	    local notes
+	    if w1 == 1 then
+	       -- beginning of bar, restart pattern
+	       restart()
+	    end
+	    notes, dir =
 	       rand_notes(w1,
 			  self.nmax, self.nmod,
 			  self.hmin, self.hmax, self.hmod,
@@ -317,7 +339,10 @@ function arpeggio:create_pattern(chord)
 			  self.pref, self.prefmod,
 			  cache,
 			  chord, seq(a, b))
-	    return cache
+	    if next(notes) ~= nil then
+	       cache = notes
+	    end
+	    return notes
 	 end
       end
    elseif self.mode == 0 then
