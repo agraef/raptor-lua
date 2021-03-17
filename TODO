@@ -1,15 +1,13 @@
 
 - better presets (port some Raptor 5 presets?)
 
-- MIDI clock sync
-
 - OSC control
 
 - looper
 
 - do something useful with meter subdivisions?
 
-Our implementation of Barlow indispensabilities, being derived from
-meter.pd_lua, supports fractional pulses to subdivide the meter into tuplets
-(up to septuplets) on the fly. This isn't used in Raptor right now, but seems
-such a useful feature, so it would be nice to support it in some way. But how?
+  Our implementation of Barlow indispensabilities snipped from meter.pd_lua
+  supports fractional pulses to subdivide the meter into tuplets (up to
+  septuplets) on the fly. This isn't used in Raptor right now, but seems such
+  a useful feature, so it would be nice to support it in some way. But how?

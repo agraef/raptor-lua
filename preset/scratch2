@@ -8,6 +8,7 @@ smod 0;
 smax 7;
 smin 1;
 tempo 100;
+meter-base 16;
 meter 15;
 swing 0;
 gatemod 0;
