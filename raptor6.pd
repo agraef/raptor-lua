@@ -1,4 +1,4 @@
-#N canvas 440 105 583 564 10;
+#N canvas 440 105 585 559 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 200 193 240;
@@ -61,7 +61,7 @@
 #X connect 19 0 17 1;
 #X coords 0 -1 1 1 185 37 1 26 22;
 #X restore 10 222 pd tempo;
-#N canvas 139 216 474 499 meter 0;
+#N canvas 138 217 476 525 meter 0;
 #X obj 30 100 inlet;
 #X obj 30 125 route float list;
 #X msg 30 250 meter \$1;
@@ -114,7 +114,6 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X floatatom 100 374 5 0 0 0 - - -, f 5;
 #X msg 100 398 meter-base \$1;
 #X obj 100 324 expr pow(2 \, ceil(log($f1)/log(2)));
-#X obj 100 349 change;
 #X obj 240 69 change;
 #X obj 240 94 t f f;
 #X obj 240 119 s \$0-m;
@@ -142,7 +141,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 18 0 24 0;
 #X connect 19 0 1 0;
 #X connect 20 0 1 0;
-#X connect 21 0 29 0;
+#X connect 21 0 28 0;
 #X connect 22 0 27 0;
 #X connect 23 0 6 0;
 #X connect 23 1 22 0;
@@ -150,11 +149,10 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 24 1 22 0;
 #X connect 25 0 26 0;
 #X connect 26 0 5 0;
-#X connect 27 0 28 0;
-#X connect 28 0 25 0;
+#X connect 27 0 25 0;
+#X connect 28 0 29 0;
 #X connect 29 0 30 0;
-#X connect 30 0 31 0;
-#X connect 30 1 25 0;
+#X connect 29 1 25 0;
 #X coords 0 -1 1 1 185 43 1 26 22;
 #X restore 10 347 pd meter;
 #X symbolatom 494 330 10 0 0 0 - #0-preset #0-preset-set, f 10;
@@ -603,7 +601,7 @@ harm-sweep pref-sweep part target;
 #X obj 250 140 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
 #X obj 320 140 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X obj 290 188 * 100;
 #X obj 331 188 int;
 #X obj 22 467 swap;
