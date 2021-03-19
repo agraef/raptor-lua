@@ -511,9 +511,6 @@ function arpeggio:in_1_nmax(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.nmax = math.max(0, math.min(10, x))
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -521,9 +518,6 @@ function arpeggio:in_1_nmod(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.nmod = math.max(-100, math.min(100, x))/100
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -531,9 +525,6 @@ function arpeggio:in_1_hmin(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.hmin = math.max(0, math.min(100, x))/100
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -541,9 +532,6 @@ function arpeggio:in_1_hmax(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.hmax = math.max(0, math.min(100, x))/100
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -551,9 +539,6 @@ function arpeggio:in_1_hmod(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.hmod = math.max(-100, math.min(100, x))/100
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -561,9 +546,6 @@ function arpeggio:in_1_smin(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.smin = math.max(-127, math.min(127, x))
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -571,9 +553,6 @@ function arpeggio:in_1_smax(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.smax = math.max(-127, math.min(127, x))
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -581,9 +560,6 @@ function arpeggio:in_1_smod(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.smod = math.max(-100, math.min(100, x))/100
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -591,9 +567,6 @@ function arpeggio:in_1_uniq(x)
    x = self:intarg(x)
    if type(x) == "number" then
       self.uniq = math.max(0, math.min(1, x))
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -601,9 +574,6 @@ function arpeggio:in_1_pref(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.pref = math.max(-100, math.min(100, x))/100
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -611,9 +581,6 @@ function arpeggio:in_1_prefmod(x)
    x = self:numarg(x)
    if type(x) == "number" then
       self.prefmod = math.max(-100, math.min(100, x))/100
-      if self.raptor~=0 then
-	 self.pattern = self:create_pattern(self:get_chord())
-      end
    end
 end
 
@@ -705,9 +672,6 @@ end
 -- pulses on the 3rd outlet
 function arpeggio:in_2_list(atoms)
    self:prepare_meter(atoms)
-   if self.raptor~=0 then
-      self.pattern = self:create_pattern(self:get_chord())
-   end
    self:outlet(3, "float", {self.beats})
 end
 
