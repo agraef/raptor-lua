@@ -62,6 +62,11 @@ function arpeggio:initialize(_, atoms)
    self.minvel, self.maxvel, self.velmod = 60, 120, 1
    self.pmin, self.pmax, self.pmod = 0.3, 1, 0
    self.gate, self.gatemod = 1, 0
+   -- Looper variables
+   self.loopstate = 0
+   self.loopsize = 0
+   self.loopidx = 0
+   self.loop = {}
    -- Raptor params, reasonable defaults
    self.nmax, self.nmod = 1, 0
    self.hmin, self.hmax, self.hmod = 0, 1, 0
@@ -172,6 +177,111 @@ function arpeggio:intarg(x)
    end
 end
 
+-- the Looper
+
+function arpeggio:loop_clear()
+   -- reset the looper
+   self.loopstate = 0
+   self.loopidx = 0
+   self.loop = {}
+end
+
+function arpeggio:loop_set()
+   -- set the loop and start playing it
+   local loop = {}
+   local n = #self.loop
+   -- pd.post(string.format("loop_set, got %d steps, loopidx = %d, size = %d", n, self.loopidx, self.loopsize))
+   if n <= 0 or self.loopsize <= 0 then
+      -- we haven't recorded anything yet, bail out
+      self.loopidx = 0
+      self.loopstate = 1
+      return
+   end
+   -- grab the last self.loopsize steps (cycle through whatever we got if we
+   -- recorded less steps than the target loop size)
+   local startidx = self.loopidx - self.loopsize
+   while startidx < 0 do
+      startidx = startidx + n
+   end
+   -- pd.post(string.format("loop_set, getting %d steps from %d to %d", self.loopsize, startidx, startidx+self.loopsize-1))
+   for i = startidx, startidx+self.loopsize-1 do
+      loop[i-startidx+1] = cycle(self.loop, i)
+   end
+   self.loop = loop
+   self.loopidx = 0
+   self.loopstate = 1
+end
+
+function arpeggio:loop_add(notes, vel, gate)
+   self.loop[self.loopidx+1] = {notes, vel, gate}
+   -- we always *store* up to 128 steps in a cyclic buffer
+   self.loopidx = (self.loopidx+1) % 128
+end
+
+function arpeggio:loop_get()
+   local res = {{}, 0, 0}
+   if self.loopsize > 0 and self.loopidx < #self.loop then
+      res = self.loop[self.loopidx+1]
+      -- we always *read* exactly self.loopsize steps in a cyclic buffer
+      self.loopidx = (self.loopidx+1) % self.loopsize
+   end
+   return res
+end
+
+function arpeggio:loop_file(file)
+   if self.loopstate == 1 then
+      local f = io.open(file, "w")
+      f:write(inspect(self.loop))
+      f:close()
+      pd.post(string.format("save loop: %s", file))
+   else
+      local f = io.open(file, "r")
+      local fun, err = load("return " .. f:read("a"))
+      f:close()
+      if type(err) == "string" then
+	 self:error(string.format("load loop: %s: %s", file, err))
+      elseif type(fun) ~= "function" then
+	 self:error(string.format("load loop: %s: invalid format", file))
+      else
+	 local loop = fun()
+	 if type(loop) ~= "table" then
+	    self:error(string.format("load loop: %s: invalid format", file))
+	 else
+	    self.loop = loop
+	    self.loopsize = #loop
+	    self.loopidx = 0
+	    self.loopstate = 1
+	    pd.post(string.format("load loop: %s", file))
+	    self:outlet(1, "loopsize", {self.loopsize})
+	 end
+      end
+   end
+end
+
+function arpeggio:in_1_loopsize(x)
+   x = self:intarg(x)
+   if type(x) == "number" then
+      self.loopsize = math.max(0, math.min(128, x))
+   end
+end
+
+function arpeggio:in_1_loop(x)
+   if type(x) == "string" then
+      self:loop_file(x)
+   elseif type(x) == "table" and type(x[1]) == "string" then
+      self:loop_file(x[1])
+   else
+      x = self:intarg(x)
+      if type(x) == "number" then
+	 if x ~= 0 and self.loopstate == 0 then
+	    self:loop_set()
+	 elseif x == 0 and self.loopstate == 1 then
+	    self:loop_clear()
+	 end
+      end
+   end
+end
+
 -- output the next note in the pattern and switch to the next pulse
 function arpeggio:in_1_bang()
    local w, n = self:meter(self.idx)
@@ -182,7 +292,20 @@ function arpeggio:in_1_bang()
       math.floor(mod_value(self.minvel, self.maxvel, self.velmod, w1))
    self:outlet(3, "float", {n})
    self:outlet(2, "float", {w})
-   local notes = nil
+   local gate, notes = 0, nil
+   if self.loopstate == 1 then
+      -- notes come straight from the loop, input is ignored
+      notes, vel, gate = table.unpack(self:loop_get())
+      if type(notes) == "table" then
+	 for _,note in ipairs(notes) do
+	    self:outlet(1, "list", {note, vel, gate})
+	 end
+      else
+	 self:outlet(1, "list", {notes, vel, gate})
+      end
+      self.idx = (self.idx + 1) % self.beats
+      return
+   end
    if type(self.pattern) == "function" then
       notes = self.pattern(w1)
    elseif next(self.pattern) ~= nil then
@@ -201,11 +324,12 @@ function arpeggio:in_1_bang()
       end
       if r <= p then
 	 -- modulated gate value
-	 local gate = mod_value(0, self.gate, self.gatemod, w1)
+	 gate = mod_value(0, self.gate, self.gatemod, w1)
 	 -- output notes (there may be more than one in Raptor mode)
 	 if self.debug&4~=0 then
 	    pd.post(string.format("idx = %g, notes = %s, vel = %g, gate = %g", self.idx, inspect(notes), vel, gate))
 	 end
+	 self:loop_add(notes, vel, gate)
 	 if type(notes) == "table" then
 	    for _,note in ipairs(notes) do
 	       self:outlet(1, "list", {note, vel, gate})
@@ -214,7 +338,11 @@ function arpeggio:in_1_bang()
 	    -- just a single note (assert type(notes) == "number")
 	    self:outlet(1, "list", {notes, vel, gate})
 	 end
+      else
+	 self:loop_add({}, vel, gate)
       end
+   else
+      self:loop_add({}, vel, gate)
    end
    -- XXXTODO: We only do integer pulses currently, maybe add some way to
    -- employ subdivisions, e.g., for ratchets?

@@ -3,7 +3,8 @@
 
 - OSC control
 
-- looper
+- when running multiple Raptors in concert, allow switching the PACER to each
+  individual instance no matter what MIDI input channels they are on
 
 - do something useful with meter subdivisions?
 
