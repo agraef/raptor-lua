@@ -188,42 +188,71 @@ end
 
 function arpeggio:loop_set()
    -- set the loop and start playing it
-   local loop = {}
-   local n = #self.loop
-   -- pd.post(string.format("loop_set, got %d steps, loopidx = %d, size = %d", n, self.loopidx, self.loopsize))
-   if n <= 0 or self.loopsize <= 0 then
-      -- we haven't recorded anything yet, bail out
+   local n, m = #self.loop, self.loopsize
+   local b, p, q = self.beats, self.loopidx, self.idx
+   -- NOTE: Use Ableton-style launch quantization here. We quantize start and
+   -- end of the loop, as well as m = the target loop size to whole bars, to
+   -- account for rhythmic inaccuracies. Otherwise it's just much too easy to
+   -- miss bar boundaries when recording a loop.
+   m = math.ceil(m/b)*b -- rounding up
+   -- beginning of last complete bar in cyclic buffer
+   local k = (p-q-b) % 256
+   if n <= 0 or m <= 0 or m > 256 or k >= n then
+      -- We haven't recorded enough steps for a bar yet, or the target size is
+      -- 0, bail out with an empty loop.
+      self.loop = {}
       self.loopidx = 0
       self.loopstate = 1
+      pd.post(string.format("loop: got %d steps, need %d/%d.", p>=n and math.max(0, p-q) or q==0 and n or math.max(0, n-b), b, m))
       return
    end
-   -- grab the last self.loopsize steps (cycle through whatever we got if we
-   -- recorded less steps than the target loop size)
-   local startidx = self.loopidx - self.loopsize
-   while startidx < 0 do
-      startidx = startidx + n
+   -- At this point we have at least 1 bar, starting at k+1, that we can grab;
+   -- try extending the loop until we hit the target size.
+   local l = b
+   while l < m do
+      if k >= b then
+	 k = k-b
+      elseif p >= n or (k-b) % 256 < p then
+	 -- in this case either the cyclic buffer hasn't been filled yet, or
+	 -- wrapping around would take us past the buffer pointer, so bail out
+	 break
+      else
+	 -- wrap around to the end of the buffer
+	 k = (k-b) % 256
+      end
+      l = l+b
    end
-   -- pd.post(string.format("loop_set, getting %d steps from %d to %d", self.loopsize, startidx, startidx+self.loopsize-1))
-   for i = startidx, startidx+self.loopsize-1 do
-      loop[i-startidx+1] = cycle(self.loop, i)
+   -- grab l (at most m) steps
+   --pd.post(string.format("loop: recorded %d/%d steps %d-%d", l, m, k+1, k+m))
+   pd.post(string.format("loop: recorded %d/%d steps", l, m))
+   local loop = {}
+   for i = k+1, k+l do
+      loop[i-k] = cycle(self.loop, i)
    end
    self.loop = loop
-   self.loopidx = self.idx % self.loopsize
+   self.loopidx = q % l
    self.loopstate = 1
 end
 
 function arpeggio:loop_add(notes, vel, gate)
-   self.loop[self.loopidx+1] = {notes, vel, gate}
-   -- we always *store* up to 128 steps in a cyclic buffer
-   self.loopidx = (self.loopidx+1) % 128
+   -- we only start recording at the first note
+   local have_notes = type(notes) == "number" or
+      (notes ~= nil and next(notes) ~= nil)
+   if have_notes or next(self.loop) ~= nil then
+      self.loop[self.loopidx+1] = {notes, vel, gate}
+      -- we always *store* up to 256 steps in a cyclic buffer
+      self.loopidx = (self.loopidx+1) % 256
+   end
 end
 
 function arpeggio:loop_get()
    local res = {{}, 0, 0}
-   if self.loopsize > 0 and self.loopidx < #self.loop then
-      res = self.loop[self.loopidx+1]
-      -- we always *read* exactly self.loopsize steps in a cyclic buffer
-      self.loopidx = (self.loopidx+1) % self.loopsize
+   local p, n = self.loopidx, #self.loop
+   if p < n then
+      res = self.loop[p+1]
+      -- we always *read* exactly n steps in a cyclic buffer
+      self:outlet(1, "loopidx", {self.loopidx})
+      self.loopidx = (p+1) % n
    end
    return res
 end
@@ -235,17 +264,19 @@ function arpeggio:loop_file(file)
       f:close()
       pd.post(string.format("save loop: %s", file))
    else
-      local f = io.open(file, "r")
+      local f, err = io.open(file, "r")
+      if type(err) == "string" then
+	 pd.post(string.format("load loop: %s", err))
+	 return
+      end
       local fun, err = load("return " .. f:read("a"))
       f:close()
-      if type(err) == "string" then
-	 self:error(string.format("load loop: %s: %s", file, err))
-      elseif type(fun) ~= "function" then
-	 self:error(string.format("load loop: %s: invalid format", file))
+      if type(err) == "string" or type(fun) ~= "function" then
+	 pd.post(string.format("load loop: %s: invalid format", file))
       else
 	 local loop = fun()
 	 if type(loop) ~= "table" then
-	    self:error(string.format("load loop: %s: invalid format", file))
+	    pd.post(string.format("load loop: %s: invalid format", file))
 	 else
 	    self.loop = loop
 	    self.loopsize = #loop
@@ -261,7 +292,7 @@ end
 function arpeggio:in_1_loopsize(x)
    x = self:intarg(x)
    if type(x) == "number" then
-      self.loopsize = math.max(0, math.min(128, x))
+      self.loopsize = math.max(0, math.min(256, x))
    end
 end
 
