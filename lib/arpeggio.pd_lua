@@ -208,7 +208,7 @@ function arpeggio:loop_set()
       loop[i-startidx+1] = cycle(self.loop, i)
    end
    self.loop = loop
-   self.loopidx = 0
+   self.loopidx = self.idx % self.loopsize
    self.loopstate = 1
 end
 
@@ -249,7 +249,7 @@ function arpeggio:loop_file(file)
 	 else
 	    self.loop = loop
 	    self.loopsize = #loop
-	    self.loopidx = 0
+	    self.loopidx = self.idx % self.loopsize
 	    self.loopstate = 1
 	    pd.post(string.format("load loop: %s", file))
 	    self:outlet(1, "loopsize", {self.loopsize})
@@ -362,7 +362,10 @@ end
 function arpeggio:in_1_float(x)
    x = self:intarg(x)
    if type(x) == "number" then
-      self.idx = math.max(0, math.min(self.beats, x)) % self.beats
+      self.idx = math.max(0, x) % self.beats
+      if self.loopstate == 1 then
+	 self.loopidx = self.idx % self.loopsize
+      end
    end
 end
 
