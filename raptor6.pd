@@ -1,4 +1,4 @@
-#N canvas 493 93 571 559 10;
+#N canvas 492 94 573 560 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 200 193 240;
@@ -105,7 +105,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 8 0 2 0;
 #X restore 270 173 pd product;
 #X obj 30 46 hsl 128 15 1 24 0 0 empty \$0-meter-set empty -2 -8 0
-10 #fcfcfc #000000 #000000 6074 1;
+10 #fcfcfc #000000 #000000 7730 1;
 #X floatatom 170 25 6 1 24 0 - #0-meter-set -, f 6;
 #X floatatom 170 45 6 1 64 0 - #0-meter-base -, f 6;
 #X floatatom 100 300 5 0 0 0 - - -, f 5;
@@ -192,7 +192,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 6 0 7 0;
 #X connect 8 0 9 0;
 #X restore 290 330 pd init;
-#N canvas 95 29 844 743 arp 0;
+#N canvas 3039 29 845 717 arp 0;
 #X floatatom 20 428 5 0 0 0 - - -, f 5;
 #X floatatom 66 428 5 0 0 0 - - -, f 5;
 #X obj 20 472 makenote 127 160;
@@ -224,7 +224,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 45 146 change;
 #X obj 280 23 notein;
 #X obj 280 142 trace 300;
-#X floatatom 314 120 5 0 0 0 - #0-trace -, f 5;
+#X floatatom 308 120 5 0 0 0 - #0-trace -, f 5;
 #X text 20 20 - input -;
 #X obj 140 280 arpeggio 15;
 #X obj 140 250 inlet;
@@ -254,7 +254,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 400 345 t f f f;
 #X obj 550 341 sel 1;
 #X obj 230 340 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
-#000000 #000000 158 1;
+#000000 #000000 0 1;
 #X obj 690 351 sel 0;
 #X obj 690 381 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -317,7 +317,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #000000 #000000;
 #X msg 186 390 300;
 #X obj 20 45 r \$0-arp;
-#X obj 331 188 s \$0-vel;
+#X obj 336 188 s \$0-vel;
 #X obj 20 120 s \$0-tempo;
 #X obj 45 171 s \$0-swing;
 #X obj 493 266 r \$0-n;
@@ -387,7 +387,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 140 110 route 0;
 #X msg 140 135 1;
 #X obj 90 85 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
-1 1;
+0 1;
 #X obj 179 135 ==;
 #X obj 30 135 unpack f f;
 #X obj 140 80 pack f f;
@@ -477,7 +477,7 @@ harm-sweep pref-sweep part target;
 #X obj 192 455 route pgm outchan pan mute;
 #X obj 527 100 == 0;
 #X obj 527 150 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X obj 527 173 t f f;
 #X obj 527 198 sel 0;
 #X msg 527 223 panic;
@@ -504,6 +504,7 @@ cchan, f 34;
 #X connect 4 1 1 0;
 #X connect 4 2 3 0;
 #X connect 5 0 73 1;
+#X connect 5 0 16 4;
 #X connect 6 0 73 2;
 #X connect 7 0 2 0;
 #X connect 10 0 8 2;
@@ -953,7 +954,7 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 272 53 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
 #X obj 200 87 hsl 64 15 -100 100 0 0 empty \$0-pmod pmod -3 -12 0 10
-#fcfcfc #000000 #000000 6300 1;
+#fcfcfc #000000 #000000 3150 1;
 #X msg 310 87 0;
 #X floatatom 100 87 6 0 100 2 pmin #0-pmin -, f 6;
 #X floatatom 147 87 6 0 100 2 pmax #0-pmax -, f 6;
@@ -963,7 +964,7 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 272 87 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
 #X obj 100 121 hsl 64 15 0 200 0 0 empty \$0-gate gate -1 -12 0 10
-#fcfcfc #000000 #000000 4725 1;
+#fcfcfc #000000 #000000 3150 1;
 #X msg 310 121 100;
 #X msg 100 420 gate \$1;
 #X obj 200 121 hsl 64 15 -100 100 0 0 empty \$0-gatemod gatemod -2
@@ -982,14 +983,14 @@ PACER setup has them on FS1+2)., f 79;
 #X floatatom 100 190 4 -100 100 2 swing #0-swing -, f 4;
 #X msg 100 330 swing \$1;
 #X obj 200 155 hsl 64 15 -100 100 0 0 empty \$0-hmod hmod -3 -12 0
-10 #fcfcfc #000000 #000000 3465 1;
+10 #fcfcfc #000000 #000000 3150 1;
 #X msg 310 155 0;
 #X floatatom 100 155 6 0 100 2 hmin #0-hmin -, f 6;
 #X floatatom 147 155 6 0 100 2 hmax #0-hmax -, f 6;
 #X obj 272 155 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X obj 200 190 hsl 64 15 -100 100 0 0 empty \$0-prefmod prefmod -3
--12 0 10 #fcfcfc #000000 #000000 3465 1;
+-12 0 10 #fcfcfc #000000 #000000 3150 1;
 #X msg 310 190 0;
 #X floatatom 147 190 6 -100 100 2 pref #0-pref -, f 6;
 #X obj 272 190 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
@@ -1021,7 +1022,7 @@ PACER setup has them on FS1+2)., f 79;
 #X msg 147 540 nmax \$1;
 #X msg 200 540 nmod \$1;
 #X obj 30 45 vradio 15 0 0 7 empty \$0-downval dn 0 -8 0 10 #fcfcfc
-#000000 #000000 5;
+#000000 #000000 4;
 #X obj 50 45 vradio 15 0 0 7 empty \$0-upval up 0 -8 0 10 #fcfcfc #000000
 #000000 2;
 #N canvas 526 202 589 302 octave 0;
@@ -1091,7 +1092,7 @@ PACER setup has them on FS1+2)., f 79;
 #X text 70 120 -2;
 #X text 70 135 -3;
 #X obj 30 219 vradio 15 0 0 6 empty \$0-mode empty 0 -8 0 10 #fcfcfc
-#000000 #000000 0;
+#000000 #000000 1;
 #X text 50 232 up;
 #X text 50 247 down;
 #X text 50 262 up-down;
@@ -1119,7 +1120,7 @@ PACER setup has them on FS1+2)., f 79;
 #X msg 30 330 transp \$1;
 #X text 50 293 outside-in;
 #X obj 30 201 tgl 15 0 empty \$0-raptor raptor 20 6 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X obj 200 294 hsl 64 15 0 127 0 0 empty \$0-pan pan -3 -12 0 10 #fcfcfc
 #000000 #000000 3175 1;
 #X obj 272 294 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
