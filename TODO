@@ -1,10 +1,13 @@
 
-- better presets (port some Raptor 5 presets?)
+- better presets (port some more presets from Raptor 5 or even version 4?)
 
-- OSC control
+- OSC control (don't hold your breath)
 
-- when running multiple Raptors in concert, allow switching the PACER to each
-  individual instance no matter what MIDI input channels they are on
+- allow loop import/export from/to MIDI?
+
+- other time sync protocols?
+
+  Ableton Link seems most interesting, is this supported in Pd yet?
 
 - do something useful with meter subdivisions?
 

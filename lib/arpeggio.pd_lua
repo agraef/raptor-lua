@@ -257,32 +257,52 @@ function arpeggio:loop_get()
    return res
 end
 
+local function fexists(name)
+   local f=io.open(name,"r")
+   if f~=nil then io.close(f) return true else return false end
+end
+
 function arpeggio:loop_file(file)
    if self.loopstate == 1 then
-      local f = io.open(file, "w")
+      -- first create a backup copy if the file already exists
+      if fexists(file) then
+	 local k, bakname = 1, ""
+	 repeat
+	    bakname = string.format("%s~%d~", file, k)
+	    k = k+1
+	 until not fexists(bakname)
+	 -- ignore errors, if we can't rename the file, we probably can't
+	 -- overwrite it either
+	 os.rename(file, bakname)
+      end
+      local f, err = io.open(file, "w")
+      if type(err) == "string" then
+	 pd.post(string.format("loop: %s", err))
+	 return
+      end
       f:write(inspect(self.loop))
       f:close()
-      pd.post(string.format("save loop: %s", file))
+      pd.post(string.format("loop: %s: saved %d steps", file, #self.loop))
    else
       local f, err = io.open(file, "r")
       if type(err) == "string" then
-	 pd.post(string.format("load loop: %s", err))
+	 pd.post(string.format("loop: %s", err))
 	 return
       end
       local fun, err = load("return " .. f:read("a"))
       f:close()
       if type(err) == "string" or type(fun) ~= "function" then
-	 pd.post(string.format("load loop: %s: invalid format", file))
+	 pd.post(string.format("loop: %s: invalid format", file))
       else
 	 local loop = fun()
 	 if type(loop) ~= "table" then
-	    pd.post(string.format("load loop: %s: invalid format", file))
+	    pd.post(string.format("loop: %s: invalid format", file))
 	 else
 	    self.loop = loop
 	    self.loopsize = #loop
 	    self.loopidx = self.idx % self.loopsize
 	    self.loopstate = 1
-	    pd.post(string.format("load loop: %s", file))
+	    pd.post(string.format("loop: %s: loaded %d steps", file, #loop))
 	    self:outlet(1, "loopsize", {self.loopsize})
 	 end
       end
