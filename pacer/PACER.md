@@ -2,7 +2,7 @@
 
 **NOTE:** While the controls discussed below can be used from a DAW, they are really designed for live performance. All Raptor parameters also have bindings better suited for MIDI automation, please see the Control section in the toplevel README file for details.
 
-<img src="/home/ag/Sources/bitbucket/raptor-lua/pacer/nektar-pacer.png" alt="nektar-pacer" style="zoom:75%;" />
+<img src="https://nektartech.com/wp-content/uploads/2018/12/pacer_rear_connections.png" style="zoom:75%;" />
 
 The [Nektar PACER][] makes for a great hands-free controller for live performances with Raptor, especially if you're playing MIDI guitar. This directory contains my custom PACER setup for Raptor, raptor-D1-3.syx, consisting of modified presets D1-D3 (these are the only presets contained in the sysex dump). You can load these into the PACER using François Georgy's web-based [PACER Editor][], or any sysex librarian such as [SimpleSysexxer][].
 
