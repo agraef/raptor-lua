@@ -117,7 +117,7 @@ Most of Raptor's parameters have MIDI bindings, so they can be automatized, e.g.
 
 ## Bugs and Limitations
 
-Here are some known issues that might be fixed in future versions (or not), and how to avoid them. Anything else that seems to be missing or not working properly? File a bug report, or (better yet) submit a pull request!
+Here are some known issues that might be fixed in future versions (or not), and how to avoid them. Anything else that seems to be missing or not working properly? File a [bug report][], or (better yet) submit a [pull request][]!
 
 ##### OSC Support
 
@@ -148,3 +148,5 @@ That said, some usability improvements might still be in order. There could be m
 [Nektar PACER]: https://nektartech.com/pacer-midi-daw-footswitch-controller/
 [OSC]: http://opensoundcontrol.org/
 [Ableton Link]: https://www.ableton.com/link/
+[bug report]: https://github.com/agraef/raptor-lua/issues
+[pull request]: https://github.com/agraef/raptor-lua/pulls
