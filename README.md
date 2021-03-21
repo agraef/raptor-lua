@@ -146,7 +146,7 @@ That said, some usability improvements might still be in order. There could be m
 [Pd-Lua]: https://agraef.github.io/pd-lua/
 [Qsynth]: https://qsynth.sourceforge.io/
 [Nektar PACER]: https://nektartech.com/pacer-midi-daw-footswitch-controller/
-[OSC]: http://opensoundcontrol.org/
+[OSC]: https://www.cnmat.berkeley.edu/opensoundcontrol
 [Ableton Link]: https://www.ableton.com/link/
 [bug report]: https://github.com/agraef/raptor-lua/issues
 [pull request]: https://github.com/agraef/raptor-lua/pulls
