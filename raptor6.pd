@@ -1,4 +1,4 @@
-#N canvas 460 87 567 558 10;
+#N canvas 460 87 568 560 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 200 193 240;
@@ -105,7 +105,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 8 0 2 0;
 #X restore 270 173 pd product;
 #X obj 30 46 hsl 128 15 1 24 0 0 empty \$0-meter-set empty -2 -8 0
-10 #fcfcfc #000000 #000000 9939 1;
+10 #fcfcfc #000000 #000000 7730 1;
 #X floatatom 170 25 6 1 24 0 - - -, f 6;
 #X floatatom 170 45 6 1 64 0 - - -, f 6;
 #X floatatom 100 300 5 0 0 0 - - -, f 5;
@@ -247,7 +247,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 20 400 unpack f f f;
 #X floatatom 259 370 5 0 127 0 - #0-vel -, f 5;
 #X obj 239 370 tgl 15 1 empty \$0-veltracker veltrk -2 -8 0 10 #fcfcfc
-#000000 #000000 0 1;
+#000000 #000000 1 1;
 #X obj 20 451 pipe;
 #X obj 20 510 noteout;
 #X obj 192 510 pgmout;
