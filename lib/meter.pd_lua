@@ -73,7 +73,7 @@ local Meter = pd.Class:new():register("meter")
 -- of the subdivision grid of the main meter like, e.g., quickly switching
 -- from power-of-2 subdivisions to q-toles for any value q <= n.
 
--- DYNAMIC METER CHANGES: Finally, it is possible the change the base meter at
+-- DYNAMIC METER CHANGES: Finally, it is possible to change the base meter at
 -- any time by feeding a singleton number or a list of numbers p1 p2 ... into
 -- the right inlet. This causes all internal indispensability tables to be
 -- recomputed and thus is a relatively expensive operation. Therefore it's
