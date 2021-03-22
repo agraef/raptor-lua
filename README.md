@@ -5,15 +5,15 @@ Albert Gräf <aggraef@gmail.com>
 Dept. of Music-Informatics  
 Johannes Gutenberg University (JGU) Mainz, Germany
 
-The raptor6.pd patch implements an experimental arpeggiator program based on the mathematical music theories of the contemporary composer and computer music pioneer Clarence Barlow. This is already the 6th iteration of this program, now ported to Lua so that it can be run easily with any Pd version. Compared to earlier versions, it also features a much cleaner source code and many noticeable improvements, including more robust timing, MIDI clock sync, and a built-in looper. We recommend running this patch with [Purr Data][], Jonathan Wilkes' modern Pd flavor, as it has all the required externals including Pd-Lua on board, and the layout of the GUI has been optimized for that version. But the patch should also work fine in "vanilla" [Pd][] if you have the [Pd-Lua][] and [Zexy][] externals installed (a version of Pd-Lua for Lua 5.3 or later is required, you can find this under the given URL). The screenshot below shows the patch running in Purr Data.
+The raptor6.pd patch implements an experimental arpeggiator program based on the mathematical music theories of the contemporary composer and computer music pioneer Clarence Barlow. This is already the 6th iteration of this program, now ported to Lua so that it can be run easily with any Pd version. Compared to earlier versions, it also features a much cleaner source code and many noticeable improvements, including more robust timing, proper MIDI clock sync, and a built-in looper. We recommend running this patch with [Purr Data][], Jonathan Wilkes' modern Pd flavor, as it has all the required externals including Pd-Lua on board, and the layout of the GUI has been optimized for that version. But the patch should also work fine in "vanilla" [Pd][] if you have [Pd-Lua][] and [Zexy][] installed. **NB:** A version of Pd-Lua for Lua 5.3 or later is required, you can find this [here](https://agraef.github.io/pd-lua/); Zexy can be installed from [Deken][]. The screenshot below shows the patch running in Purr Data.
 
 <img src="raptor6.png" alt="raptor6" style="zoom: 67%;" />
 
-Raptor is quite advanced as arpeggiators go, it's really a full-blown algorithmic composition tool, although it offers the usual run-of-the-mill deterministic and random arpeggios as well. But the real magic starts when you turn on `raptor` mode and start playing around with the parameters in the panel. The algorithm behind Raptor is briefly sketched out in my [ICMC 2006 paper][] (cf. Section 8), and you'll find some practical information to get you started below. But if you'd like to get a deeper understanding of how the algorithm actually works, you'll have to dive into the source code and read Barlow's article in the [Ratio book][] for now.
+Raptor is quite advanced as arpeggiators go, it's really a full-blown algorithmic composition tool, although it offers the usual run-of-the-mill deterministic and random arpeggios as well. But the real magic starts when you turn on `raptor` mode and start playing around with the parameters in the panel. The algorithm behind Raptor is briefly sketched out in my [ICMC 2006 paper][] (cf. Section 8), and you'll find some practical information to get you started below. But if you'd like to get a deeper understanding of how the algorithm actually works, you'll have to dive into the source code and read Barlow's article in the [Ratio book][].
 
-Using the patch is easy enough, however. Hook up your MIDI keyboard and synthesizer to Pd's MIDI input and output, respectively, press the green `play` button and just play some chords. I'm mostly using Raptor with a MIDI guitar and a [Nektar PACER][] foot pedal these days, so the patch is somewhat tailored to that use case, but it also works fine with just a MIDI keyboard and a free software synth such as [Qsynth][].
+Using the patch is easy enough, however. Hook up your MIDI keyboard and synthesizer to Pd's MIDI input and output, respectively, press the green `play` button and just play some chords. I'm mostly driving Raptor with a MIDI guitar and a [Nektar PACER][] foot pedal these days, so the patch is somewhat tailored to that use case, but it also works fine with just a MIDI keyboard and a free software synth such as [Qsynth][].
 
-This project is still work in progress. In particular, the included presets need some work, but hey, you get them for free, so feel free to modify and use them for whatever purpose! ;-) Bug reports and other contributions are welcome. I'm always curious about music made with my programs, so please do send me links to music produced with Raptor!
+This project is still work in progress. In particular, the included presets need some work, but hey, you get them for free, so feel free to modify and use them for whatever purpose! ;-) Bug reports and other contributions are welcome. I'm always curious about uses of my programs, so please do send me links to music produced with Raptor!
 
 ## Getting Started
 
@@ -103,6 +103,7 @@ Most of Raptor's parameters have MIDI bindings, so they can be automatized, e.g.
 | CC76       | -100..100 | gatemod (gate bias)                                          |
 | CC77       | -100..100 | swing bias (note delays modulated by pulse strength)         |
 | CC78       | 0..127    | meter (number of pulses, always uses normal stratification; e.g., 12 = 2-2-3) |
+| CC79       | 0..127    | meter base pulse (this is usually a power of 2, i.e. 1, 2, 4, 8, 16, 32, 64) |
 | CC84, CC85 | -128..127 | smin, smax (min and max step size)                           |
 | CC86       | -100..100 | smod (step size bias)                                        |
 | CC87       | 0..127    | nmax (maximum chord size a.k.a. number of notes per step)    |
@@ -112,8 +113,18 @@ Most of Raptor's parameters have MIDI bindings, so they can be automatized, e.g.
 ##### Notes:
 
 - Raptor is controlled using two types of MIDI messages, *PC* (program change) and *CC* (control change). Control input has its own MIDI channel which can be zero to denote "omni" (listen on all channels). This is set in the `control` subpatch and is independent of note input, please check the GUI section for details.
+- The CC numbers might look a bit random, but at least we tried to assign and group them in a logical fashion. We also stayed away from some special CC numbers (bank changes, RPNS etc.) which have a well-defined meaning and might actually be emitted by standard gear during normal use, so that these don't accidentally trigger some totally unrelated action in Raptor.
 - For "discrete" controls (0-1 switches: hold, mute, raptor mode, and uniq; 0-n switches: mode), the control value is taken as is, and any value greater than the number of alternatives is clamped to the given range. In particular, for the 0-1 switches, *any* positive value means "on". For other ("continuous") controls the full 0-127 MIDI range is mapped to the parameter range given in the table, and a CC value of 64 denotes the middle of the range (which means zero for parameters with a bipolar range, such as the "bias" parameters explained below).
-- 0-100 ranges generally denote percentages, which are used for probabilities (pmin, pmax) and harmonicities (hmin, hmax). The gate parameter, which determines how long generated output notes are sustained, is also specified as a percentage of the pulse length, but its range goes from 0% (extreme staccato) to 200% (extreme legato), with 100% (the default) indicating that each note lasts exactly as long as the pulse length. Some parameters (pref, swing, as well as all the "mod" parameters) denote bias values ranging from -100% to +100% which are used for automatic modulation of other parameters according to pulse strengths in the chosen meter. A *positive* bias means that the value of the dependent parameter increases for *stronger* and decreases for *weaker* pulses; conversely, a *negative* bias indicates that the parameter increases for *weaker* and decreases for *stronger* pulses; and a *zero* bias means that the parameter does *not* vary with pulse strength at all.
+
+## Parameter Ranges
+
+In the table above, 0-100 ranges generally denote percentages in relation to some measure. These are used for probabilities (pmin, pmax), where 0% and 100% denote zero and one probability, and harmonicities (hmin, hmax), which range from 0% = "anything goes" to 100% = "unisons and octaves only", respectively. The gate parameter, which determines how long generated output notes are sustained, is also specified as a percentage (of the pulse length), but its range goes from 0% (extreme staccato) to 200% (extreme legato), with 100% (center value and default) indicating that each note lasts exactly as long as the pulse length.
+
+Some parameters (pref, swing, as well as all the "mod" parameters) denote *bias values* ranging from -100% to +100% which are used for automatic modulation of other parameters according to pulse strengths in the chosen meter. A *positive* bias means that the value of the dependent parameter increases for *stronger* and decreases for *weaker* pulses; conversely, a *negative* bias indicates that the parameter increases for *weaker* and decreases for *stronger* pulses; and a *zero* bias means that the parameter does *not* vary with pulse strength at all.
+
+Here is a fun little experiment concerning harmonicities to try for yourself. However, before we embark on this, we have to point out that our harmonicity measure, although derived from the same *disharmonicity* values, isn't quite the same as the one from the Ratio book. Raptor uses a slightly modified definition from my ICMC 2006 paper which avoids the infinities for computational convenience, and redefines the octave to be equivalent to the unison. Except for the octave equivalence, our measure is essentially equivalent to Barlow's, although the specific numeric values are different.
+
+With that out of the way, you'll find that using our modified measure, some interesting harmonicity thresholds are at about 21% (the 5th), 17% (the 4th), 10% (major 2nd and 3rd), and 9% (the minor 7th). To listen to these, make sure that raptor mode is enabled, set hmin = hmax = 100% and pref = 0%, then launch the arpeggiator and hold just a single note. Successively lower hmin to the various thresholds. You should then hear that Raptor gradually brings in more notes from the major scale (first only unison and octave, then at 21% the 5th, etc.), and finally descends into complete anarchy (essentially just producing random notes) at hmin = 0. Next play a chord (still at hmin = 0) and bring up the pref value until it reaches 100%. Observe how your chord gradually emerges from the sea of atonality. This will give you a good initial idea about what these parameters do. :)
 
 ## Bugs and Limitations
 
@@ -144,9 +155,11 @@ That said, some usability improvements might still be in order. There could be m
 [Pd]: http://msp.ucsd.edu/software.html
 [Zexy]: https://github.com/iem-projects/pd-zexy
 [Pd-Lua]: https://agraef.github.io/pd-lua/
+[Deken]: https://github.com/pure-data/deken
 [Qsynth]: https://qsynth.sourceforge.io/
 [Nektar PACER]: https://nektartech.com/pacer-midi-daw-footswitch-controller/
 [OSC]: https://www.cnmat.berkeley.edu/opensoundcontrol
 [Ableton Link]: https://www.ableton.com/link/
 [bug report]: https://github.com/agraef/raptor-lua/issues
 [pull request]: https://github.com/agraef/raptor-lua/pulls
+
