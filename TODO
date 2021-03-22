@@ -9,9 +9,9 @@
 
   Ableton Link seems most interesting, is this supported in Pd yet?
 
-- do something useful with meter subdivisions?
+- do something useful with meter subdivisions? ratchets maybe?
 
-  Our implementation of Barlow indispensabilities snipped from meter.pd_lua
-  supports fractional pulses to subdivide the meter into tuplets (up to
-  septuplets) on the fly. This isn't used in Raptor right now, but seems such
-  a useful feature, so it would be nice to support it in some way. But how?
+  Our implementation of Barlow indispensabilities from meter.pd_lua supports
+  fractional pulses to subdivide the meter into tuplets (up to septuplets) on
+  the fly. This isn't used in Raptor right now, but seems such a useful
+  feature, so it would be nice to support it in some way. But how?

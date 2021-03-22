@@ -18,17 +18,17 @@ local arpeggio = pd.Class:new():register("arpeggio")
 -- pulse weights using Barlow indispensabilities. The arguments are in fact
 -- exactly the same as in meter.pd_lua (which is included here and can be run
 -- alongside the arpeggiator), so please check the comments at the beginning
--- of that source file for details. (The subdivision option -n is also
--- supported, although the arpeggiator object currently doesn't use it.)
+-- of that source file for details. (The subdivision option -n is currently
+-- unsupported, since the arpeggiator object doesn't use it.)
 
 -- The 1st inlet, when receiving a bang, outputs the next note-vel pair in the
 -- pattern and advances the current pulse index. This is typically driven by a
 -- metro object. It also outputs the current pulse weight (Barlow
--- indispensability) and total number of pulses (including subdivisions) on
--- the 2nd and 3rd outlet, respectively. This data may be used, e.g., to
--- recalculate note length and metro period according to a given tempo
--- setting, or to feed a drumkit or metronome click. NOTE: The 2nd and 3rd
--- outlet are output on *every* pulse, even if no chord is currently playing.
+-- indispensability) and total number of pulses on the 2nd and 3rd outlet,
+-- respectively. This data may be used, e.g., to recalculate note length and
+-- metro period according to a given tempo setting, or to feed a drumkit or
+-- metronome click. NOTE: The 2nd and 3rd outlet are output on *every* pulse,
+-- even if no chord is currently playing.
 
 -- The 1st inlet also accepts a note-vel pair to indicate note-ons and -offs
 -- which determine the note input of the arpeggiator. It then updates the
@@ -49,7 +49,7 @@ function arpeggio:initialize(_, atoms)
    self.inlets = 2
    -- 1st outlet outputs note-vel pairs from the arpeggiator
    -- 2nd outlet outputs the note weight (Barlow indispensability)
-   -- 3rd outlet outputs total number of pulses (including subdivisions)
+   -- 3rd outlet outputs total number of pulses
    self.outlets = 3
    -- debugging (bitmask): 1 = pattern, 2 = input, 4 = output
    self.debug = 0
@@ -74,6 +74,11 @@ function arpeggio:initialize(_, atoms)
    self.uniq = 1
    self.pref, self.prefmod = 1, 0
    -- Barlow meter, cf. barlow.pd_lua
+   -- XXXTODO: We only do integer pulses currently, so the subdivisions
+   -- parameter self.n is currently disabled. Maybe we can find some good use
+   -- for it in the future, e.g., for ratchets?
+   self.n = 0
+   --[[
    self.n = 7 -- subdivisions, seems to work reasonably well up to 7-toles
    if atoms[1] == "-n" then
       self.n = type(atoms[2]) == "number" and atoms[2]+0.0 or self.n
@@ -88,6 +93,7 @@ function arpeggio:initialize(_, atoms)
       table.remove(atoms, 1)
       table.remove(atoms, 1)
    end
+   --]]
    if #atoms == 0 then
       atoms = {4} -- default meter (common time)
    end
@@ -395,8 +401,6 @@ function arpeggio:in_1_bang()
    else
       self:loop_add({}, vel, gate)
    end
-   -- XXXTODO: We only do integer pulses currently, maybe add some way to
-   -- employ subdivisions, e.g., for ratchets?
    self.idx = (self.idx + 1) % self.beats
 end
 
