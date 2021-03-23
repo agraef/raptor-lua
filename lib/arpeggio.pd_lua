@@ -417,7 +417,7 @@ function arpeggio:in_1_panic()
    self.chord = {}
    self.pattern = {}
    self.last_q = nil
-   arpeggio:in_1_hold(0)
+   self:in_1_hold(0)
 end
 
 -- float on the 1st inlet changes the current pulse
