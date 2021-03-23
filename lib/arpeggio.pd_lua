@@ -253,7 +253,7 @@ end
 
 function arpeggio:loop_get()
    local res = {{}, 0, 0}
-   local p, n = self.loopidx, #self.loop
+   local p, n = self.loopidx, math.min(#self.loop, self.loopsize)
    if p < n then
       res = self.loop[p+1]
       -- we always *read* exactly n steps in a cyclic buffer
@@ -286,16 +286,19 @@ function arpeggio:loop_file(file)
 	 pd.post(string.format("loop: %s", err))
 	 return
       end
+      -- shorten the table to the current loop size if needed
+      local loop, n = {}, math.min(#self.loop, self.loopsize)
+      table.move(self.loop, 1, n, 1, loop)
+      -- add some pretty-printing
       local function bars(level, count)
 	 if level == 1 and count%self.beats == 0 then
 	    return string.format("-- bar %d", count//self.beats+1)
 	 end
       end
-      -- add some pretty-printing
       f:write(string.format("-- saved by Raptor %s\n", os.date()))
-      f:write(inspect(self.loop, {extra = 1, addin = bars}))
+      f:write(inspect(loop, {extra = 1, addin = bars}))
       f:close()
-      pd.post(string.format("loop: %s: saved %d steps", file, #self.loop))
+      pd.post(string.format("loop: %s: saved %d steps", file, n))
    else
       local f, err = io.open(file, "r")
       if type(err) == "string" then
@@ -326,6 +329,15 @@ function arpeggio:in_1_loopsize(x)
    x = self:intarg(x)
    if type(x) == "number" then
       self.loopsize = math.max(0, math.min(256, x))
+      if self.loopstate == 1 then
+	 -- need to update the loop index in case the loopsize changed
+	 if self.loopsize > 0 then
+	    -- also resynchronize the loop with the arpeggiator if needed
+	    self.loopidx = math.max(self.idx, self.loopidx % self.loopsize)
+	 else
+	    self.loopidx = 0
+	 end
+      end
    end
 end
 
@@ -426,7 +438,7 @@ function arpeggio:in_1_float(x)
    if type(x) == "number" then
       self.idx = math.max(0, x) % self.beats
       if self.loopstate == 1 then
-	 self.loopidx = self.idx % self.loopsize
+	 self.loopidx = self.idx % math.min(#self.loop, self.loopsize)
       end
    end
 end
