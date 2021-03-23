@@ -286,7 +286,14 @@ function arpeggio:loop_file(file)
 	 pd.post(string.format("loop: %s", err))
 	 return
       end
-      f:write(inspect(self.loop))
+      local function bars(level, count)
+	 if level == 1 and count%self.beats == 0 then
+	    return string.format("-- bar %d", count//self.beats+1)
+	 end
+      end
+      -- add some pretty-printing
+      f:write(string.format("-- saved by Raptor %s\n", os.date()))
+      f:write(inspect(self.loop, {extra = 1, addin = bars}))
       f:close()
       pd.post(string.format("loop: %s: saved %d steps", file, #self.loop))
    else
