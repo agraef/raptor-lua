@@ -250,7 +250,25 @@ function Inspector:putTable(t)
       local count = 0
       for i=1, sequenceLength do
         if count > 0 then self:puts(',') end
-        self:puts(' ')
+        if self.level > self.extra then
+	   self:puts(' ')
+	   if self.addin then
+	      local s = self.addin(self.level, count)
+	      if s then
+		 self:puts(s)
+		 self:puts(' ')
+	      end
+	   end
+	else
+	   self:tabify()
+	   if self.addin then
+	      local s = self.addin(self.level, count)
+	      if s then
+		 self:puts(s)
+		 self:tabify()
+	      end
+	   end
+	end
         self:putValue(t[i])
         count = count + 1
       end
@@ -273,9 +291,9 @@ function Inspector:putTable(t)
       end
     end)
 
-    if nonSequentialKeysLength > 0 or type(mt) == 'table' then -- result is multi-lined. Justify closing }
+    if self.level < self.extra and sequenceLength > 0 or nonSequentialKeysLength > 0 or type(mt) == 'table' then -- result is multi-lined. Justify closing }
       self:tabify()
-    elseif sequenceLength > 0 then -- array tables have one extra space before closing }
+    elseif self.level >= self.extra and sequenceLength > 0 then -- array tables have one extra space before closing }
       self:puts(' ')
     end
 
@@ -304,8 +322,10 @@ function inspect.inspect(root, options)
   options       = options or {}
 
   local depth   = options.depth   or math.huge
+  local extra   = options.extra   or 0
   local newline = options.newline or '\n'
   local indent  = options.indent  or '  '
+  local addin   = options.addin
   local process = options.process
 
   if process then
@@ -314,12 +334,14 @@ function inspect.inspect(root, options)
 
   local inspector = setmetatable({
     depth            = depth,
+    extra            = extra,
     level            = 0,
     buffer           = {},
     ids              = {},
     maxIds           = {},
     newline          = newline,
     indent           = indent,
+    addin            = addin,
     tableAppearances = countTableAppearances(root)
   }, Inspector_mt)
 
