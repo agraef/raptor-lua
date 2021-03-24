@@ -268,9 +268,11 @@ local function fexists(name)
    if f~=nil then io.close(f) return true else return false end
 end
 
-function arpeggio:loop_file(file)
-   if self.loopstate == 1 then
-      -- first create a backup copy if the file already exists
+function arpeggio:loop_file(file, cmd)
+   -- default for cmd is 1 (save) if loop is playing, 0 (load) otherwise
+   cmd = cmd or self.loopstate
+   if cmd == 1 then
+      -- save: first create a backup copy if the file already exists
       if fexists(file) then
 	 local k, bakname = 1, ""
 	 repeat
@@ -299,7 +301,8 @@ function arpeggio:loop_file(file)
       f:write(inspect(loop, {extra = 1, addin = bars}))
       f:close()
       pd.post(string.format("loop: %s: saved %d steps", file, n))
-   else
+   elseif cmd == 0 then
+      -- load: check that file exists and is loadable
       local f, err = io.open(file, "r")
       if type(err) == "string" then
 	 pd.post(string.format("loop: %s", err))
@@ -322,6 +325,9 @@ function arpeggio:loop_file(file)
 	    self:outlet(1, "loopsize", {self.loopsize})
 	 end
       end
+   elseif cmd == 2 then
+      -- check that file exists, report result on 1st outlet
+      self:outlet(1, "loop", {fexists(file) and 1 or 0})
    end
 end
 
@@ -343,9 +349,11 @@ end
 
 function arpeggio:in_1_loop(x)
    if type(x) == "string" then
-      self:loop_file(x)
-   elseif type(x) == "table" and type(x[1]) == "string" then
-      self:loop_file(x[1])
+      x = {x}
+   end
+   if type(x) == "table" and type(x[1]) == "string" then
+      -- file operations
+      self:loop_file(table.unpack(x))
    else
       x = self:intarg(x)
       if type(x) == "number" then
