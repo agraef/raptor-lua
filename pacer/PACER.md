@@ -4,7 +4,7 @@
 
 <img src="https://nektartech.com/wp-content/uploads/2018/12/pacer_rear_connections.png" style="zoom:75%;" />
 
-The [Nektar PACER][] makes for a great hands-free controller for live performances with Raptor, especially if you're playing MIDI guitar. This directory contains my custom PACER setup for Raptor, raptor-D1-3.syx, consisting of modified presets D1-D3 (these are the only presets contained in the sysex dump). You can load these into the PACER using François Georgy's web-based [PACER Editor][], or any sysex librarian such as [SimpleSysexxer][].
+The [Nektar PACER][] makes for a great hands-free controller for live performances with Raptor, especially if you're playing MIDI guitar. This directory contains my custom PACER setup for Raptor, [raptor-D1-3.syx](raptor-D1-3.syx), consisting of modified presets D1-D3 (these are the only presets contained in the sysex dump). You can load these into the PACER using François Georgy's web-based [PACER Editor][], or any sysex librarian such as [SimpleSysexxer][].
 
 The three presets are based on the A1 and D2 factory presets of the PACER, but have quite a few modifications (and different names). They provide the following functions within Raptor (the actual CCs are mostly subject to change and thus not listed here; you can find them in Raptor's `control` subpatch if needed):
 
