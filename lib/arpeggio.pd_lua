@@ -73,6 +73,8 @@ function arpeggio:initialize(_, atoms)
    self.smin, self.smax, self.smod = 1, 7, 0
    self.uniq = 1
    self.pref, self.prefmod = 1, 0
+   self.pitchtracker = 0
+   self.pitchlo, self.pitchhi = 0, 0
    -- Barlow meter, cf. barlow.pd_lua
    -- XXXTODO: We only do integer pulses currently, so the subdivisions
    -- parameter self.n is currently disabled. Maybe we can find some good use
@@ -455,12 +457,30 @@ local function transp(chord, i)
    return map(chord, function (n) return n+12*i end)
 end
 
+function arpeggio:pitchrange(a, b)
+   if self.pitchtracker == 0 then
+      -- just octave range
+      a = math.max(0, math.min(127, a+12*self.down))
+      b = math.max(0, math.min(127, b+12*self.up))
+   elseif self.pitchtracker == 1 then
+      -- full range tracker
+      a = math.max(0, math.min(127, a+12*self.down+self.pitchlo))
+      b = math.max(0, math.min(127, b+12*self.up+self.pitchhi))
+   elseif self.pitchtracker == 2 then
+      -- treble tracker
+      a = math.max(0, math.min(127, b+12*self.down+self.pitchlo))
+      b = math.max(0, math.min(127, b+12*self.up+self.pitchhi))
+   elseif self.pitchtracker == 3 then
+      -- bass tracker
+      a = math.max(0, math.min(127, a+12*self.down+self.pitchlo))
+      b = math.max(0, math.min(127, a+12*self.up+self.pitchhi))
+   end
+   return seq(a, b)
+end
+
 function arpeggio:create_pattern(chord)
    -- create a new pattern using the current settings
-   local pattern = {}
-   for i = self.down, self.up do
-      pattern = tabcat(pattern, transp(chord, i))
-   end
+   local pattern = chord
    -- By default we do outside-in by alternating up-down (i.e., lo-hi), set
    -- this flag to true to get something more Logic-like which goes down-up.
    local logic_like = false
@@ -512,7 +532,7 @@ function arpeggio:create_pattern(chord)
 			  dir, mode, self.uniq ~= 0,
 			  self.pref, self.prefmod,
 			  cache[mode],
-			  chord, seq(a, b))
+			  chord, self:pitchrange(a, b))
 	    if next(notes) ~= nil then
 	       cache[mode] = notes
 	    end
@@ -551,57 +571,64 @@ function arpeggio:create_pattern(chord)
 			  dir, mode, self.uniq ~= 0,
 			  self.pref, self.prefmod,
 			  cache,
-			  chord, seq(a, b))
+			  chord, self:pitchrange(a, b))
 	    if next(notes) ~= nil then
 	       cache = notes
 	    end
 	    return notes
 	 end
       end
-   elseif self.mode == 0 then
-      -- random: this is just the run-of-the-mill random pattern permutation
-      local n, pat = #pattern, {}
-      local p = seq(1, n)
-      for i = 1, n do
-	 local j = math.random(i, n)
-	 p[i], p[j] = p[j], p[i]
+   else
+      -- apply the octave range (not used in raptor mode)
+      pattern = {}
+      for i = self.down, self.up do
+	 pattern = tabcat(pattern, transp(chord, i))
       end
-      for i = 1, n do
-	 pat[i] = pattern[p[i]]
-      end
-      pattern = pat
-   elseif self.mode == 1 then
-      -- up (no-op)
-   elseif self.mode == 2 then
-      -- down
-      pattern = reverse(pattern)
-   elseif self.mode == 3 then
-      -- up-down
-      pattern = tabcat(pattern, reverse(pattern))
-   elseif self.mode == 4 then
-      -- down-up
-      pattern = tabcat(reverse(pattern), pattern)
-   elseif self.mode == 5 then
-      -- outside-in
-      local n, pat = #pattern, {}
-      local p, q = n//2, n%2
-      if logic_like then
-	 for i = 1, p do
-	    -- highest note first (a la Logic?)
-	    pat[2*i-1] = pattern[n+1-i]
-	    pat[2*i] = pattern[i]
+      if self.mode == 0 then
+	 -- random: this is just the run-of-the-mill random pattern permutation
+	 local n, pat = #pattern, {}
+	 local p = seq(1, n)
+	 for i = 1, n do
+	    local j = math.random(i, n)
+	    p[i], p[j] = p[j], p[i]
 	 end
-      else
-	 for i = 1, p do
-	    -- lowest note first (sounds better IMHO)
-	    pat[2*i-1] = pattern[i]
-	    pat[2*i] = pattern[n+1-i]
+	 for i = 1, n do
+	    pat[i] = pattern[p[i]]
 	 end
+	 pattern = pat
+      elseif self.mode == 1 then
+	 -- up (no-op)
+      elseif self.mode == 2 then
+	 -- down
+	 pattern = reverse(pattern)
+      elseif self.mode == 3 then
+	 -- up-down
+	 pattern = tabcat(pattern, reverse(pattern))
+      elseif self.mode == 4 then
+	 -- down-up
+	 pattern = tabcat(reverse(pattern), pattern)
+      elseif self.mode == 5 then
+	 -- outside-in
+	 local n, pat = #pattern, {}
+	 local p, q = n//2, n%2
+	 if logic_like then
+	    for i = 1, p do
+	       -- highest note first (a la Logic?)
+	       pat[2*i-1] = pattern[n+1-i]
+	       pat[2*i] = pattern[i]
+	    end
+	 else
+	    for i = 1, p do
+	       -- lowest note first (sounds better IMHO)
+	       pat[2*i-1] = pattern[i]
+	       pat[2*i] = pattern[n+1-i]
+	    end
+	 end
+	 if q > 0 then
+	    pat[n] = pattern[p+1]
+	 end
+	 pattern = pat
       end
-      if q > 0 then
-	 pat[n] = pattern[p+1]
-      end
-      pattern = pat
    end
    if self.debug&1~=0 then
       pd.post(string.format("chord = %s", inspect(chord)))
@@ -631,7 +658,7 @@ end
 function arpeggio:in_1_up(x)
    x = self:intarg(x)
    if type(x) == "number" then
-      self.up = math.max(-3, math.min(3, x))
+      self.up = math.max(-2, math.min(2, x))
       self.pattern = self:create_pattern(self:get_chord())
    end
 end
@@ -639,7 +666,31 @@ end
 function arpeggio:in_1_down(x)
    x = self:intarg(x)
    if type(x) == "number" then
-      self.down = math.max(-3, math.min(3, x))
+      self.down = math.max(-2, math.min(2, x))
+      self.pattern = self:create_pattern(self:get_chord())
+   end
+end
+
+function arpeggio:in_1_pitchtracker(x)
+   x = self:intarg(x)
+   if type(x) == "number" then
+      self.pitchtracker = math.max(0, math.min(3, x))
+      self.pattern = self:create_pattern(self:get_chord())
+   end
+end
+
+function arpeggio:in_1_pitchlo(x)
+   x = self:intarg(x)
+   if type(x) == "number" then
+      self.pitchlo = math.max(-36, math.min(36, x))
+      self.pattern = self:create_pattern(self:get_chord())
+   end
+end
+
+function arpeggio:in_1_pitchhi(x)
+   x = self:intarg(x)
+   if type(x) == "number" then
+      self.pitchhi = math.max(-36, math.min(36, x))
       self.pattern = self:create_pattern(self:get_chord())
    end
 end

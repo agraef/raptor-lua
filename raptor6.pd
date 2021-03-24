@@ -1,4 +1,4 @@
-#N canvas 437 87 571 558 10;
+#N canvas 435 87 568 556 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 200 193 240;
@@ -197,36 +197,37 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X text 220 65 gate;
 #X text 220 81 gatemod;
 #X text 220 96 swing;
-#N canvas 900 29 472 743 init 0;
+#N canvas 897 29 475 743 init 0;
 #X obj 70 20 loadbang;
 #X obj 210 20 declare -path lib;
 #X obj 97 70 f \$0;
 #X obj 70 45 t b b;
 #X obj 97 95 t f f;
-#X msg 97 120 \; \$1-hmin 0 \; \$1-hmax 100 \; \$1-hmod 0 \; \$1-pref
-100 \; \$1-prefmod 0 \; \$1-smin 1 \; \$1-smax 7 \; \$1-smod 0 \; \$1-uniq
-1 \; \$1-nmax 1 \; \$1-nmod 0;
-#X msg 70 300 set default;
-#X obj 70 325 s \$0-preset;
-#X msg 70 350 default;
-#X obj 70 375 outlet;
-#X msg 194 120 \; \$1-tempo 100 \; \$1-meter 15 \; \$1-swing 0 \; \$1-mode
+#X msg 70 340 set default;
+#X obj 70 365 s \$0-preset;
+#X msg 70 390 default;
+#X obj 70 415 outlet;
+#X msg 250 120 \; \$1-tempo 100 \; \$1-meter 15 \; \$1-swing 0 \; \$1-mode
 1 \; \$1-raptor 0 \; \$1-minvel 60 \; \$1-maxvel 120 \; \$1-velmod
 100 \; \$1-pmin 30 \; \$1-pmax 100 \; \$1-pmod 0 \; \$1-gate 100 \;
 \$1-gatemod 0 \; \$1-gain 0 \; \$1-pan 64 \; \$1-pgm 1 \; \$1-inchan
 1 \; \$1-outchan 1 \; \$1-down -1 \; \$1-up 1 \; \$1-transp 0 \; \$1-loopsize
 4;
+#X msg 97 120 \; \$1-hmin 0 \; \$1-hmax 100 \; \$1-hmod 0 \; \$1-pref
+100 \; \$1-prefmod 0 \; \$1-smin 1 \; \$1-smax 7 \; \$1-smod 0 \; \$1-uniq
+1 \; \$1-nmax 1 \; \$1-nmod 0 \; \$1-pitchtracker 0 \; \$1-pitchlo
+0 \; \$1-pitchhi 0;
 #X connect 0 0 3 0;
 #X connect 2 0 4 0;
-#X connect 3 0 6 0;
-#X connect 3 0 8 0;
+#X connect 3 0 5 0;
+#X connect 3 0 7 0;
 #X connect 3 1 2 0;
-#X connect 4 0 5 0;
-#X connect 4 1 10 0;
-#X connect 6 0 7 0;
-#X connect 8 0 9 0;
+#X connect 4 0 10 0;
+#X connect 4 1 9 0;
+#X connect 5 0 6 0;
+#X connect 7 0 8 0;
 #X restore 290 330 pd init;
-#N canvas 245 51 865 691 arp 0;
+#N canvas 245 29 865 743 arp 0;
 #X floatatom 20 428 5 0 0 0 - - -, f 5;
 #X floatatom 66 428 5 0 0 0 - - -, f 5;
 #X obj 20 472 makenote 127 160;
@@ -412,7 +413,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 450 415 r \$0-master;
 #X obj 400 439 spigot;
 #X obj 180 250 r all-arp;
-#N canvas 835 105 455 621 notefilter 0;
+#N canvas 835 105 455 648 notefilter 0;
 #X obj 30 30 inlet;
 #X obj 30 85 pack f f;
 #X obj 30 110 spigot;
@@ -420,7 +421,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 140 110 route 0;
 #X msg 140 135 1;
 #X obj 90 85 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
-0 1;
+1 1;
 #X obj 179 135 ==;
 #X obj 30 135 unpack f f;
 #X obj 140 80 pack f f;
@@ -849,8 +850,6 @@ this patch is included in the distribution!, f 80;
 #X text 20 650 NOTE: To make CC64 (hold) and CC67 (mute) work \, you
 need to have a foot pedals hooked up to Pd in some way (the custom
 PACER setup has them on FS1+2)., f 79;
-#X obj 100 135 expr ($f1+3)%7-3;
-#X obj 30 115 expr 3-($f1+3)%7;
 #X obj 22 517 route 1 2 3 4 5 6 7;
 #X obj 22 445 r \$0-mod-val;
 #X obj 180 115 mod 8;
@@ -910,6 +909,8 @@ PACER setup has them on FS1+2)., f 79;
 #X connect 9 0 3 0;
 #X connect 11 0 5 0;
 #X restore 459 344 pd cchan;
+#X obj 30 115 expr 2-($f1+2)%5;
+#X obj 100 135 expr ($f1+2)%5-2;
 #X connect 0 1 1 0;
 #X connect 1 0 30 0;
 #X connect 5 0 7 0;
@@ -920,7 +921,7 @@ PACER setup has them on FS1+2)., f 79;
 #X connect 9 0 43 0;
 #X connect 10 0 11 0;
 #X connect 10 1 11 1;
-#X connect 11 0 71 0;
+#X connect 11 0 69 0;
 #X connect 14 0 19 0;
 #X connect 15 0 6 0;
 #X connect 16 0 13 0;
@@ -938,9 +939,9 @@ PACER setup has them on FS1+2)., f 79;
 #X connect 42 0 41 0;
 #X connect 42 0 33 0;
 #X connect 43 0 4 0;
-#X connect 44 0 70 0;
-#X connect 45 0 69 0;
-#X connect 46 0 73 0;
+#X connect 44 0 99 0;
+#X connect 45 0 100 0;
+#X connect 46 0 71 0;
 #X connect 47 0 15 0;
 #X connect 48 0 5 0;
 #X connect 49 0 18 0;
@@ -956,142 +957,142 @@ PACER setup has them on FS1+2)., f 79;
 #X connect 61 0 65 0;
 #X connect 62 0 61 0;
 #X connect 64 0 62 0;
-#X connect 66 0 75 0;
-#X connect 67 0 76 0;
-#X connect 69 0 3 0;
-#X connect 70 0 2 0;
-#X connect 71 0 21 0;
-#X connect 71 1 16 0;
-#X connect 71 2 12 0;
-#X connect 71 3 23 0;
-#X connect 71 4 25 0;
-#X connect 71 5 53 0;
-#X connect 71 6 56 0;
-#X connect 72 0 10 0;
-#X connect 73 0 74 0;
-#X connect 75 0 38 0;
+#X connect 66 0 73 0;
+#X connect 67 0 74 0;
+#X connect 69 0 21 0;
+#X connect 69 1 16 0;
+#X connect 69 2 12 0;
+#X connect 69 3 23 0;
+#X connect 69 4 25 0;
+#X connect 69 5 53 0;
+#X connect 69 6 56 0;
+#X connect 70 0 10 0;
+#X connect 71 0 72 0;
+#X connect 73 0 38 0;
+#X connect 74 0 75 0;
+#X connect 75 0 81 0;
 #X connect 76 0 77 0;
-#X connect 77 0 83 0;
-#X connect 78 0 79 0;
+#X connect 77 0 79 0;
+#X connect 78 0 76 0;
 #X connect 79 0 81 0;
-#X connect 80 0 78 0;
+#X connect 79 1 81 1;
+#X connect 80 0 31 0;
 #X connect 81 0 83 0;
-#X connect 81 1 83 1;
-#X connect 82 0 31 0;
-#X connect 83 0 85 0;
-#X connect 84 0 82 0;
-#X connect 85 0 84 0;
-#X connect 88 0 94 0;
+#X connect 82 0 80 0;
+#X connect 83 0 82 0;
+#X connect 86 0 92 0;
+#X connect 88 0 89 0;
+#X connect 89 1 90 0;
 #X connect 90 0 91 0;
-#X connect 91 1 92 0;
-#X connect 92 0 93 0;
-#X connect 94 1 95 0;
-#X connect 95 0 89 0;
-#X connect 96 0 49 0;
-#X connect 96 0 64 0;
-#X connect 96 0 66 0;
-#X connect 96 0 67 0;
-#X connect 96 0 88 0;
-#X connect 96 0 90 0;
-#X connect 97 0 48 0;
-#X connect 97 0 47 0;
-#X connect 97 0 46 0;
-#X connect 97 0 45 0;
-#X connect 97 0 44 0;
-#X connect 97 0 59 0;
-#X connect 97 0 60 0;
-#X connect 98 0 100 0;
-#X connect 99 0 100 1;
+#X connect 92 1 93 0;
+#X connect 93 0 87 0;
+#X connect 94 0 49 0;
+#X connect 94 0 64 0;
+#X connect 94 0 66 0;
+#X connect 94 0 67 0;
+#X connect 94 0 86 0;
+#X connect 94 0 88 0;
+#X connect 95 0 48 0;
+#X connect 95 0 47 0;
+#X connect 95 0 46 0;
+#X connect 95 0 45 0;
+#X connect 95 0 44 0;
+#X connect 95 0 59 0;
+#X connect 95 0 60 0;
+#X connect 96 0 98 0;
+#X connect 97 0 98 1;
+#X connect 99 0 2 0;
+#X connect 100 0 3 0;
 #X coords 0 -1 1 1 66 34 1 456 304;
 #X restore 200 151 pd control;
-#N canvas 832 29 540 743 panel 0;
-#X obj 27 31 cnv 15 67 157 empty empty empty 20 12 0 14 #e0e0e0 #404040
+#N canvas 711 29 549 717 panel 0;
+#X obj 27 31 cnv 15 70 161 empty empty empty 20 12 0 14 #e0e0e0 #404040
 0;
-#X obj 27 197 cnv 15 67 113 empty empty empty 20 12 0 14 #e0e0e0 #404040
+#X obj 27 197 cnv 15 70 113 empty empty empty 20 12 0 14 #e0e0e0 #404040
 0;
-#X floatatom 102 51 6 0 127 2 minvel #0-minvel -, f 6;
-#X msg 102 361 minvel \$1;
-#X floatatom 147 51 6 0 127 2 maxvel #0-maxvel -, f 6;
-#X msg 147 361 maxvel \$1;
-#X obj 200 53 hsl 64 15 -100 100 0 0 empty \$0-velmod velmod -3 -12
+#X floatatom 107 51 6 0 127 2 minvel #0-minvel -, f 6;
+#X msg 107 361 minvel \$1;
+#X floatatom 152 51 6 0 127 2 maxvel #0-maxvel -, f 6;
+#X msg 152 361 maxvel \$1;
+#X obj 202 53 hsl 64 15 -100 100 0 0 empty \$0-velmod velmod -3 -12
 0 10 #fcfcfc #000000 #000000 6300 1;
-#X msg 200 361 velmod \$1;
+#X msg 202 361 velmod \$1;
 #X msg 310 53 100;
-#X obj 272 53 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 274 53 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 200 87 hsl 64 15 -100 100 0 0 empty \$0-pmod pmod -3 -12 0 10
+#X obj 202 87 hsl 64 15 -100 100 0 0 empty \$0-pmod pmod -3 -12 0 10
 #fcfcfc #000000 #000000 3150 1;
 #X msg 310 87 0;
-#X floatatom 100 87 6 0 100 2 pmin #0-pmin -, f 6;
-#X floatatom 147 87 6 0 100 2 pmax #0-pmax -, f 6;
-#X msg 100 390 pmin \$1;
-#X msg 147 390 pmax \$1;
-#X msg 200 390 pmod \$1;
-#X obj 272 87 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X floatatom 105 87 6 0 100 2 pmin #0-pmin -, f 6;
+#X floatatom 152 87 6 0 100 2 pmax #0-pmax -, f 6;
+#X msg 107 390 pmin \$1;
+#X msg 153 390 pmax \$1;
+#X msg 202 390 pmod \$1;
+#X obj 274 87 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 100 121 hsl 64 15 0 200 0 0 empty \$0-gate gate -1 -12 0 10
+#X obj 105 121 hsl 64 15 0 200 0 0 empty \$0-gate gate -1 -12 0 10
 #fcfcfc #000000 #000000 3150 1;
 #X msg 310 121 100;
-#X msg 100 420 gate \$1;
-#X obj 200 121 hsl 64 15 -100 100 0 0 empty \$0-gatemod gatemod -2
+#X msg 105 420 gate \$1;
+#X obj 202 121 hsl 64 15 -100 100 0 0 empty \$0-gatemod gatemod -2
 -12 0 10 #fcfcfc #000000 #000000 3150 1;
 #X msg 350 121 0;
-#X msg 200 420 gatemod \$1;
-#X obj 272 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X msg 202 420 gatemod \$1;
+#X obj 274 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 172 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 177 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 272 20 tgl 15 0 empty \$0-hold H -10 6 0 10 #3cc840 #000000
+#X obj 274 20 tgl 15 0 empty \$0-hold H -10 6 0 10 #3cc840 #000000
 #000000 0 1;
-#X msg 276 361 hold \$1;
-#X floatatom 199 19 4 1 128 0 pgm #0-pgm -, f 4;
-#X msg 199 610 pgm \$1;
-#X floatatom 100 190 4 -100 100 2 swing #0-swing -, f 4;
-#X msg 100 330 swing \$1;
-#X obj 200 155 hsl 64 15 -100 100 0 0 empty \$0-hmod hmod -3 -12 0
+#X msg 278 361 hold \$1;
+#X floatatom 201 19 4 1 128 0 pgm #0-pgm -, f 4;
+#X msg 201 610 pgm \$1;
+#X floatatom 105 190 4 -100 100 2 swing #0-swing -, f 4;
+#X msg 105 330 swing \$1;
+#X obj 202 155 hsl 64 15 -100 100 0 0 empty \$0-hmod hmod -3 -12 0
 10 #fcfcfc #000000 #000000 3150 1;
 #X msg 310 155 0;
-#X floatatom 100 155 6 0 100 2 hmin #0-hmin -, f 6;
-#X floatatom 147 155 6 0 100 2 hmax #0-hmax -, f 6;
-#X obj 272 155 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X floatatom 105 155 6 0 100 2 hmin #0-hmin -, f 6;
+#X floatatom 152 155 6 0 100 2 hmax #0-hmax -, f 6;
+#X obj 274 155 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 200 190 hsl 64 15 -100 100 0 0 empty \$0-prefmod prefmod -3
+#X obj 202 190 hsl 64 15 -100 100 0 0 empty \$0-prefmod prefmod -3
 -12 0 10 #fcfcfc #000000 #000000 3150 1;
 #X msg 310 190 0;
-#X floatatom 147 190 6 -100 100 2 pref #0-pref -, f 6;
-#X obj 272 190 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X floatatom 152 190 6 -100 100 2 pref #0-pref -, f 6;
+#X obj 274 190 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 200 225 hsl 64 15 -100 100 0 0 empty \$0-smod smod -3 -12 0
+#X obj 202 225 hsl 64 15 -100 100 0 0 empty \$0-smod smod -3 -12 0
 10 #fcfcfc #000000 #000000 3150 1;
 #X msg 310 225 0;
-#X floatatom 100 225 6 -127 127 2 smin #0-smin -, f 6;
-#X floatatom 147 225 6 -127 127 2 smax #0-smax -, f 6;
-#X obj 272 225 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X floatatom 105 225 6 -127 127 2 smin #0-smin -, f 6;
+#X floatatom 152 225 6 -127 127 2 smax #0-smax -, f 6;
+#X obj 274 225 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 200 260 hsl 64 15 -100 100 0 0 empty \$0-nmod nmod -3 -12 0
+#X obj 202 260 hsl 64 15 -100 100 0 0 empty \$0-nmod nmod -3 -12 0
 10 #fcfcfc #000000 #000000 3150 1;
 #X msg 310 260 0;
-#X floatatom 147 260 6 0 10 2 nmax #0-nmax -, f 6;
-#X obj 272 260 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X floatatom 152 260 6 0 10 2 nmax #0-nmax -, f 6;
+#X obj 274 260 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 100 260 tgl 15 0 empty \$0-uniq uniq -1 -10 0 10 #fcfcfc #000000
+#X obj 105 260 tgl 15 0 empty \$0-uniq uniq -1 -10 0 10 #fcfcfc #000000
 #000000 1 1;
-#X msg 100 450 hmin \$1;
-#X msg 147 450 hmax \$1;
-#X msg 200 450 hmod \$1;
-#X msg 147 480 pref \$1;
-#X msg 200 480 prefmod \$1;
-#X msg 100 510 smin \$1;
-#X msg 147 510 smax \$1;
-#X msg 200 510 smod \$1;
-#X msg 100 540 uniq \$1;
-#X msg 147 540 nmax \$1;
-#X msg 200 540 nmod \$1;
-#X obj 30 45 vradio 15 0 0 7 empty \$0-downval dn 0 -8 0 10 #fcfcfc
-#000000 #000000 4;
-#X obj 50 45 vradio 15 0 0 7 empty \$0-upval up 0 -8 0 10 #fcfcfc #000000
-#000000 2;
-#N canvas 526 202 589 302 octave 0;
+#X msg 105 450 hmin \$1;
+#X msg 152 450 hmax \$1;
+#X msg 202 450 hmod \$1;
+#X msg 152 480 pref \$1;
+#X msg 202 480 prefmod \$1;
+#X msg 105 510 smin \$1;
+#X msg 152 510 smax \$1;
+#X msg 202 510 smod \$1;
+#X msg 105 540 uniq \$1;
+#X msg 152 540 nmax \$1;
+#X msg 202 540 nmod \$1;
+#X obj 30 44 vradio 15 0 0 5 empty \$0-downval dn 0 -8 0 10 #fcfcfc
+#000000 #000000 3;
+#X obj 50 44 vradio 15 0 0 5 empty \$0-upval up 0 -8 0 10 #fcfcfc #000000
+#000000 1;
+#N canvas 525 202 590 329 octave 0;
 #X obj 20 20 inlet;
 #X obj 20 100 t b f;
 #X obj 20 150 min;
@@ -1103,13 +1104,9 @@ PACER setup has them on FS1+2)., f 79;
 #X floatatom 80 175 5 0 0 0 - - -, f 5;
 #X floatatom 370 175 5 0 0 0 - - -, f 5;
 #X obj 20 45 t f f f;
-#X obj 90 100 expr 3-$f1;
-#X obj 390 100 expr 3-$f1;
 #X obj 300 45 t f f f;
 #X msg 90 125 down \$1;
 #X msg 390 125 up \$1;
-#X obj 120 45 expr max(0 \, min(6 \, 3-$f1));
-#X obj 390 45 expr max(0 \, min(6 \, 3-$f1));
 #X obj 39 70 v \$0-downval;
 #X obj 120 70 s \$0-downval;
 #X obj 120 20 r \$0-down;
@@ -1121,42 +1118,44 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 390 20 r \$0-up;
 #X obj 300 125 v \$0-downval;
 #X obj 300 200 s \$0-downval;
+#X obj 120 45 expr max(0 \, min(4 \, 2-$f1));
+#X obj 390 45 expr max(0 \, min(4 \, 2-$f1));
+#X obj 90 100 expr 2-$f1;
+#X obj 390 100 expr 2-$f1;
 #X connect 0 0 10 0;
-#X connect 1 0 21 0;
+#X connect 1 0 17 0;
 #X connect 1 1 2 1;
 #X connect 2 0 3 0;
 #X connect 2 0 8 0;
-#X connect 3 0 22 0;
-#X connect 4 0 13 0;
-#X connect 5 0 27 0;
+#X connect 3 0 18 0;
+#X connect 4 0 11 0;
+#X connect 5 0 23 0;
 #X connect 5 1 7 1;
-#X connect 6 0 28 0;
+#X connect 6 0 24 0;
 #X connect 7 0 6 0;
 #X connect 7 0 9 0;
 #X connect 10 0 1 0;
-#X connect 10 1 18 0;
-#X connect 10 2 11 0;
-#X connect 11 0 14 0;
-#X connect 12 0 15 0;
-#X connect 13 0 5 0;
-#X connect 13 1 24 0;
-#X connect 13 2 12 0;
-#X connect 14 0 23 0;
-#X connect 15 0 23 0;
-#X connect 16 0 19 0;
-#X connect 17 0 25 0;
-#X connect 20 0 16 0;
-#X connect 21 0 2 0;
-#X connect 26 0 17 0;
-#X connect 27 0 7 0;
+#X connect 10 1 14 0;
+#X connect 10 2 27 0;
+#X connect 11 0 5 0;
+#X connect 11 1 20 0;
+#X connect 11 2 28 0;
+#X connect 12 0 19 0;
+#X connect 13 0 19 0;
+#X connect 16 0 25 0;
+#X connect 17 0 2 0;
+#X connect 22 0 26 0;
+#X connect 23 0 7 0;
+#X connect 25 0 15 0;
+#X connect 26 0 21 0;
+#X connect 27 0 12 0;
+#X connect 28 0 13 0;
 #X restore 30 360 pd octave;
-#X text 70 45 +3;
-#X text 70 60 +2;
-#X text 70 75 +1;
-#X text 76 92 0;
-#X text 70 105 -1;
-#X text 70 120 -2;
-#X text 70 135 -3;
+#X text 70 45 +2;
+#X text 70 60 +1;
+#X text 76 77 0;
+#X text 70 90 -1;
+#X text 70 105 -2;
 #X obj 30 219 vradio 15 0 0 6 empty \$0-mode empty 0 -8 0 10 #fcfcfc
 #000000 #000000 1;
 #X text 50 232 up;
@@ -1177,64 +1176,77 @@ PACER setup has them on FS1+2)., f 79;
 #X connect 3 0 4 0;
 #X connect 4 0 5 0;
 #X restore 30 390 pd mode;
-#X floatatom 147 19 3 0 128 0 out #0-outchan -, f 3;
+#X floatatom 152 19 3 0 128 0 out #0-outchan -, f 3;
 #X obj 360 490 s \$0-arp;
-#X msg 147 580 outchan \$1;
-#X floatatom 30 155 5 0 0 3 transp #0-transp -, f 5;
-#X floatatom 102 19 3 0 128 0 in #0-inchan -, f 3;
-#X msg 102 610 inchan \$1;
-#X msg 30 330 transp \$1;
+#X msg 152 580 outchan \$1;
+#X floatatom 360 390 5 0 0 3 transp #0-transp -, f 5;
+#X floatatom 107 19 3 0 128 0 in #0-inchan -, f 3;
+#X msg 107 610 inchan \$1;
+#X msg 360 430 transp \$1;
 #X text 50 293 outside-in;
 #X obj 30 201 tgl 15 0 empty \$0-raptor raptor 20 6 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 200 294 hsl 64 15 0 127 0 0 empty \$0-pan pan -3 -12 0 10 #fcfcfc
+#X obj 202 294 hsl 64 15 0 127 0 0 empty \$0-pan pan -3 -12 0 10 #fcfcfc
 #000000 #000000 3175 1;
-#X obj 272 294 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 274 294 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X msg 310 294 64;
-#X msg 200 330 pan \$1;
+#X msg 202 330 pan \$1;
 #X obj 390 120 r all-hmin;
 #X obj 390 145 s \$0-hmin;
 #X obj 390 180 r all-pref;
 #X obj 390 210 s \$0-pref;
-#X obj 243 20 tgl 15 0 empty \$0-mute M -10 6 0 10 #e8dc1c #000000
+#X obj 245 20 tgl 15 0 empty \$0-mute M -10 6 0 10 #e8dc1c #000000
 #000000 0 1;
-#X msg 243 330 mute \$1;
-#X floatatom 147 294 6 0 16 2 loop #0-loopsize -, f 6;
-#X obj 123 294 tgl 15 0 empty \$0-loop empty -1 -10 0 10 #fcfcfc #000000
-#000000 1 1;
-#X msg 147 640 loopsize \$1;
-#X msg 123 670 loop \$1;
+#X msg 245 330 mute \$1;
+#X floatatom 152 294 6 0 16 2 loop #0-loopsize -, f 6;
+#X obj 128 294 tgl 15 0 empty \$0-loop empty -1 -10 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 152 640 loopsize \$1;
+#X msg 128 680 loop \$1;
+#X floatatom 76 174 3 -36 36 2 - #0-pitchlo -, f 3;
+#X floatatom 76 144 3 -36 36 2 - #0-pitchhi -, f 3;
+#X obj 30 129 vradio 15 0 0 4 empty \$0-pitchtracker empty 0 -8 0 10
+#fcfcfc #000000 #000000 0;
+#X text 48 128 off;
+#X text 48 143 on;
+#X text 48 158 trbl;
+#X text 48 175 bass;
+#X msg 30 570 pitchtracker \$1;
+#X msg 76 640 pitchhi \$1;
+#X msg 76 660 pitchlo \$1;
+#X text 75 128 hi;
+#X text 75 158 lo;
 #X connect 2 0 3 0;
-#X connect 3 0 80 0;
+#X connect 3 0 78 0;
 #X connect 4 0 5 0;
-#X connect 5 0 80 0;
+#X connect 5 0 78 0;
 #X connect 6 0 7 0;
-#X connect 7 0 80 0;
+#X connect 7 0 78 0;
 #X connect 8 0 6 0;
 #X connect 9 0 8 0;
 #X connect 10 0 16 0;
 #X connect 11 0 10 0;
 #X connect 12 0 14 0;
 #X connect 13 0 15 0;
-#X connect 14 0 80 0;
-#X connect 15 0 80 0;
-#X connect 16 0 80 0;
+#X connect 14 0 78 0;
+#X connect 15 0 78 0;
+#X connect 16 0 78 0;
 #X connect 17 0 11 0;
 #X connect 18 0 20 0;
 #X connect 19 0 18 0;
-#X connect 20 0 80 0;
+#X connect 20 0 78 0;
 #X connect 21 0 23 0;
 #X connect 22 0 21 0;
-#X connect 23 0 80 0;
+#X connect 23 0 78 0;
 #X connect 24 0 22 0;
 #X connect 25 0 19 0;
 #X connect 26 0 27 0;
-#X connect 27 0 80 0;
+#X connect 27 0 78 0;
 #X connect 28 0 29 0;
-#X connect 29 0 80 0;
+#X connect 29 0 78 0;
 #X connect 30 0 31 0;
-#X connect 31 0 80 0;
+#X connect 31 0 78 0;
 #X connect 32 0 53 0;
 #X connect 33 0 32 0;
 #X connect 34 0 51 0;
@@ -1254,40 +1266,46 @@ PACER setup has them on FS1+2)., f 79;
 #X connect 48 0 60 0;
 #X connect 49 0 47 0;
 #X connect 50 0 59 0;
-#X connect 51 0 80 0;
-#X connect 52 0 80 0;
-#X connect 53 0 80 0;
-#X connect 54 0 80 0;
-#X connect 55 0 80 0;
-#X connect 56 0 80 0;
-#X connect 57 0 80 0;
-#X connect 58 0 80 0;
-#X connect 59 0 80 0;
-#X connect 60 0 80 0;
-#X connect 61 0 80 0;
+#X connect 51 0 78 0;
+#X connect 52 0 78 0;
+#X connect 53 0 78 0;
+#X connect 54 0 78 0;
+#X connect 55 0 78 0;
+#X connect 56 0 78 0;
+#X connect 57 0 78 0;
+#X connect 58 0 78 0;
+#X connect 59 0 78 0;
+#X connect 60 0 78 0;
+#X connect 61 0 78 0;
 #X connect 62 0 64 0;
 #X connect 63 0 64 1;
-#X connect 72 0 78 0;
-#X connect 79 0 81 0;
-#X connect 81 0 80 0;
-#X connect 82 0 85 0;
-#X connect 83 0 84 0;
-#X connect 84 0 80 0;
-#X connect 85 0 80 0;
-#X connect 87 0 78 1;
-#X connect 88 0 91 0;
-#X connect 89 0 90 0;
-#X connect 90 0 88 0;
-#X connect 91 0 80 0;
+#X connect 70 0 76 0;
+#X connect 77 0 79 0;
+#X connect 79 0 78 0;
+#X connect 80 0 83 0;
+#X connect 81 0 82 0;
+#X connect 82 0 78 0;
+#X connect 83 0 78 0;
+#X connect 85 0 76 1;
+#X connect 86 0 89 0;
+#X connect 87 0 88 0;
+#X connect 88 0 86 0;
+#X connect 89 0 78 0;
+#X connect 90 0 91 0;
 #X connect 92 0 93 0;
 #X connect 94 0 95 0;
-#X connect 96 0 97 0;
-#X connect 97 0 80 0;
-#X connect 98 0 100 0;
-#X connect 99 0 101 0;
-#X connect 100 0 80 0;
-#X connect 101 0 80 0;
-#X coords 0 -1 1 1 266 299 1 25 15;
+#X connect 95 0 78 0;
+#X connect 96 0 98 0;
+#X connect 97 0 99 0;
+#X connect 98 0 78 0;
+#X connect 99 0 78 0;
+#X connect 100 0 109 0;
+#X connect 101 0 108 0;
+#X connect 102 0 107 0;
+#X connect 107 0 78 0;
+#X connect 108 0 78 0;
+#X connect 109 0 78 0;
+#X coords 0 -1 1 1 267 299 1 25 15;
 #X restore 290 20 pd panel;
 #X obj 290 350 p \$0 default 1;
 #X obj 290 375 p \$0 triplet 2;
@@ -1602,23 +1620,25 @@ SPP, f 30;
 #X text 220 125 autosweep;
 #X msg 62 193 90;
 #X msg 144 193 140;
-#N canvas 75 252 455 488 more... 0;
+#N canvas 75 203 455 569 more... 0;
 #X obj 10 40 p \$0 piano 9;
-#X obj 10 65 p \$0 bass 10;
-#X obj 10 90 p \$0 arp 11;
-#X obj 10 115 p \$0 wave 12;
+#X obj 10 90 p \$0 bass 10;
+#X obj 10 115 p \$0 arp 11;
 #X text 10 10 a few bonus presets ported from Raptor5;
+#X obj 10 65 p \$0 vibes 12;
+#X obj 10 140 p \$0 wave 13;
+#X obj 10 165 p \$0 shred 14;
 #X restore 380 330 pd more...;
 #X text 220 21 off;
 #N canvas 1829 29 456 717 looper 0;
 #X floatatom 40 82 3 0 99 0 - - -, f 3;
 #X obj 70 82 bng 15 250 50 0 empty \$0-loop-file load/save 17 7 0 10
-#fc2828 #202020 #202020;
+#e0e0e0 #202020 #202020;
 #X obj 260 40 r \$0-loop;
 #X obj 260 65 route set;
 #X obj 260 90 != 0;
 #X obj 260 115 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X floatatom 280 277 5 0 0 0 - - -, f 5;
 #X msg 280 301 color \$1 12 12;
 #X obj 260 220 sel 1 0;
