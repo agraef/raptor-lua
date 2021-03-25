@@ -15,3 +15,10 @@
   fractional pulses to subdivide the meter into tuplets (up to septuplets) on
   the fly. This isn't used in Raptor right now, but seems such a useful
   feature, so it would be nice to support it in some way. But how?
+
+- better harmonicity control
+
+  Maybe we should use a logarithmic control for these, as the interesting
+  harmonicity thresholds are all crowded together in the bottom 21% of the
+  range. This would certainly make those controls easier to use, but will be a
+  rather disruptive change and impact backward compatibility with old presets.
