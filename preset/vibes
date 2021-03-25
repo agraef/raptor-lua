@@ -31,7 +31,7 @@ transp 0;
 up 0;
 down -1;
 pan 45.8611;
-gain 0;
+gain 64;
 pitchhi -5;
 pitchlo -16;
 pitchtracker 2;
