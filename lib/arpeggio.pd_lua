@@ -62,7 +62,17 @@ function arpeggio:initialize(_, atoms)
    self.minvel, self.maxvel, self.velmod = 60, 120, 1
    self.pmin, self.pmax, self.pmod = 0.3, 1, 0
    self.gate, self.gatemod = 1, 0
-   -- Looper variables
+   -- velocity tracker
+   self.veltracker, self.minavg, self.maxavg = 1, nil, nil
+   -- this isn't really a "gain" control any more, it's more like a dry/wet
+   -- mix (1 = dry, 0 = wet) between set values (minvel, maxvel) and the
+   -- calculated envelope (minavg, maxavg)
+   self.gain = 1
+   -- smoothing filter, time in pulses (3 works for me, YMMV)
+   local t = 3
+    -- filter coefficient
+   self.g = math.exp(-1/t)
+   -- looper
    self.loopstate = 0
    self.loopsize = 0
    self.loopidx = 0
@@ -368,20 +378,61 @@ function arpeggio:in_1_loop(x)
    end
 end
 
+-- velocity tracking
+
+function arpeggio:update_veltracker(chord, vel)
+   if next(chord) == nil then
+      -- reset
+      self.minavg, self.maxavg = nil, nil
+      if self.debug&2~=0 then
+	 pd.post(string.format("min = %s, max = %s", self.minavg, self.maxavg))
+      end
+   elseif vel > 0 then
+      -- calculate the velocity envelope
+      if not self.minavg then
+	 self.minavg = self.minvel
+      end
+      self.minavg = self.minavg*self.g + vel*(1-self.g)
+      if not self.maxavg then
+	 self.maxavg = self.maxvel
+      end
+      self.maxavg = self.maxavg*self.g + vel*(1-self.g)
+      if self.debug&2~=0 then
+	 pd.post(string.format("vel min = %g, max = %g", self.minavg, self.maxavg))
+      end
+   end
+end
+
+function arpeggio:velrange()
+   if self.veltracker then
+      local g = self.gain
+      local min = self.minavg or self.minvel
+      local max = self.maxavg or self.maxvel
+      min = g*self.minvel + (1-g)*min
+      max = g*self.maxvel + (1-g)*max
+      return min, max
+   else
+      return self.minvel, self.maxvel
+   end
+end
+
 -- output the next note in the pattern and switch to the next pulse
 function arpeggio:in_1_bang()
    local w, n = self:meter(self.idx)
    -- normalized pulse strength
    local w1 = w/math.max(1,n-1)
    -- corresponding MIDI velocity
+   local minvel, maxvel = self:velrange()
    local vel =
-      math.floor(mod_value(self.minvel, self.maxvel, self.velmod, w1))
+      math.floor(mod_value(minvel, maxvel, self.velmod, w1))
    self:outlet(3, "float", {n})
    self:outlet(2, "float", {w})
    local gate, notes = 0, nil
    if self.loopstate == 1 then
       -- notes come straight from the loop, input is ignored
       notes, vel, gate = table.unpack(self:loop_get())
+      -- adjust velocities using gain value
+      vel = vel*2^(2*self.gain-1)
       if type(notes) == "table" then
 	 for _,note in ipairs(notes) do
 	    self:outlet(1, "list", {note, vel, gate})
@@ -433,13 +484,13 @@ function arpeggio:in_1_bang()
    self.idx = (self.idx + 1) % self.beats
 end
 
--- panic on the 1st inlet clears the chord memory and pattern, and also resets
--- the subdivision
+-- panic on the 1st inlet clears the chord memory and pattern
 function arpeggio:in_1_panic()
    self.chord = {}
    self.pattern = {}
    self.last_q = nil
    self:in_1_hold(0)
+   self:update_veltracker({}, 0)
 end
 
 -- float on the 1st inlet changes the current pulse
@@ -735,6 +786,26 @@ function arpeggio:in_1_velmod(x)
    end
 end
 
+function arpeggio:in_1_veltracker(x)
+   x = self:intarg(x)
+   if type(x) == "number" then
+      self.veltracker = math.max(0, math.min(1, x))
+   end
+end
+
+local function midiccval(x)
+   -- pesky midi cc values aren't properly centered; do some magic to get a
+   -- fudged normalization where 64 maps to exactly 0.5
+   return x<127 and x/128 or 1.0 -- snaps to 1 at max
+end
+
+function arpeggio:in_1_gain(x)
+   x = self:numarg(x)
+   if type(x) == "number" then
+      self.gain = midiccval(math.max(0, math.min(127, x)))
+   end
+end
+
 function arpeggio:in_1_gate(x)
    x = self:numarg(x)
    if type(x) == "number" then
@@ -897,6 +968,7 @@ function arpeggio:in_1_list(x)
 	 update_chord(self.hold, note, vel)
       end
       self.pattern = self:create_pattern(self:get_chord())
+      self:update_veltracker(self:get_chord(), vel)
    end
 end
 
