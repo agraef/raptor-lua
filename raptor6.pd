@@ -1,4 +1,4 @@
-#N canvas 435 87 569 560 10;
+#N canvas 435 87 570 557 10;
 #X declare -path lib;
 #X msg 30 80 panic;
 #X msg 200 193 240;
@@ -17,7 +17,7 @@
 #X msg 110 330 3 2 2;
 #X msg 154 330 2 3 2;
 #X obj 10 20 tgl 20 0 empty \$0-play play -1 -11 0 10 #69be77 #000000
-#000000 0 1;
+#000000 1 1;
 #N canvas 300 175 475 440 tempo 0;
 #X obj 30 10 inlet;
 #X obj 30 105 change;
@@ -227,10 +227,10 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 5 0 6 0;
 #X connect 7 0 8 0;
 #X restore 290 330 pd init;
-#N canvas 500 29 872 743 arp 0;
+#N canvas 1618 29 878 717 arp 0;
 #X floatatom 20 428 5 0 0 0 - - -, f 5;
 #X floatatom 66 428 5 0 0 0 - - -, f 5;
-#X obj 20 472 makenote 127 160;
+#X obj 20 501 makenote 127 160;
 #N canvas 725 185 465 508 gate 0;
 #X obj 50 20 inlet;
 #X obj 50 120 * 1;
@@ -246,8 +246,8 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 5 0 1 1;
 #X restore 113 428 pd gate;
 #X obj 20 400 unpack f f f;
-#X obj 20 451 pipe;
-#X obj 20 510 noteout;
+#X obj 20 480 pipe;
+#X obj 20 530 noteout;
 #X obj 192 510 pgmout;
 #X obj 230 480 t f f f b;
 #X msg 281 510 0;
@@ -265,7 +265,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X floatatom 400 266 5 0 0 0 - - -, f 5;
 #X obj 400 464 spigot;
 #X obj 470 438 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#000000 1 1;
 #X obj 400 489 spigot;
 #X obj 276 340 tgl 15 1 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 1 1;
@@ -285,7 +285,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 400 365 t f f f;
 #X obj 550 361 sel 1;
 #X obj 202 340 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
-#000000 #000000 0 1;
+#000000 #000000 1267 1;
 #X obj 690 371 sel 0;
 #X obj 690 401 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -343,7 +343,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X text 580 250 - time -;
 #X text 100 220 - arpeggiator external -;
 #X obj 130 370 hsl 32 15 0 600 0 1 \$0-trace empty trace -2 -8 0 10
-#fcfcfc #000000 #000000 1566 1;
+#fcfcfc #000000 #000000 1550 1;
 #X obj 171 370 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X msg 171 395 300;
@@ -359,7 +359,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 450 415 r \$0-master;
 #X obj 400 439 spigot;
 #X obj 180 250 r all-arp;
-#N canvas 835 105 455 648 notefilter 0;
+#N canvas 665 197 457 271 notefilter 0;
 #X obj 30 30 inlet;
 #X obj 30 85 pack f f;
 #X obj 30 110 spigot;
@@ -367,21 +367,15 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 140 110 route 0;
 #X msg 140 135 1;
 #X obj 90 85 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
-0 1;
+1 1;
 #X obj 179 135 ==;
 #X obj 30 135 unpack f f;
 #X obj 140 80 pack f f;
-#X obj 30 230 outlet;
-#X obj 87 230 outlet;
-#X obj 30 200 +;
-#X obj 260 80 change;
-#X obj 260 105 t f b;
-#X msg 287 130 panic;
-#X obj 287 155 s \$0-arp;
+#X obj 30 180 outlet;
+#X obj 87 180 outlet;
 #X obj 190 30 r \$0-inch;
-#X obj 260 30 inlet;
 #X obj 30 55 unpack f f f;
-#X connect 0 0 19 0;
+#X connect 0 0 13 0;
 #X connect 1 0 2 0;
 #X connect 2 0 8 0;
 #X connect 3 0 9 0;
@@ -391,19 +385,13 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 5 0 6 0;
 #X connect 6 0 2 1;
 #X connect 7 0 6 0;
-#X connect 8 0 12 0;
+#X connect 8 0 10 0;
 #X connect 8 1 11 0;
 #X connect 9 0 4 0;
-#X connect 12 0 10 0;
-#X connect 13 0 14 0;
-#X connect 14 0 12 1;
-#X connect 14 1 15 0;
-#X connect 15 0 16 0;
-#X connect 17 0 3 1;
-#X connect 18 0 13 0;
-#X connect 19 0 1 0;
-#X connect 19 1 1 1;
-#X connect 19 2 3 0;
+#X connect 12 0 3 1;
+#X connect 13 0 1 0;
+#X connect 13 1 1 1;
+#X connect 13 2 3 0;
 #X restore 280 100 pd notefilter;
 #X obj 268 560 ctlout 8;
 #X obj 195 370 hsl 32 15 0 127 0 0 empty \$0-gain gain -2 -8 0 10 #fcfcfc
@@ -425,21 +413,21 @@ harm-sweep pref-sweep part target;
 #X connect 1 0 2 0;
 #X connect 2 10 3 0;
 #X restore 192 175 pd harm-sweep;
-#X obj 20 560 r \$0-inch;
-#X obj 20 585 ctrlx;
-#X obj 100 560 tgl 15 1 empty empty bend 17 7 0 10 #fcfcfc #000000
+#X obj 20 590 r \$0-inch;
+#X obj 20 615 ctrlx;
+#X obj 100 590 tgl 15 1 empty empty bend 17 7 0 10 #fcfcfc #000000
 #000000 1 1;
-#X obj 150 560 tgl 15 1 empty empty touch 17 7 0 10 #fcfcfc #000000
+#X obj 150 590 tgl 15 1 empty empty touch 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 20 610 bendout;
-#X obj 80 610 touchout;
-#X text 20 533 - passthrough bend/aftertouch -;
+#X obj 20 640 bendout;
+#X obj 80 640 touchout;
+#X text 20 563 - passthrough bend/aftertouch -;
 #X obj 106 107 s \$0-meter-base;
-#X obj 210 560 tgl 15 0 empty empty mute 17 7 0 10 #fcfcfc #000000
+#X obj 210 590 tgl 15 0 empty empty mute 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 210 583 == 0;
-#X obj 150 583 && 1;
-#X obj 100 583 && 1;
+#X obj 210 613 == 0;
+#X obj 150 613 && 1;
+#X obj 100 613 && 1;
 #X obj 20 374 spigot 1;
 #X obj 590 100 r \$0-n;
 #X obj 575 150 *;
@@ -497,7 +485,8 @@ harm-sweep pref-sweep part target;
 #X msg 236 395 64;
 #X floatatom 259 370 5 0 0 2 transp #0-transp -, f 5;
 #X msg 259 395 transp \$1;
-#X connect 0 0 5 0;
+#X obj 20 452 +;
+#X connect 0 0 152 0;
 #X connect 1 0 2 1;
 #X connect 2 0 6 0;
 #X connect 2 1 6 1;
@@ -663,7 +652,7 @@ harm-sweep pref-sweep part target;
 #X connect 147 1 12 0;
 #X connect 147 2 17 1;
 #X connect 147 3 96 0;
-#X connect 147 4 77 1;
+#X connect 147 4 152 1;
 #X connect 147 5 84 0;
 #X connect 147 6 130 0;
 #X connect 147 7 88 0;
@@ -671,6 +660,7 @@ harm-sweep pref-sweep part target;
 #X connect 149 0 79 0;
 #X connect 150 0 151 0;
 #X connect 151 0 83 0;
+#X connect 152 0 5 0;
 #X coords 0 -1 1 1 167 52 1 127 337;
 #X restore 10 110 pd arp;
 #N canvas 702 29 571 717 control 0;
@@ -1265,7 +1255,7 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 40 123 bng 15 50 10 0 pulse empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
 #X obj 210 20 tgl 15 0 empty \$0-metro empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#000000 1 1;
 #X obj 40 102 metro 160;
 #X obj 170 100 != 0;
 #X obj 260 100 == 0;
