@@ -195,7 +195,7 @@ function arpeggio:intarg(x)
    end
 end
 
--- the Looper
+-- the looper
 
 function arpeggio:loop_clear()
    -- reset the looper
