@@ -1,5 +1,11 @@
 -- the drunken nightclub pianist :)
 
+-- Best listened to with a piano patch, vibes (pgm 12) and pizzicato strings
+-- (pgm 46) also sound great IMHO. I don't remember the parameter settings, so
+-- don't ask. ;-) Also, this was done with an early (and slightly buggy)
+-- version of Raptor 6, so I'm not even sure if the present version can still
+-- produce something quite like it...
+
 -- saved by Raptor Tue Mar 23 14:44:10 2021
 {
   -- bar 1
