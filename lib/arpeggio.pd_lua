@@ -654,9 +654,14 @@ function arpeggio:create_pattern(chord)
 	 pattern = reverse(pattern)
       elseif self.mode == 3 then
 	 -- up-down
-	 pattern = tabcat(pattern, reverse(pattern))
+	 local r = reverse(pattern)
+	 -- get rid of the repeated note in the middle
+	 table.remove(pattern)
+	 pattern = tabcat(pattern, r)
       elseif self.mode == 4 then
 	 -- down-up
+	 local r = reverse(pattern)
+	 table.remove(r)
 	 pattern = tabcat(reverse(pattern), pattern)
       elseif self.mode == 5 then
 	 -- outside-in
