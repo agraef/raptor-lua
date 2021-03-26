@@ -1,4 +1,4 @@
-#N canvas 60 125 453 304 12;
+#N canvas 60 125 595 351 12;
 #X obj 30 140 spigot;
 #X obj 69 90 expr ($f2==0) || ($f1==$f2), f 13;
 #X text 100 130 test for omni or matching MIDI input channel, f 17
@@ -20,10 +20,26 @@
 #X obj 250 20 touchin;
 #X obj 30 198 - 8192;
 #X obj 30 227 outlet;
+#X obj 400 140 spigot;
+#X obj 439 90 expr ($f2==0) || ($f1==$f2), f 13;
+#X obj 480 20 inlet;
+#X obj 400 20 notein;
+#X obj 400 49 pack f f;
+#X obj 400 169 list prepend;
+#X obj 480 49 hradio 15 0 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 2;
+#X obj 400 198 route 1 2;
+#X obj 400 227 outlet;
+#X obj 460 227 unpack f f;
+#X obj 460 256 spigot;
+#X obj 527 256 > 0;
+#X obj 460 285 - 60;
+#X obj 460 314 outlet;
 #X connect 0 0 5 0;
 #X connect 1 0 0 1;
 #X connect 3 0 1 1;
 #X connect 3 0 7 1;
+#X connect 3 0 19 1;
 #X connect 4 0 3 0;
 #X connect 5 0 16 0;
 #X connect 6 0 8 0;
@@ -38,3 +54,19 @@
 #X connect 15 0 6 0;
 #X connect 15 1 7 0;
 #X connect 16 0 17 0;
+#X connect 18 0 23 0;
+#X connect 19 0 18 1;
+#X connect 20 0 24 0;
+#X connect 21 0 22 0;
+#X connect 21 1 22 1;
+#X connect 21 2 19 0;
+#X connect 22 0 18 0;
+#X connect 23 0 25 0;
+#X connect 24 0 23 1;
+#X connect 25 0 26 0;
+#X connect 25 1 27 0;
+#X connect 27 0 28 0;
+#X connect 27 1 29 0;
+#X connect 28 0 30 0;
+#X connect 29 0 28 1;
+#X connect 30 0 31 0;
