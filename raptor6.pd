@@ -1,4 +1,4 @@
-#N canvas 435 87 568 558 10;
+#N canvas 435 87 570 559 10;
 #X declare -path lib;
 #X obj 239 240 bng 25 250 50 0 \$0-play empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -201,7 +201,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X text 220 65 gate;
 #X text 220 81 gatemod;
 #X text 220 96 swing;
-#N canvas 735 50 490 651 init 0;
+#N canvas 735 50 490 705 init 0;
 #X obj 70 20 loadbang;
 #X obj 210 20 declare -path lib;
 #X obj 121 70 f \$0;
@@ -1770,6 +1770,7 @@ SPP, f 30;
 #X coords 0 -1 1 1 107 36 1 36 64;
 #X restore 177 283 pd looper;
 #X obj 252 239 ggee/image lib/autodom.gif;
+#X obj 290 3 namecanvas \$1;
 #X connect 2 0 29 0;
 #X connect 3 0 19 0;
 #X connect 4 0 19 0;

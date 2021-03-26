@@ -1,13 +1,10 @@
-#N canvas 140 325 455 305 12;
+#N canvas 140 325 455 309 12;
 #X obj 20 70 raptor6 piano;
 #X obj 20 100 raptor6 arp;
 #X obj 20 130 raptor6 bass;
 #X text 20 20 A band of raptors - just add as many raptor instances
 as you need and specify the desired presets as arguments;
-#X obj 180 70 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000;
-#X msg 180 94 vis 1;
-#X obj 180 120 s pd-raptor6.pd;
-#X text 240 90 open all raptors at once;
-#X connect 4 0 5 0;
-#X connect 5 0 6 0;
+#X msg 20 200 \; piano vis 1;
+#X msg 20 250 \; pd-raptor6.pd vis 1;
+#X text 170 210 show all piano raptors;
+#X text 170 260 show *all* raptors (the whole band);
