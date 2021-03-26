@@ -1,4 +1,4 @@
-#N canvas 435 87 570 561 10;
+#N canvas 435 87 568 558 10;
 #X declare -path lib;
 #X obj 239 240 bng 25 250 50 0 \$0-play empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -289,7 +289,7 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X obj 400 365 t f f f;
 #X obj 550 361 sel 1;
 #X obj 202 340 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
-#000000 #000000 127 1;
+#000000 #000000 0 1;
 #X obj 690 371 sel 0;
 #X obj 690 401 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -1271,87 +1271,128 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 290 425 p \$0 bla 4;
 #X obj 290 450 p \$0 raptor 5;
 #X obj 290 475 p \$0 tr808 6;
-#N canvas 260 82 505 664 time 0;
-#X obj 350 135 inlet;
+#N canvas 260 54 505 718 time 0;
+#X obj 350 155 inlet;
 #X obj 230 20 tgl 15 1 empty \$0-master-toggle M 17 7 0 10 #fcfcfc
 #000000 #000000 1 1;
-#X obj 40 123 bng 15 50 10 0 pulse empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 40 143 bng 15 50 10 0 pulse empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
 #X obj 210 20 tgl 15 0 empty \$0-metro empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 40 102 metro 160;
-#X obj 170 100 != 0;
-#X obj 260 100 == 0;
-#X obj 170 125 s \$0-master;
-#X obj 260 125 s \$0-slave;
-#X obj 40 180 r \$0-master;
-#X obj 170 180 r \$0-slave;
-#X text 40 150 - master -;
-#X text 170 150 - slave -;
-#X obj 230 235 sel \$0;
-#X msg 263 260 0;
+#X obj 40 122 metro 160;
+#X obj 170 120 != 0;
+#X obj 260 120 == 0;
+#X obj 170 145 s \$0-master;
+#X obj 260 145 s \$0-slave;
+#X obj 40 200 r \$0-master;
+#X obj 170 200 r \$0-slave;
+#X text 40 170 - master -;
+#X text 170 170 - slave -;
+#X obj 230 255 sel \$0;
+#X msg 263 280 0;
 #X obj 40 36 spigot;
 #X obj 282 20 bng 15 100 10 0 empty pulse empty 17 7 0 10 #fcfcfc #202020
 #202020;
-#X obj 350 210 outlet;
-#X obj 170 235 spigot;
-#X msg 170 260 1;
-#X obj 400 240 s \$0-me;
-#X obj 170 210 r \$0-me;
+#X obj 350 230 outlet;
+#X obj 170 255 spigot;
+#X msg 170 280 1;
+#X obj 400 260 s \$0-me;
+#X obj 170 230 r \$0-me;
 #X obj 282 43 outlet;
-#X obj 230 210 r all-master;
-#X obj 350 100 s stop;
-#X obj 170 290 s \$0-master-toggle;
-#X obj 170 50 change -1;
-#X obj 40 290 s all-master;
-#X obj 40 240 sel 1;
-#X obj 40 265 f \$0;
-#X obj 240 410 sel 1;
-#X obj 170 70 t f f b;
-#X obj 350 185 t f f f b;
-#X msg 370 320 set \$1;
-#X obj 370 345 s \$0-play;
-#X obj 91 80 r \$0-tick;
-#X obj 40 345 midiclock;
-#X obj 40 210 t f f f;
-#X obj 65 370 s \$0-ms;
-#X obj 40 370 bng 15 100 50 0 pulse empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 230 230 r all-master;
+#X obj 350 120 s stop;
+#X obj 170 310 s \$0-master-toggle;
+#X obj 170 70 change -1;
+#X obj 40 310 s all-master;
+#X obj 40 260 sel 1;
+#X obj 40 285 f \$0;
+#X obj 240 430 sel 1;
+#X obj 170 90 t f f b;
+#X obj 350 205 t f f f b;
+#X msg 370 340 set \$1;
+#X obj 370 365 s \$0-play;
+#X obj 91 100 r \$0-tick;
+#X obj 40 365 midiclock;
+#X obj 40 230 t f f f;
+#X obj 65 390 s \$0-ms;
+#X obj 40 390 bng 15 100 50 0 pulse empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 120 370 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 120 390 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X floatatom 140 477 5 0 0 0 - - -, f 5;
-#X msg 140 501 color \$1 12 12;
-#X msg 120 447 13;
-#X obj 120 420 sel 1 0;
-#X obj 140 526 s pulse;
-#X msg 160 447 0;
-#X obj 350 160 spigot 1;
-#X obj 40 61 spigot 1;
-#X obj 190 420 == 0;
-#X obj 40 320 r \$0-m;
-#X obj 90 320 r \$0-n;
+#X floatatom 140 497 5 0 0 0 - - -, f 5;
+#X msg 140 521 color \$1 12 12;
+#X msg 120 467 13;
+#X obj 120 440 sel 1 0;
+#X obj 140 546 s pulse;
+#X msg 160 467 0;
+#X obj 350 180 spigot 1;
+#X obj 40 81 spigot 1;
+#X obj 190 440 == 0;
+#X obj 40 340 r \$0-m;
+#X obj 90 340 r \$0-n;
 #X floatatom 185 19 3 -24 24 0 - #0-pos -, f 3;
-#X obj 240 437 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 240 457 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 240 460 spigot;
-#X obj 273 437 tgl 15 1 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 240 480 spigot;
+#X obj 273 457 tgl 15 1 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 1 1;
-#X text 170 320 SPP - set the pulse number;
-#X obj 240 485 s \$0-pos;
-#X obj 185 360 mod 15;
-#X obj 185 381 s all-arp;
-#X obj 218 338 r \$0-n;
-#X obj 120 393 t f f f;
-#X text 300 400 just leave this enabled \, in case your DAW doesn't
+#X text 170 340 SPP - set the pulse number;
+#X obj 240 505 s \$0-pos;
+#X obj 185 380 mod 15;
+#X obj 185 401 s all-arp;
+#X obj 218 358 r \$0-n;
+#X obj 120 413 t f f f;
+#X text 300 420 just leave this enabled \, in case your DAW doesn't
 send SPP messages - it simply resends the pulse counter before starting
 playback \, so it shouldn't do any harm even if your DAW *does* support
 SPP, f 30;
 #X obj 256 20 tgl 15 1 empty \$0-clkin S 17 7 0 10 #fcfcfc #000000
 #000000 1 1;
-#X obj 90 240 &&;
-#X obj 100 210 t b f;
+#X obj 90 260 &&;
+#X obj 100 230 t b f;
+#N canvas 730 184 451 326 setup 0;
+#X obj 260 20 r query-master;
+#X obj 260 45 spigot;
+#X obj 260 70 f \$0;
+#X obj 260 95 s reply-master;
+#X obj 360 20 inlet;
+#X obj 40 20 inlet;
+#X obj 40 45 pack f f;
+#X msg 40 70 \$2 \$1;
+#X obj 85 20 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 40 210 outlet;
+#X obj 40 95 route 0 1;
+#X obj 40 120 t f b b;
+#X obj 59 150 s query-master;
+#X obj 260 155 sel \$0;
+#X msg 293 180 0;
+#X obj 260 130 r reply-master;
+#X obj 40 180 spigot 1;
+#X obj 293 205 t f f;
+#X obj 293 230 s \$0-master-toggle;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 4 0 1 1;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 10 0;
+#X connect 8 0 6 1;
+#X connect 10 0 11 0;
+#X connect 10 1 9 0;
+#X connect 11 0 16 0;
+#X connect 11 1 12 0;
+#X connect 11 2 8 0;
+#X connect 13 1 14 0;
+#X connect 14 0 17 0;
+#X connect 15 0 13 0;
+#X connect 16 0 9 0;
+#X connect 17 0 18 0;
+#X connect 17 1 16 1;
+#X restore 170 50 pd setup;
 #X connect 0 0 47 0;
-#X connect 1 0 26 0;
+#X connect 1 0 66 0;
 #X connect 3 0 15 0;
 #X connect 4 0 2 0;
 #X connect 5 0 7 0;
@@ -1385,6 +1426,7 @@ SPP, f 30;
 #X connect 36 3 57 0;
 #X connect 37 0 28 0;
 #X connect 37 1 15 1;
+#X connect 37 1 66 1;
 #X connect 37 2 64 0;
 #X connect 40 0 61 0;
 #X connect 41 0 42 0;
@@ -1412,6 +1454,7 @@ SPP, f 30;
 #X connect 64 0 36 2;
 #X connect 65 0 64 0;
 #X connect 65 1 64 1;
+#X connect 66 0 26 0;
 #X coords 0 -1 1 1 167 21 1 134 17;
 #X restore 10 50 pd time;
 #X msg 195 390;
