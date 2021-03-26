@@ -1,4 +1,4 @@
-#N canvas 435 87 568 558 10;
+#N canvas 435 87 568 560 10;
 #X declare -path lib;
 #X obj 239 240 bng 25 250 50 0 \$0-play empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -201,35 +201,48 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X text 220 65 gate;
 #X text 220 81 gatemod;
 #X text 220 96 swing;
-#N canvas 1819 29 476 717 init 0;
+#N canvas 741 34 489 738 init 0;
 #X obj 70 20 loadbang;
 #X obj 210 20 declare -path lib;
-#X obj 97 70 f \$0;
-#X obj 70 45 t b b;
-#X obj 97 95 t f f;
-#X msg 70 340 set default;
-#X obj 70 365 s \$0-preset;
-#X msg 70 390 default;
-#X obj 70 415 outlet;
-#X msg 97 120 \; \$1-hmin 0 \; \$1-hmax 100 \; \$1-hmod 0 \; \$1-pref
+#X obj 121 250 f \$0;
+#X obj 121 275 t f f;
+#X msg 104 120 set default;
+#X obj 104 145 s \$0-preset;
+#X msg 121 300 \; \$1-hmin 0 \; \$1-hmax 100 \; \$1-hmod 0 \; \$1-pref
 100 \; \$1-prefmod 0 \; \$1-smin 1 \; \$1-smax 7 \; \$1-smod 0 \; \$1-uniq
 1 \; \$1-nmax 1 \; \$1-nmod 0 \; \$1-pitchtracker 0 \; \$1-pitchlo
 0 \; \$1-pitchhi 0;
-#X msg 250 120 \; \$1-tempo 100 \; \$1-meter 15 \; \$1-swing 0 \; \$1-mode
+#X msg 274 300 \; \$1-tempo 100 \; \$1-meter 15 \; \$1-swing 0 \; \$1-mode
 1 \; \$1-raptor 0 \; \$1-minvel 60 \; \$1-maxvel 120 \; \$1-velmod
 100 \; \$1-pmin 30 \; \$1-pmax 100 \; \$1-pmod 0 \; \$1-gate 100 \;
 \$1-gatemod 0 \; \$1-gain 64 \; \$1-pan 64 \; \$1-pgm 1 \; \$1-inchan
 1 \; \$1-outchan 1 \; \$1-down -1 \; \$1-up 1 \; \$1-transp 0 \; \$1-loopsize
 4;
-#X connect 0 0 3 0;
-#X connect 2 0 4 0;
-#X connect 3 0 5 0;
-#X connect 3 0 7 0;
-#X connect 3 1 2 0;
-#X connect 4 0 9 0;
-#X connect 4 1 10 0;
-#X connect 5 0 6 0;
-#X connect 7 0 8 0;
+#X obj 70 70 symbol \$1;
+#X obj 70 45 t b b b b;
+#X obj 70 95 s \$0-change-preset;
+#X obj 87 195 s \$0-op;
+#X text 140 70 preset recall on startup;
+#X text 190 120 update the preset name shown initially in the symbol
+box, f 30;
+#X text 190 170 This is important. MIDI CCs are handled in the presets
+\, but we don't want every preset to update the GUI \, just one of
+them. "default" is supposed to always exist \, so use that one. (And
+better don't remove it \, otherwise MIDI control will stop working.)
+, f 46;
+#X text 200 275 These are the factory defaults.;
+#X msg 87 170 symbol default;
+#X connect 0 0 9 0;
+#X connect 2 0 3 0;
+#X connect 3 0 6 0;
+#X connect 3 1 7 0;
+#X connect 4 0 5 0;
+#X connect 8 0 10 0;
+#X connect 9 0 8 0;
+#X connect 9 1 16 0;
+#X connect 9 2 4 0;
+#X connect 9 3 2 0;
+#X connect 16 0 11 0;
 #X restore 290 330 pd init;
 #N canvas 2945 29 884 743 arp 0;
 #X floatatom 20 428 5 0 0 0 - - -, f 5;
@@ -1360,7 +1373,7 @@ SPP, f 30;
 #X obj 40 45 pack f f;
 #X msg 40 70 \$2 \$1;
 #X obj 85 20 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
-0 1;
+1 1;
 #X obj 40 210 outlet;
 #X obj 40 95 route 0 1;
 #X obj 40 120 t f b b;
@@ -1754,7 +1767,7 @@ SPP, f 30;
 #X connect 38 0 6 0;
 #X coords 0 -1 1 1 107 36 1 36 64;
 #X restore 177 283 pd looper;
-#X obj 251 240 ggee/image lib/autodom.gif 0;
+#X obj 252 239 ggee/image lib/autodom.gif;
 #X connect 2 0 29 0;
 #X connect 3 0 19 0;
 #X connect 4 0 19 0;
@@ -1773,7 +1786,6 @@ SPP, f 30;
 #X connect 19 0 7 0;
 #X connect 20 0 39 0;
 #X connect 22 0 30 0;
-#X connect 28 0 32 0;
 #X connect 38 0 29 0;
 #X connect 38 1 29 1;
 #X connect 40 0 20 0;
