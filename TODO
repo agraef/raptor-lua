@@ -1,6 +1,10 @@
 
 - better presets (port some more presets from Raptor 5 or even version 4?)
 
+- in the current implementation, presets (p abstractions) *must* be inserted
+  in the main patch so that they know which Raptor instance to send their
+  parameter values to; is there a better way to do this?
+
 - OSC control (don't hold your breath)
 
 - allow loop import/export from/to MIDI?

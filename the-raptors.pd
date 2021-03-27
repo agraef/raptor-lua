@@ -1,10 +1,13 @@
-#N canvas 140 325 455 309 12;
+#N canvas 140 325 455 314 12;
 #X obj 20 70 raptor6 piano;
 #X obj 20 100 raptor6 arp;
 #X obj 20 130 raptor6 bass;
-#X text 20 20 A band of raptors - just add as many raptor instances
-as you need and specify the desired presets as arguments;
-#X msg 20 200 \; piano vis 1;
-#X msg 20 250 \; pd-raptor6.pd vis 1;
-#X text 170 210 show all piano raptors;
-#X text 170 260 show *all* raptors (the whole band);
+#X msg 20 210 \; piano vis 1;
+#X msg 20 260 \; pd-raptor6.pd vis 1;
+#X text 170 220 show all piano raptors;
+#X text 170 270 show *all* raptors (the whole band);
+#X text 20 160 Raptor patches are named accordingly \, so you can send
+them canvas messages such as vis 1 which makes a patch visible.;
+#X text 20 10 A band of raptors - just add as many raptor instances
+as you need and specify the desired presets as arguments. NOTE: The
+presets themselves all need to be in the main patch.;
