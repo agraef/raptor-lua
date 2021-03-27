@@ -10,7 +10,7 @@ The three presets are based on the A1 and D2 factory presets of the PACER, but h
 
 - **D1 (R1PRE):** program changes (PC1-6), these recall presets 1-6 in the patch (i.e., the `p` abstractions that have 1-6 in their 3rd argument; preset file names are given as the 2nd argument) 
 - **D2 (R2MOD):** modulation control, switches 1-4 are toggles, 5+6 are triggers (momentary switches), assigned as follows:
-    - switches 1+2 (down/up) adjust the octave range (each step goes one octave down/up, up to -3/+3 octaves, then cycling back to 0 octaves)
+    - switches 1+2 (down/up) adjust the octave range (each step goes one octave down/up, up to -2/+2 octaves, then cycling back to 0 octaves)
     - switch 3 cycles through the available "mod-switch" assignments, while switches 4 (mod shift) and 5 (mod) change whatever parameter is assigned to that control, see below for details
     - switch 6 triggers "play", turning the arpeggiator on or off; unlike the other switches, this trigger is always received by the Raptor instance which currently acts as the time master (i.e., the instance which has the "M" toggle engaged in its `time` subpatch)
 - **D3 (R3ARP):** special functions for arpeggiator control, switch 1 is a toggle, the rest are triggers:
