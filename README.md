@@ -1,6 +1,6 @@
 # Raptor: The Random Arpeggiator
 
-Albert Gräf [<aggraef@gmail.com>](mailto:aggraef@gmail.com), March 2021  
+Albert Gräf [\<aggraef@gmail.com\>](mailto:aggraef@gmail.com), March 2021  
 Computer Music Dept., Institute of Art History and Musicology  
 Johannes Gutenberg University (JGU) Mainz, Germany  
 This document is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
