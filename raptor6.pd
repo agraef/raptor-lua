@@ -1,4 +1,4 @@
-#N canvas 435 87 572 558 10;
+#N canvas 435 87 575 564 10;
 #X declare -path lib;
 #X obj 239 240 bng 25 250 50 0 \$0-play empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -201,14 +201,14 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X text 220 65 gate;
 #X text 220 81 gatemod;
 #X text 220 96 swing;
-#N canvas 735 50 490 705 init 0;
+#N canvas 600 30 482 694 init 0;
 #X obj 70 20 loadbang;
 #X obj 210 20 declare -path lib;
-#X obj 121 70 f \$0;
-#X obj 121 95 t f f;
-#X msg 104 370 set default;
-#X obj 104 395 s \$0-preset;
-#X msg 121 120 \; \$1-hmin 0 \; \$1-hmax 100 \; \$1-hmod 0 \; \$1-pref
+#X obj 117 70 f \$0;
+#X obj 117 95 t f f;
+#X msg 101 370 set default;
+#X obj 101 395 s \$0-preset;
+#X msg 117 120 \; \$1-hmin 0 \; \$1-hmax 100 \; \$1-hmod 0 \; \$1-pref
 100 \; \$1-prefmod 0 \; \$1-smin 1 \; \$1-smax 7 \; \$1-smod 0 \; \$1-uniq
 1 \; \$1-nmax 1 \; \$1-nmod 0 \; \$1-pitchtracker 0 \; \$1-pitchlo
 0 \; \$1-pitchhi 0;
@@ -219,32 +219,52 @@ it with a suitable replacement \, such as list-drip from list-abs.
 1 \; \$1-outchan 1 \; \$1-down -1 \; \$1-up 1 \; \$1-transp 0 \; \$1-loopsize
 4;
 #X obj 70 480 symbol \$1;
-#X obj 70 45 t b b b b;
 #X obj 70 505 s \$0-change-preset;
-#X obj 87 625 s \$0-op;
+#X obj 85 635 s \$0-op;
 #X text 20 540 This is important. MIDI CCs are handled in the presets
 \, but we don't want every preset to update the GUI \, just one of
 them. "default" is supposed to always exist \, so use that one. (And
 better don't remove it \, otherwise MIDI control will stop working.)
 , f 73;
-#X msg 87 600 symbol default;
-#X text 200 95 factory defaults \, edit as needed;
+#X msg 85 610 symbol default;
+#X text 170 80 factory defaults \, edit as needed;
 #X text 20 440 autostart preset NOTE: to *always* recall the same preset
 at startup \, change \$0 to the preset name \, e.g.:;
 #X obj 296 456 symbol triplet;
 #X text 20 330 initialize the preset name shown in the symbol box:
 , f 40;
-#X connect 0 0 9 0;
+#X obj 70 45 t b b b b b;
+#N canvas 307 195 453 352 looper-init 0;
+#X msg 20 180 dir;
+#X obj 20 205 iemguts/try canvasinfo \, pdcontrol;
+#X msg 20 230 loopdir \$1;
+#X obj 20 20 inlet;
+#X text 30 50 Kludge alert: The actual cwd depends on how Pd was invoked
+\, and the Lua external doesn't know anything about canvas directories
+\, so we need to tell the looper where to look. NB1: This *must* come
+first \, before any of the defaults are sent., f 44;
+#X text 60 140 NB2: We need either canvasinfo (pd-l2ork) or pdcontrol
+(vanilla) here to make this work (and iemguts/try to figure out what
+we have). So if you insist on using vanilla \, make sure that it's
+a fairly recent version.;
+#X obj 20 255 s \$0-myarp;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 6 0;
+#X connect 3 0 0 0;
+#X restore 210 50 pd looper-init;
+#X connect 0 0 17 0;
 #X connect 2 0 3 0;
 #X connect 3 0 6 0;
 #X connect 3 1 7 0;
 #X connect 4 0 5 0;
-#X connect 8 0 10 0;
-#X connect 9 0 8 0;
-#X connect 9 1 13 0;
-#X connect 9 2 4 0;
-#X connect 9 3 2 0;
-#X connect 13 0 11 0;
+#X connect 8 0 9 0;
+#X connect 12 0 10 0;
+#X connect 17 0 8 0;
+#X connect 17 1 12 0;
+#X connect 17 2 4 0;
+#X connect 17 3 2 0;
+#X connect 17 4 18 0;
 #X restore 290 330 pd init;
 #N canvas 485 29 887 743 arp 0;
 #X floatatom 20 428 5 0 0 0 - - -, f 5;
@@ -304,7 +324,7 @@ at startup \, change \$0 to the preset name \, e.g.:;
 #X obj 400 365 t f f f;
 #X obj 550 361 sel 1;
 #X obj 202 340 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
-#000000 #000000 127 1;
+#000000 #000000 0 1;
 #X obj 690 371 sel 0;
 #X obj 690 401 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -462,7 +482,7 @@ harm-sweep pref-sweep part target;
 #X obj 192 490 route pgm outchan pan mute;
 #X obj 527 120 == 0;
 #X obj 527 170 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X obj 527 193 t f f;
 #X obj 527 218 sel 0;
 #X msg 527 243 panic;
@@ -1654,7 +1674,7 @@ SPP, f 30;
 #X obj 10 165 p \$0 shred 14;
 #X restore 380 330 pd more...;
 #X text 220 21 off;
-#N canvas 915 29 457 743 looper 0;
+#N canvas 732 125 462 516 looper 0;
 #X floatatom 40 82 3 0 99 0 - - -, f 3;
 #X obj 70 82 bng 15 250 50 0 empty \$0-loop-file load/save 17 7 0 10
 #e0e0e0 #202020 #202020;
@@ -1696,7 +1716,7 @@ SPP, f 30;
 #X restore 70 190 pd filename;
 #X msg 70 215 loop \$1 2;
 #X obj 70 240 s \$0-myarp;
-#N canvas 650 217 453 353 filename 0;
+#N canvas 165 240 458 431 filename 0;
 #X obj 40 80 symbol;
 #X obj 40 105 pack s f;
 #X obj 40 155 makefilename preset/%s.loop;

@@ -77,6 +77,7 @@ function arpeggio:initialize(_, atoms)
    self.loopsize = 0
    self.loopidx = 0
    self.loop = {}
+   self.loopdir = ""
    -- Raptor params, reasonable defaults
    self.nmax, self.nmod = 1, 0
    self.hmin, self.hmax, self.hmod = 0, 1, 0
@@ -283,19 +284,21 @@ end
 function arpeggio:loop_file(file, cmd)
    -- default for cmd is 1 (save) if loop is playing, 0 (load) otherwise
    cmd = cmd or self.loopstate
+   -- apply the loopdir if any
+   local path = self.loopdir .. file
    if cmd == 1 then
       -- save: first create a backup copy if the file already exists
-      if fexists(file) then
-	 local k, bakname = 1, ""
+      if fexists(path) then
+	 local k, bakname = 1
 	 repeat
-	    bakname = string.format("%s~%d~", file, k)
+	    bakname = string.format("%s~%d~", path, k)
 	    k = k+1
 	 until not fexists(bakname)
 	 -- ignore errors, if we can't rename the file, we probably can't
 	 -- overwrite it either
-	 os.rename(file, bakname)
+	 os.rename(path, bakname)
       end
-      local f, err = io.open(file, "w")
+      local f, err = io.open(path, "w")
       if type(err) == "string" then
 	 pd.post(string.format("loop: %s", err))
 	 return
@@ -315,7 +318,7 @@ function arpeggio:loop_file(file, cmd)
       pd.post(string.format("loop: %s: saved %d steps", file, n))
    elseif cmd == 0 then
       -- load: check that file exists and is loadable
-      local f, err = io.open(file, "r")
+      local f, err = io.open(path, "r")
       if type(err) == "string" then
 	 pd.post(string.format("loop: %s", err))
 	 return
@@ -339,7 +342,7 @@ function arpeggio:loop_file(file, cmd)
       end
    elseif cmd == 2 then
       -- check that file exists, report result on 1st outlet
-      self:outlet(1, "loop", {fexists(file) and 1 or 0})
+      self:outlet(1, "loop", {fexists(path) and 1 or 0})
    end
 end
 
@@ -375,6 +378,16 @@ function arpeggio:in_1_loop(x)
 	    self:loop_clear()
 	 end
       end
+   end
+end
+
+function arpeggio:in_1_loopdir(x)
+   if type(x) == "string" then
+      x = {x}
+   end
+   if type(x) == "table" and type(x[1]) == "string" then
+      -- directory for file operations
+      self.loopdir = x[1] .. "/"
    end
 end
 
