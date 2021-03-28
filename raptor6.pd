@@ -1,27 +1,27 @@
-#N canvas 435 87 575 564 10;
+#N canvas 470 125 592 580 10;
 #X declare -path lib;
-#X obj 239 240 bng 25 250 50 0 \$0-play empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X obj 239 215 bng 25 250 50 0 \$0-play empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X msg 30 76 panic;
-#X msg 201 203 240;
-#X msg 116 203 120;
-#X msg 89 203 100;
-#X msg 173 203 200;
-#X floatatom 10 277 7 0 0 1 ms - #0-ms, f 7;
-#X msg 10 203 50;
-#X msg 37 203 60;
-#X msg 10 300 4;
-#X msg 40 300 8;
-#X msg 70 300 9;
-#X msg 100 300 12;
-#X msg 130 300 15;
-#X text 80 182 tempo;
-#X msg 110 330 3 2 2;
-#X msg 154 330 2 3 2;
-#X obj 10 20 tgl 20 0 empty \$0-play play -1 -11 0 10 #69be77 #000000
-#000000 0 1;
+#X obj 251 250 bng 25 250 50 0 \$0-play empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 251 225 bng 25 250 50 0 \$0-play empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 42 86 panic;
+#X msg 213 213 240;
+#X msg 128 213 120;
+#X msg 101 213 100;
+#X msg 185 213 200;
+#X floatatom 22 287 7 0 0 1 ms - #0-ms;
+#X msg 22 213 50;
+#X msg 49 213 60;
+#X msg 22 310 4;
+#X msg 52 310 8;
+#X msg 82 310 9;
+#X msg 112 310 12;
+#X msg 142 310 15;
+#X text 92 192 tempo;
+#X msg 122 340 3 2 2;
+#X msg 166 340 2 3 2;
+#X obj 22 30 tgl 20 0 empty \$0-play play -1 -11 0 10 -109534 -1 -1
+0 1;
 #N canvas 300 175 475 440 tempo 0;
 #X obj 30 10 inlet;
 #X obj 30 105 change;
@@ -30,14 +30,14 @@
 #X obj 30 230 outlet;
 #X obj 160 235 s \$0-arp;
 #X obj 30 130 t f f;
-#X obj 30 40 hsl 128 15 40 480 0 0 empty empty empty -25 5 0 10 #fcfcfc
-#000000 #000000 1732 1;
-#X floatatom 170 40 6 40 480 0 - #0-tempo -, f 6;
+#X obj 30 40 hsl 128 15 40 480 0 0 empty empty empty -25 5 0 10 -262144
+-1 -1 1732 1;
+#X floatatom 170 40 6 40 480 0 - #0-tempo -;
 #X obj 80 210 v \$0-ms;
 #X obj 30 270 r \$0-ms;
 #X obj 30 295 change;
 #X msg 30 210 set \$1;
-#X floatatom 30 345 5 0 0 0 - - #0-tempo, f 5;
+#X floatatom 30 345 5 0 0 0 - - #0-tempo;
 #X obj 30 185 t f f f;
 #X obj 80 230 s \$0-tick;
 #X obj 30 160 expr 60000/$f1*4/max(1 \, $f2);
@@ -64,8 +64,8 @@
 #X connect 18 0 2 0;
 #X connect 19 0 17 1;
 #X coords 0 -1 1 1 185 37 1 26 22;
-#X restore 10 232 pd tempo;
-#N canvas 705 57 483 713 meter 0;
+#X restore 22 242 pd tempo;
+#N canvas 705 32 484 740 meter 0;
 #X obj 30 100 inlet;
 #X obj 30 125 route float list;
 #X msg 30 250 meter \$1;
@@ -109,13 +109,13 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 8 0 2 0;
 #X restore 270 173 pd product;
 #X obj 30 46 hsl 128 15 1 24 0 0 empty \$0-meter-set empty -2 -8 0
-10 #fcfcfc #000000 #000000 7730 1;
-#X floatatom 170 25 6 1 24 0 - - -, f 6;
-#X floatatom 170 45 6 1 64 0 - - -, f 6;
-#X floatatom 100 300 5 0 0 0 - - -, f 5;
+10 -262144 -1 -1 7730 1;
+#X floatatom 170 25 6 1 24 0 - - -;
+#X floatatom 170 45 6 1 64 0 - - -;
+#X floatatom 100 300 5 0 0 0 - - -;
 #X obj 30 175 t f f;
 #X obj 100 225 t f f;
-#X floatatom 100 374 5 0 0 0 - - -, f 5;
+#X floatatom 100 374 5 0 0 0 - - -;
 #X msg 100 398 meter-base \$1;
 #X obj 100 324 expr pow(2 \, ceil(log($f1)/log(2)));
 #X obj 240 69 change;
@@ -192,16 +192,16 @@ it with a suitable replacement \, such as list-drip from list-abs.
 #X connect 33 0 20 0;
 #X connect 34 0 21 0;
 #X coords 0 -1 1 1 185 43 1 26 22;
-#X restore 10 347 pd meter;
-#X symbolatom 494 330 10 0 0 0 - #0-preset #0-preset-set, f 10;
-#X obj 200 21 vradio 15 0 1 8 empty \$0-mod-switch mod-switch 0 -8
-0 10 #fcfcfc #000000 #000000 0;
-#X text 220 35 velmod;
-#X text 220 50 pmod;
-#X text 220 65 gate;
-#X text 220 81 gatemod;
-#X text 220 96 swing;
-#N canvas 600 30 482 694 init 0;
+#X restore 22 357 pd meter;
+#X symbolatom 506 340 10 0 0 0 - #0-preset #0-preset-set;
+#X obj 212 31 vradio 15 0 1 8 empty \$0-mod-switch mod-switch 0 -8
+0 10 -262144 -1 -1 0;
+#X text 232 45 velmod;
+#X text 232 60 pmod;
+#X text 232 75 gate;
+#X text 232 91 gatemod;
+#X text 232 106 swing;
+#N canvas 600 29 484 743 init 0;
 #X obj 70 20 loadbang;
 #X obj 210 20 declare -path lib;
 #X obj 117 70 f \$0;
@@ -253,6 +253,8 @@ a fairly recent version.;
 #X connect 2 0 6 0;
 #X connect 3 0 0 0;
 #X restore 210 50 pd looper-init;
+#X text 230 620 pd-lua live-coding support;
+#X obj 230 650 pdlua-remote;
 #X connect 0 0 17 0;
 #X connect 2 0 3 0;
 #X connect 3 0 6 0;
@@ -265,15 +267,15 @@ a fairly recent version.;
 #X connect 17 2 4 0;
 #X connect 17 3 2 0;
 #X connect 17 4 18 0;
-#X restore 290 330 pd init;
-#N canvas 485 29 887 743 arp 0;
-#X floatatom 20 428 5 0 0 0 - - -, f 5;
-#X floatatom 66 428 5 0 0 0 - - -, f 5;
+#X restore 302 340 pd init;
+#N canvas 2990 29 888 717 arp 0;
+#X floatatom 20 428 5 0 0 0 - - -;
+#X floatatom 66 428 5 0 0 0 - - -;
 #X obj 20 501 makenote 127 160;
 #N canvas 725 185 465 508 gate 0;
 #X obj 50 20 inlet;
 #X obj 50 120 * 1;
-#X floatatom 50 50 5 0 0 0 - - -, f 5;
+#X floatatom 50 50 5 0 0 0 - - -;
 #X obj 50 145 outlet;
 #X obj 50 79 t f b;
 #X obj 77 100 v \$0-ms;
@@ -295,60 +297,60 @@ a fairly recent version.;
 #X obj 48 150 change;
 #X obj 280 23 notein;
 #X obj 280 142 trace 300;
-#X floatatom 331 120 5 0 0 0 - #0-trace -, f 5;
+#X floatatom 331 120 5 0 0 0 - #0-trace -;
 #X text 20 20 - input -;
 #X obj 140 280 arpeggio 15;
 #X obj 140 250 inlet;
 #X obj 580 286 change;
-#X floatatom 580 310 5 0 0 0 - - #0-n, f 5;
-#X floatatom 400 266 5 0 0 0 - - -, f 5;
+#X floatatom 580 310 5 0 0 0 - - #0-n;
+#X floatatom 400 266 5 0 0 0 - - -;
 #X obj 400 464 spigot;
-#X obj 470 438 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 470 438 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
 #X obj 400 489 spigot;
-#X obj 276 340 tgl 15 1 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
-#X floatatom 400 341 5 0 0 0 - - -, f 5;
+#X obj 276 340 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X floatatom 400 341 5 0 0 0 - - -;
 #X obj 400 390 expr rint($f1*60)+60;
-#X floatatom 400 415 5 0 0 0 - - -, f 5;
+#X floatatom 400 415 5 0 0 0 - - -;
 #X obj 400 614 makenote 127 160, f 18;
 #X obj 400 639 noteout 10;
 #X obj 640 321 loadbang;
-#X floatatom 640 371 5 0 0 0 - - -, f 5;
+#X floatatom 640 371 5 0 0 0 - - -;
 #X obj 540 391 expr $f1>$f2;
 #X obj 400 316 expr ($f1+1)/$f2;
 #X msg 640 346 0.4;
-#X obj 230 340 bng 15 150 10 0 empty empty empty 17 7 0 10 #a0a0a0
-#202020 #202020;
+#X obj 230 340 bng 15 150 10 0 empty empty empty 17 7 0 10 -166441
+-33289 -33289;
 #X obj 550 336 expr $f1==1;
 #X obj 400 365 t f f f;
 #X obj 550 361 sel 1;
-#X obj 202 340 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 #a0a0a0
-#000000 #000000 0 1;
+#X obj 202 340 hsl 20 15 0 1 0 0 empty empty empty -2 -8 0 10 -166441
+-1 -1 0 1;
 #X obj 690 371 sel 0;
-#X obj 690 401 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X obj 690 401 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X obj 723 261 inlet;
 #X msg 723 321 1;
 #X obj 690 424 spigot;
 #X obj 690 449 t b b;
 #X msg 690 474 0;
 #X msg 723 474 0;
-#X obj 723 401 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 723 401 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
 #X msg 756 474 1;
 #X obj 723 286 sel 0 1;
-#X floatatom 600 501 5 0 0 0 - - -, f 5;
+#X floatatom 600 501 5 0 0 0 - - -;
 #X msg 600 525 color \$1 12 12;
 #X msg 620 471 1;
 #X msg 580 471 13;
 #X obj 400 514 pipe;
 #N canvas 50 147 465 594 swing 0;
 #X text 30 10 experimental humanizer / swing feature;
-#X floatatom 230 40 5 0 100 0 - #0-swing -, f 5;
-#X floatatom 30 175 5 0 0 0 - - -, f 5;
+#X floatatom 230 40 5 0 100 0 - #0-swing -;
+#X floatatom 30 175 5 0 0 0 - - -;
 #X obj 30 249 *;
-#X floatatom 30 274 5 0 0 0 - - -, f 5;
+#X floatatom 30 274 5 0 0 0 - - -;
 #X obj 30 298 outlet;
 #X obj 30 114 expr $f1/max(1 \, $f2-1);
 #X obj 230 114 / 100;
@@ -382,9 +384,9 @@ a fairly recent version.;
 #X text 580 250 - time -;
 #X text 100 220 - arpeggiator external -;
 #X obj 130 370 hsl 32 15 0 600 0 1 \$0-trace empty trace -2 -8 0 10
-#fcfcfc #000000 #000000 1550 1;
-#X obj 171 370 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+-262144 -1 -1 1550 1;
+#X obj 171 370 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X msg 171 430 300;
 #X obj 20 45 r \$0-arp;
 #X obj 20 107 s \$0-tempo;
@@ -405,8 +407,8 @@ a fairly recent version.;
 #X obj 140 55 swap;
 #X obj 140 110 route 0;
 #X msg 140 135 1;
-#X obj 90 85 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
-0 1;
+#X obj 90 85 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
+;
 #X obj 179 135 ==;
 #X obj 30 135 unpack f f;
 #X obj 140 80 pack f f;
@@ -433,8 +435,8 @@ a fairly recent version.;
 #X connect 13 2 3 0;
 #X restore 280 100 pd notefilter;
 #X obj 268 595 ctlout 8;
-#X obj 195 370 hsl 32 15 0 127 0 0 empty \$0-gain gain -2 -8 0 10 #fcfcfc
-#000000 #000000 1562 1;
+#X obj 195 370 hsl 32 15 0 127 0 0 empty \$0-gain gain -2 -8 0 10 -262144
+-1 -1 1562 1;
 #X obj 400 589 t a b;
 #X obj 505 589 v \$0-ms;
 #X msg 195 430 gain \$1;
@@ -453,22 +455,22 @@ harm-sweep pref-sweep part target;
 #X connect 2 10 3 0;
 #X restore 192 175 pd harm-sweep;
 #X obj 20 590 r \$0-inch;
-#X obj 236 403 tgl 15 1 empty empty bend -2 -8 0 10 #fcfcfc #000000
-#000000 1 1;
-#X obj 265 403 tgl 15 1 empty empty touch -2 -8 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 236 403 tgl 15 1 empty empty bend -2 -8 0 10 -262144 -1 -1 1
+1;
+#X obj 265 403 tgl 15 1 empty empty touch -2 -8 0 10 -262144 -1 -1
+0 1;
 #X obj 20 640 bendout;
 #X obj 80 640 touchout;
 #X obj 106 107 s \$0-meter-base;
-#X obj 210 590 tgl 15 0 empty empty mute 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 210 590 tgl 15 0 empty empty mute 17 7 0 10 -262144 -1 -1 0
+1;
 #X obj 210 613 == 0;
 #X obj 150 613 && 1;
 #X obj 100 613 && 1;
 #X obj 20 374 spigot 1;
 #X obj 590 100 r \$0-n;
 #X obj 575 150 *;
-#X floatatom 575 175 5 0 0 0 - - -, f 5;
+#X floatatom 575 175 5 0 0 0 - - -;
 #X obj 590 125 t b f;
 #X msg 575 199 loopsize \$1;
 #X text 530 20 - looper -;
@@ -476,19 +478,19 @@ harm-sweep pref-sweep part target;
 #X obj 500 75 t f f;
 #X obj 280 48 pack f f f;
 #X obj 280 73 spigot 1;
-#X obj 500 120 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 500 120 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
 #X msg 500 143 loop \$1;
 #X obj 192 490 route pgm outchan pan mute;
 #X obj 527 120 == 0;
-#X obj 527 170 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 527 170 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
 #X obj 527 193 t f f;
 #X obj 527 218 sel 0;
 #X msg 527 243 panic;
 #X obj 715 30 r \$0-n;
 #X obj 700 60 /;
-#X floatatom 700 85 5 0 0 0 - - -, f 5;
+#X floatatom 700 85 5 0 0 0 - - -;
 #X obj 700 109 t b f;
 #X msg 737 130 set \$1;
 #X obj 737 155 s \$0-loopsize;
@@ -501,44 +503,44 @@ harm-sweep pref-sweep part target;
 #X obj 400 80 s \$0-loopstart;
 #X obj 400 539 swap;
 #X obj 400 564 pack 54 f;
-#X obj 320 380 nbx 2 14 35 81 0 1 empty empty empty 0 -8 0 10 #fcfcfc
-#000000 #000000 54 256 0;
-#X floatatom 250 340 3 35 81 0 - - -, f 3;
+#X obj 320 380 nbx 2 14 35 81 0 1 empty empty empty 0 -8 0 10 -262144
+-1 -1 54 256;
+#X floatatom 250 340 3 35 81 0 - - -;
 #X obj 320 360 change;
 #X obj 400 30 t f f;
 #X obj 415 100 r \$0-n;
-#X floatatom 440 50 5 0 0 0 - - -, f 5;
+#X floatatom 440 50 5 0 0 0 - - -;
 #X obj 400 130 div;
 #X obj 400 180 change;
 #X obj 400 205 s \$0-loopcounter;
 #X obj 400 155 + 1;
 #X obj 140 305 route list loopsize loopidx loop;
-#X obj 340 330 tgl 15 0 \$0-loopcheck empty empty 17 7 0 10 #fcfcfc
-#000000 #000000 1 1;
+#X obj 340 330 tgl 15 0 \$0-loopcheck empty empty 17 7 0 10 -262144
+-1 -1 1 1;
 #X obj 20 70 route tempo swing meter meter-base transp inchan cchan
 , f 34;
-#X obj 236 370 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X obj 236 370 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X msg 236 430 64;
-#X floatatom 259 370 5 0 0 2 - #0-transp -, f 5;
+#X floatatom 259 370 5 0 0 2 - #0-transp -;
 #X msg 259 430 transp \$1;
 #X obj 20 452 +;
 #X text 254 356 transp;
-#X obj 130 403 hradio 15 0 1 3 empty empty thru/transp -2 -8 0 10 #fcfcfc
-#000000 #000000 0;
+#X obj 130 403 hradio 15 0 1 3 empty empty thru/transp -2 -8 0 10 -262144
+-1 -1 0;
 #X text 20 563 - thru -;
 #X obj 20 615 thru;
 #X obj 150 640 noteout;
 #X obj 210 640 spigot;
 #X obj 210 665 s \$0-transp;
-#X obj 554 170 tgl 15 0 \$0-loop-playing empty empty 17 7 0 10 #fcfcfc
-#000000 #000000 0 1;
+#X obj 554 170 tgl 15 0 \$0-loop-playing empty empty 17 7 0 10 -262144
+-1 -1 0 1;
 #X obj 527 96 t f f;
-#X obj 260 640 tgl 15 0 empty \$0-loop-playing empty 17 7 0 10 #fcfcfc
-#000000 #000000 0 1;
-#X obj 100 563 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 #fcfcfc
-#000000 #000000 60 256 0;
-#X floatatom 179 402 3 0 127 2 - - -, f 3;
+#X obj 260 640 tgl 15 0 empty \$0-loop-playing empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 100 563 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
+-1 -1 60 256;
+#X floatatom 179 402 3 0 127 2 - - -;
 #X obj 100 540 change;
 #X connect 0 0 150 0;
 #X connect 1 0 2 1;
@@ -728,40 +730,40 @@ harm-sweep pref-sweep part target;
 #X connect 162 0 163 0;
 #X connect 163 0 161 0;
 #X coords 0 -1 1 1 167 84 1 127 337;
-#X restore 10 93 pd arp;
-#N canvas 701 29 573 743 control 0;
+#X restore 22 103 pd arp;
+#N canvas 1770 29 574 717 control 0;
 #X obj 380 115 sel 0;
-#X obj 380 140 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X floatatom 30 210 5 0 0 0 down - #0-down, f 5;
-#X floatatom 100 210 5 0 0 0 up - #0-up, f 5;
-#X floatatom 290 213 5 0 0 0 mod-val - #0-mod-val, f 5;
+#X obj 380 140 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 30 210 5 0 0 0 down - #0-down;
+#X floatatom 100 210 5 0 0 0 up - #0-up;
+#X floatatom 290 213 5 0 0 0 mod-val - #0-mod-val;
 #X obj 320 115 == 0;
-#X obj 250 140 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
-#X obj 320 140 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 250 140 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 320 140 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
 #X obj 290 188 * 100;
 #X obj 331 188 int;
 #X obj 22 467 swap;
 #X obj 22 492 pack f f;
-#X floatatom 55 542 5 0 0 1 gate - #0-gate, f 5;
-#X floatatom 38 587 5 0 0 1 pmod - #0-pmod, f 5;
+#X floatatom 55 542 5 0 0 1 gate - #0-gate;
+#X floatatom 38 587 5 0 0 1 pmod - #0-pmod;
 #X obj 142 442 inlet;
 #X obj 250 115 != 0;
 #X obj 38 562 expr $f1-100;
-#X obj 438 455 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 438 455 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
 #X obj 438 433 != 0;
-#X floatatom 142 467 5 0 0 0 - - -, f 5;
-#X floatatom 240 612 5 0 0 1 velmod - #0-velmod, f 5;
+#X floatatom 142 467 5 0 0 0 - - -;
+#X floatatom 240 612 5 0 0 1 velmod - #0-velmod;
 #X obj 22 612 expr if($f1>=100 \, 200-$f1 \, $f1-100);
-#X floatatom 120 587 5 0 0 1 gatemod - #0-gatemod, f 5;
+#X floatatom 120 587 5 0 0 1 gatemod - #0-gatemod;
 #X obj 120 562 expr $f1-100;
-#X floatatom 219 587 5 0 0 1 swing - #0-swing, f 5;
+#X floatatom 219 587 5 0 0 1 swing - #0-swing;
 #X obj 219 534 expr $f1-100;
 #X obj 219 562 * 0.25;
-#X floatatom 252 502 5 0 1 0 - - -, f 5;
+#X floatatom 252 502 5 0 1 0 - - -;
 #X text 310 470 adjust the swing factor to your liking, f 14;
 #N canvas 662 242 458 432 swing 0;
 #X obj 20 20 r arp;
@@ -797,11 +799,11 @@ you use a different MIDI controller \, you'll have to change the controls
 below accordingly. A suitably modified Pacer setup (.syx file) for
 this patch is included in the distribution!, f 80;
 #X text 60 420 mod switcher - see R2MOD above;
-#X obj 32 340 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 32 340 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
 #X obj 32 363 s \$0-raptor;
 #X text 430 391 CC64 - HOLD;
-#X floatatom 380 259 5 0 0 0 - - -, f 5;
+#X floatatom 380 259 5 0 0 0 - - -;
 #X obj 380 234 expr 1-$f1/127;
 #X obj 331 213 change;
 #X obj 30 90 ctrl 91;
@@ -821,7 +823,7 @@ this patch is included in the distribution!, f 80;
 #X obj 20 75 - 100;
 #X obj 20 150 route 0 1;
 #X obj 20 175 expr 100-$f1;
-#X floatatom 20 200 5 0 0 0 - - -, f 5;
+#X floatatom 20 200 5 0 0 0 - - -;
 #X obj 110 175 abs;
 #X obj 20 224 outlet;
 #X connect 0 0 4 0;
@@ -837,15 +839,15 @@ this patch is included in the distribution!, f 80;
 #X connect 8 0 7 0;
 #X restore 300 534 pd sweep;
 #X obj 300 562 / 100;
-#X floatatom 300 587 5 0 0 1 sweep - #0-sweep-val, f 5;
+#X floatatom 300 587 5 0 0 1 sweep - #0-sweep-val;
 #X obj 360 534 sel 0 200;
 #X obj 360 559 bng 15 250 50 0 \$0-sweep empty autosweep 17 7 0 10
-#fcfcfc #000000 #000000;
+-262144 -1 -1;
 #X text 390 190 modwheel/pedal support;
 #X obj 380 213 ctrl 1;
 #X obj 438 213 ctrl 11;
-#X obj 438 565 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 438 565 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
 #X obj 438 543 != 0;
 #X text 430 501 CC67 - MUTE;
 #X obj 438 521 ctrl 67;
@@ -858,42 +860,42 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 22 517 route 1 2 3 4 5 6 7;
 #X obj 22 445 r \$0-mod-val;
 #X obj 180 115 mod 8;
-#X floatatom 180 210 5 0 0 2 mod-switch - #0-mod-switch, f 5;
+#X floatatom 180 210 5 0 0 2 mod-switch - #0-mod-switch;
 #X obj 32 315 != 0;
 #X obj 112 315 mod 6;
-#X floatatom 112 340 5 0 0 0 - - -, f 5;
+#X floatatom 112 340 5 0 0 0 - - -;
 #X obj 172 315 mod 6;
-#X floatatom 172 340 5 0 0 0 - - -, f 5;
+#X floatatom 172 340 5 0 0 0 - - -;
 #X obj 172 290 ctrl 48;
 #X obj 172 364 t b f;
-#X floatatom 230 364 5 0 0 0 - - -, f 5;
+#X floatatom 230 364 5 0 0 0 - - -;
 #X obj 112 364 -;
 #X obj 230 340 mod 6;
-#X floatatom 230 315 5 0 0 0 - - -, f 5;
+#X floatatom 230 315 5 0 0 0 - - -;
 #X text 110 260 R3ARP: arp mode special functions;
 #X text 110 67 R2MOD: octave \, mod \, start/stop;
 #X obj 282 290 ctrl 49;
 #X obj 282 363 s \$0-loop;
 #X obj 342 290 ctrl 50;
 #X obj 342 315 sel 0;
-#X obj 342 340 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X obj 342 340 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X obj 342 363 s \$0-loop-file;
 #X obj 282 315 sel 0;
-#X obj 282 340 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X obj 282 340 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X obj 438 273 r \$0-cch;
 #X obj 438 73 r \$0-cch;
-#X floatatom 480 320 3 0 128 0 cin #0-cchan -, f 3;
-#X obj 504 321 tgl 15 1 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#X floatatom 480 320 3 0 128 0 cin #0-cchan -;
+#X obj 504 321 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
 #N canvas 247 207 451 326 cchan 0;
 #X obj 20 20 inlet;
 #X obj 20 45 change;
 #X obj 20 70 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 0 256 0;
+-262144 -1 -1 0 256;
 #X obj 20 142 expr if($f2 \, $f1 \, -1);
-#X floatatom 20 167 5 0 0 0 - - -, f 5;
+#X floatatom 20 167 5 0 0 0 - - -;
 #X obj 20 216 s \$0-arp;
 #X obj 100 20 inlet;
 #X obj 100 45 t b f;
@@ -1009,79 +1011,79 @@ PACER setup has them on FS1+2)., f 79;
 #X connect 99 0 2 0;
 #X connect 100 0 3 0;
 #X coords 0 -1 1 1 66 34 1 456 304;
-#X restore 200 151 pd control;
-#N canvas 710 29 550 743 panel 0;
-#X obj 27 31 cnv 15 70 161 empty empty empty 20 12 0 14 #e0e0e0 #404040
+#X restore 212 161 pd control;
+#N canvas 1782 29 551 717 panel 0;
+#X obj 27 31 cnv 15 70 161 empty empty empty 20 12 0 14 -233017 -66577
 0;
-#X obj 27 197 cnv 15 70 113 empty empty empty 20 12 0 14 #e0e0e0 #404040
+#X obj 27 197 cnv 15 70 113 empty empty empty 20 12 0 14 -233017 -66577
 0;
-#X floatatom 107 51 6 0 127 2 minvel #0-minvel -, f 6;
+#X floatatom 107 51 6 0 127 2 minvel #0-minvel -;
 #X msg 107 361 minvel \$1;
-#X floatatom 152 51 6 0 127 2 maxvel #0-maxvel -, f 6;
+#X floatatom 152 51 6 0 127 2 maxvel #0-maxvel -;
 #X msg 152 361 maxvel \$1;
 #X obj 202 53 hsl 64 15 -100 100 0 0 empty \$0-velmod velmod -3 -12
-0 10 #fcfcfc #000000 #000000 6300 1;
+0 10 -262144 -1 -1 6300 1;
 #X msg 202 361 velmod \$1;
 #X msg 310 53 100;
-#X obj 274 53 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000;
+#X obj 274 53 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
 #X obj 202 87 hsl 64 15 -100 100 0 0 empty \$0-pmod pmod -3 -12 0 10
-#fcfcfc #000000 #000000 3150 1;
+-262144 -1 -1 3150 1;
 #X msg 310 87 0;
-#X floatatom 105 87 6 0 100 2 pmin #0-pmin -, f 6;
-#X floatatom 152 87 6 0 100 2 pmax #0-pmax -, f 6;
+#X floatatom 105 87 6 0 100 2 pmin #0-pmin -;
+#X floatatom 152 87 6 0 100 2 pmax #0-pmax -;
 #X msg 107 390 pmin \$1;
 #X msg 153 390 pmax \$1;
 #X msg 202 390 pmod \$1;
-#X obj 274 87 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000;
+#X obj 274 87 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
 #X obj 105 121 hsl 64 15 0 200 0 0 empty \$0-gate gate -1 -12 0 10
-#fcfcfc #000000 #000000 3150 1;
+-262144 -1 -1 3150 1;
 #X msg 310 121 100;
 #X msg 105 420 gate \$1;
 #X obj 202 121 hsl 64 15 -100 100 0 0 empty \$0-gatemod gatemod -2
--12 0 10 #fcfcfc #000000 #000000 3150 1;
+-12 0 10 -262144 -1 -1 3150 1;
 #X msg 350 121 0;
 #X msg 202 420 gatemod \$1;
-#X obj 274 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X obj 177 121 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X obj 274 20 tgl 15 0 empty \$0-hold H -10 6 0 10 #3cc840 #000000
-#000000 0 1;
+#X obj 274 121 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 177 121 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 274 20 tgl 15 0 empty \$0-hold H -10 6 0 10 -64657 -1 -1 0 1
+;
 #X msg 278 361 hold \$1;
-#X floatatom 201 19 4 1 128 0 pgm #0-pgm -, f 4;
+#X floatatom 201 19 4 1 128 0 pgm #0-pgm -;
 #X msg 201 610 pgm \$1;
-#X floatatom 105 190 4 -100 100 2 swing #0-swing -, f 4;
+#X floatatom 105 190 4 -100 100 2 swing #0-swing -;
 #X msg 105 330 swing \$1;
 #X obj 202 155 hsl 64 15 -100 100 0 0 empty \$0-hmod hmod -3 -12 0
-10 #fcfcfc #000000 #000000 3150 1;
+10 -262144 -1 -1 3150 1;
 #X msg 310 155 0;
-#X floatatom 105 155 6 0 100 2 hmin #0-hmin -, f 6;
-#X floatatom 152 155 6 0 100 2 hmax #0-hmax -, f 6;
-#X obj 274 155 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X floatatom 105 155 6 0 100 2 hmin #0-hmin -;
+#X floatatom 152 155 6 0 100 2 hmax #0-hmax -;
+#X obj 274 155 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X obj 202 190 hsl 64 15 -100 100 0 0 empty \$0-prefmod prefmod -3
--12 0 10 #fcfcfc #000000 #000000 3150 1;
+-12 0 10 -262144 -1 -1 3150 1;
 #X msg 310 190 0;
-#X floatatom 152 190 6 -100 100 2 pref #0-pref -, f 6;
-#X obj 274 190 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X floatatom 152 190 6 -100 100 2 pref #0-pref -;
+#X obj 274 190 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X obj 202 225 hsl 64 15 -100 100 0 0 empty \$0-smod smod -3 -12 0
-10 #fcfcfc #000000 #000000 3150 1;
+10 -262144 -1 -1 3150 1;
 #X msg 310 225 0;
-#X floatatom 105 225 6 -127 127 2 smin #0-smin -, f 6;
-#X floatatom 152 225 6 -127 127 2 smax #0-smax -, f 6;
-#X obj 274 225 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X floatatom 105 225 6 -127 127 2 smin #0-smin -;
+#X floatatom 152 225 6 -127 127 2 smax #0-smax -;
+#X obj 274 225 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X obj 202 260 hsl 64 15 -100 100 0 0 empty \$0-nmod nmod -3 -12 0
-10 #fcfcfc #000000 #000000 3150 1;
+10 -262144 -1 -1 3150 1;
 #X msg 310 260 0;
-#X floatatom 152 260 6 0 10 2 nmax #0-nmax -, f 6;
-#X obj 274 260 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X obj 105 260 tgl 15 0 empty \$0-uniq uniq -1 -10 0 10 #fcfcfc #000000
-#000000 1 1;
+#X floatatom 152 260 6 0 10 2 nmax #0-nmax -;
+#X obj 274 260 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 105 260 tgl 15 0 empty \$0-uniq uniq -1 -10 0 10 -262144 -1
+-1 1 1;
 #X msg 105 450 hmin \$1;
 #X msg 152 450 hmax \$1;
 #X msg 202 450 hmod \$1;
@@ -1093,10 +1095,10 @@ PACER setup has them on FS1+2)., f 79;
 #X msg 105 540 uniq \$1;
 #X msg 152 540 nmax \$1;
 #X msg 202 540 nmod \$1;
-#X obj 30 44 vradio 15 0 0 5 empty \$0-downval dn 0 -8 0 10 #fcfcfc
-#000000 #000000 3;
-#X obj 50 44 vradio 15 0 0 5 empty \$0-upval up 0 -8 0 10 #fcfcfc #000000
-#000000 1;
+#X obj 30 44 vradio 15 0 0 5 empty \$0-downval dn 0 -8 0 10 -262144
+-1 -1 3;
+#X obj 50 44 vradio 15 0 0 5 empty \$0-upval up 0 -8 0 10 -262144 -1
+-1 1;
 #N canvas 525 202 590 329 octave 0;
 #X obj 20 20 inlet;
 #X obj 20 100 t b f;
@@ -1106,8 +1108,8 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 300 100 t b f;
 #X obj 300 175 change;
 #X obj 300 150 max;
-#X floatatom 80 175 5 0 0 0 - - -, f 5;
-#X floatatom 370 175 5 0 0 0 - - -, f 5;
+#X floatatom 80 175 5 0 0 0 - - -;
+#X floatatom 370 175 5 0 0 0 - - -;
 #X obj 20 45 t f f f;
 #X obj 300 45 t f f f;
 #X msg 90 125 down \$1;
@@ -1161,8 +1163,8 @@ PACER setup has them on FS1+2)., f 79;
 #X text 76 77 0;
 #X text 70 90 -1;
 #X text 70 105 -2;
-#X obj 30 219 vradio 15 0 0 6 empty \$0-mode empty 0 -8 0 10 #fcfcfc
-#000000 #000000 1;
+#X obj 30 219 vradio 15 0 0 6 empty \$0-mode empty 0 -8 0 10 -262144
+-1 -1 1;
 #X text 50 232 up;
 #X text 50 247 down;
 #X text 50 262 up-down;
@@ -1181,36 +1183,36 @@ PACER setup has them on FS1+2)., f 79;
 #X connect 3 0 4 0;
 #X connect 4 0 5 0;
 #X restore 30 390 pd mode;
-#X floatatom 152 19 3 0 128 0 out #0-outchan -, f 3;
+#X floatatom 152 19 3 0 128 0 out #0-outchan -;
 #X obj 360 490 s \$0-arp;
 #X msg 152 580 outchan \$1;
-#X floatatom 107 19 3 0 128 0 in #0-inchan -, f 3;
+#X floatatom 107 19 3 0 128 0 in #0-inchan -;
 #X msg 107 610 inchan \$1;
 #X text 50 293 outside-in;
-#X obj 30 201 tgl 15 0 empty \$0-raptor raptor 20 6 0 10 #fcfcfc #000000
-#000000 0 1;
-#X obj 202 294 hsl 64 15 0 127 0 0 empty \$0-pan pan -3 -12 0 10 #fcfcfc
-#000000 #000000 3175 1;
-#X obj 274 294 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X obj 30 201 tgl 15 0 empty \$0-raptor raptor 20 6 0 10 -262144 -1
+-1 0 1;
+#X obj 202 294 hsl 64 15 0 127 0 0 empty \$0-pan pan -3 -12 0 10 -262144
+-1 -1 3175 1;
+#X obj 274 294 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X msg 310 294 64;
 #X msg 202 330 pan \$1;
 #X obj 390 120 r all-hmin;
 #X obj 390 145 s \$0-hmin;
 #X obj 390 180 r all-pref;
 #X obj 390 210 s \$0-pref;
-#X obj 245 20 tgl 15 0 empty \$0-mute M -10 6 0 10 #e8dc1c #000000
-#000000 0 1;
+#X obj 245 20 tgl 15 0 empty \$0-mute M -10 6 0 10 -241096 -1 -1 0
+1;
 #X msg 245 330 mute \$1;
-#X floatatom 152 294 6 0 16 2 loop #0-loopsize -, f 6;
-#X obj 128 294 tgl 15 0 empty \$0-loop empty -1 -10 0 10 #fcfcfc #000000
-#000000 0 1;
+#X floatatom 152 294 6 0 16 2 loop #0-loopsize -;
+#X obj 128 294 tgl 15 0 empty \$0-loop empty -1 -10 0 10 -262144 -1
+-1 0 1;
 #X msg 152 640 loopsize \$1;
 #X msg 128 680 loop \$1;
-#X floatatom 76 174 3 -36 36 2 - #0-pitchlo -, f 3;
-#X floatatom 76 144 3 -36 36 2 - #0-pitchhi -, f 3;
+#X floatatom 76 174 3 -36 36 2 - #0-pitchlo -;
+#X floatatom 76 144 3 -36 36 2 - #0-pitchhi -;
 #X obj 30 129 vradio 15 0 0 4 empty \$0-pitchtracker empty 0 -8 0 10
-#fcfcfc #000000 #000000 0;
+-262144 -1 -1 0;
 #X text 48 128 off;
 #X text 48 143 on;
 #X text 48 158 trbl;
@@ -1307,21 +1309,21 @@ PACER setup has them on FS1+2)., f 79;
 #X connect 106 0 78 0;
 #X connect 107 0 78 0;
 #X coords 0 -1 1 1 267 299 1 25 15;
-#X restore 290 20 pd panel;
-#X obj 290 350 p \$0 default 1;
-#X obj 290 375 p \$0 triplet 2;
-#X obj 290 400 p \$0 weirdmod 3;
-#X obj 290 425 p \$0 bla 4;
-#X obj 290 450 p \$0 raptor 5;
-#X obj 290 475 p \$0 tr808 6;
-#N canvas 260 54 505 718 time 0;
+#X restore 302 30 pd panel;
+#X obj 302 360 p \$0 default 1;
+#X obj 302 385 p \$0 triplet 2;
+#X obj 302 410 p \$0 weirdmod 3;
+#X obj 302 435 p \$0 bla 4;
+#X obj 302 460 p \$0 raptor 5;
+#X obj 302 485 p \$0 tr808 6;
+#N canvas 665 64 505 603 time 0;
 #X obj 350 155 inlet;
-#X obj 230 20 tgl 15 1 empty \$0-master-toggle M 17 7 0 10 #fcfcfc
-#000000 #000000 1 1;
-#X obj 40 143 bng 15 50 10 0 pulse empty empty 17 7 0 10 #fcfcfc #000000
-#000000;
-#X obj 210 20 tgl 15 0 empty \$0-metro empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 230 20 tgl 15 1 empty \$0-master-toggle M 17 7 0 10 -262144
+-1 -1 1 1;
+#X obj 40 143 bng 15 50 10 0 pulse empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 210 20 tgl 15 0 empty \$0-metro empty 17 7 0 10 -262144 -1 -1
+0 1;
 #X obj 40 122 metro 160;
 #X obj 170 120 != 0;
 #X obj 260 120 == 0;
@@ -1334,12 +1336,12 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 230 255 sel \$0;
 #X msg 263 280 0;
 #X obj 40 36 spigot;
-#X obj 282 20 bng 15 100 10 0 empty pulse empty 17 7 0 10 #fcfcfc #202020
-#202020;
+#X obj 282 20 bng 15 100 10 0 empty pulse empty 17 7 0 10 -262144 -33289
+-33289;
 #X obj 350 230 outlet;
 #X obj 170 255 spigot;
 #X msg 170 280 1;
-#X obj 400 260 s \$0-me;
+#X obj 401 260 s \$0-me;
 #X obj 170 230 r \$0-me;
 #X obj 282 43 outlet;
 #X obj 230 230 r all-master;
@@ -1352,17 +1354,17 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 240 430 sel 1;
 #X obj 170 90 t f f b;
 #X obj 350 205 t f f f b;
-#X msg 370 340 set \$1;
-#X obj 370 365 s \$0-play;
+#X msg 384 290 set \$1;
+#X obj 384 315 s \$0-play;
 #X obj 91 100 r \$0-tick;
 #X obj 40 365 midiclock;
 #X obj 40 230 t f f f;
 #X obj 65 390 s \$0-ms;
-#X obj 40 390 bng 15 100 50 0 pulse empty empty 17 7 0 10 #fcfcfc #000000
-#000000;
-#X obj 120 390 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
-#X floatatom 140 497 5 0 0 0 - - -, f 5;
+#X obj 40 390 bng 15 100 50 0 pulse empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 120 390 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 140 497 5 0 0 0 - - -;
 #X msg 140 521 color \$1 12 12;
 #X msg 120 467 13;
 #X obj 120 440 sel 1 0;
@@ -1373,12 +1375,12 @@ PACER setup has them on FS1+2)., f 79;
 #X obj 190 440 == 0;
 #X obj 40 340 r \$0-m;
 #X obj 90 340 r \$0-n;
-#X floatatom 185 19 3 -24 24 0 - #0-pos -, f 3;
-#X obj 240 457 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X floatatom 185 19 3 -24 24 0 - #0-pos -;
+#X obj 240 457 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X obj 240 480 spigot;
-#X obj 273 457 tgl 15 1 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#X obj 273 457 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
 #X text 170 340 SPP - set the pulse number;
 #X obj 240 505 s \$0-pos;
 #X obj 185 380 mod 15;
@@ -1389,8 +1391,8 @@ PACER setup has them on FS1+2)., f 79;
 send SPP messages - it simply resends the pulse counter before starting
 playback \, so it shouldn't do any harm even if your DAW *does* support
 SPP, f 30;
-#X obj 256 20 tgl 15 1 empty \$0-clkin S 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#X obj 256 20 tgl 15 1 empty \$0-clkin S 17 7 0 10 -262144 -1 -1 1
+1;
 #X obj 90 260 &&;
 #X obj 100 230 t b f;
 #N canvas 730 184 451 326 setup 0;
@@ -1402,8 +1404,8 @@ SPP, f 30;
 #X obj 40 20 inlet;
 #X obj 40 45 pack f f;
 #X msg 40 70 \$2 \$1;
-#X obj 85 20 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
-1 1;
+#X obj 85 20 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+;
 #X obj 40 210 outlet;
 #X obj 40 95 route 0 1;
 #X obj 40 120 t f b b;
@@ -1499,36 +1501,36 @@ SPP, f 30;
 #X connect 65 1 64 1;
 #X connect 66 0 26 0;
 #X coords 0 -1 1 1 167 21 1 134 17;
-#X restore 10 50 pd time;
-#X msg 195 390;
-#X msg 198 330 5 2;
-#X msg 230 330 7 2;
-#X text 80 280 meter;
-#N canvas 300 52 570 720 harm-sweep 0;
-#X floatatom 20 30 5 0 100 2 hmin #0-harm-val -, f 5;
-#X floatatom 60 30 5 -100 100 2 pref #0-pref-val -, f 5;
-#X floatatom 20 70 5 0 100 2 from #0-harm-from -, f 5;
-#X floatatom 60 70 5 -100 100 2 from #0-pref-from -, f 5;
-#X floatatom 20 103 5 0 100 2 to #0-harm-to -, f 5;
-#X floatatom 60 103 5 -100 100 2 to #0-pref-to -, f 5;
+#X restore 22 60 pd time;
+#X msg 207 400;
+#X msg 210 340 5 2;
+#X msg 242 340 7 2;
+#X text 92 290 meter;
+#N canvas 300 29 570 743 harm-sweep 0;
+#X floatatom 20 30 5 0 100 2 hmin #0-harm-val -;
+#X floatatom 60 30 5 -100 100 2 pref #0-pref-val -;
+#X floatatom 20 70 5 0 100 2 from #0-harm-from -;
+#X floatatom 60 70 5 -100 100 2 from #0-pref-from -;
+#X floatatom 20 103 5 0 100 2 to #0-harm-to -;
+#X floatatom 60 103 5 -100 100 2 to #0-pref-to -;
 #X obj 170 30 vradio 15 0 0 2 \$0-harm-sweep-s \$0-harm-sweep harm
-0 -8 0 10 #fcfcfc #000000 #000000 1;
+0 -8 0 10 -262144 -1 -1 1;
 #X obj 210 30 vradio 15 0 0 2 \$0-pref-sweep-s \$0-pref-sweep pref
-0 -8 0 10 #fcfcfc #000000 #000000 1;
+0 -8 0 10 -262144 -1 -1 1;
 #X text 235 27 up;
 #X text 235 44 down;
 #X obj 100 30 vradio 15 0 0 2 \$0-part-s \$0-part part -1 -10 0 10
-#dcdcdc #000000 #000000 0;
+-228856 -1 -1 0;
 #X text 124 44 all;
 #X obj 100 70 vradio 15 0 0 3 \$0-target-s \$0-target target -1 53
-0 10 #dcdcdc #000000 #000000 0;
+0 10 -228856 -1 -1 0;
 #X text 125 67 both;
 #X text 125 84 harm;
 #X text 125 100 pref;
-#X floatatom 170 84 5 0 64 2 time #0-harm-time -, f 5;
-#X floatatom 210 84 5 0 64 2 time #0-pref-time -, f 5;
-#X obj 250 84 bng 15 250 50 0 empty \$0-sweep empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X floatatom 170 84 5 0 64 2 time #0-harm-time -;
+#X floatatom 210 84 5 0 64 2 time #0-pref-time -;
+#X obj 250 84 bng 15 250 50 0 empty \$0-sweep empty 17 7 0 10 -262144
+-1 -1;
 #X obj 20 140 v \$0-harm-from;
 #X obj 20 160 v \$0-harm-to;
 #X obj 60 180 v \$0-pref-from;
@@ -1539,10 +1541,10 @@ SPP, f 30;
 #X obj 280 200 v \$0-pref-sweep;
 #X obj 250 380 sweep \$0 harm;
 #X obj 289 400 sweep \$0 pref;
-#X obj 250 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X obj 289 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X obj 250 360 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 289 360 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X obj 390 200 v \$0-part;
 #X obj 470 200 v \$0-target;
 #X obj 250 310 v \$0-target;
@@ -1577,7 +1579,7 @@ SPP, f 30;
 #X obj 330 515 sweep2 \$0 harm;
 #X obj 450 515 sweep2 \$0 pref;
 #X obj 170 117 hsl 90 15 0 1 0 0 empty \$0-sweep-val sweep -2 -8 0
-10 #fcfcfc #000000 #000000 8900 1;
+10 -262144 -1 -1 8900 1;
 #X msg 20 220 harm-from \$1;
 #X msg 20 240 harm-to \$1;
 #X msg 60 260 pref-from \$1;
@@ -1657,14 +1659,14 @@ SPP, f 30;
 #X connect 70 0 65 0;
 #X connect 71 0 49 0;
 #X coords 0 -1 1 1 254 136 1 15 0;
-#X restore 10 410 pd harm-sweep;
-#X text 220 110 sweep;
-#X obj 290 500 p \$0 scratch1 7;
-#X obj 290 525 p \$0 scratch2 8;
-#X text 220 125 autosweep;
-#X msg 62 203 90;
-#X msg 144 203 140;
-#N canvas 75 203 455 569 more... 0;
+#X restore 22 420 pd harm-sweep;
+#X text 232 120 sweep;
+#X obj 302 510 p \$0 scratch1 7;
+#X obj 302 535 p \$0 scratch2 8;
+#X text 232 135 autosweep;
+#X msg 74 213 90;
+#X msg 156 213 140;
+#N canvas 75 176 455 596 more... 0;
 #X obj 10 40 p \$0 piano 9;
 #X obj 10 90 p \$0 bass 10;
 #X obj 10 115 p \$0 arp 11;
@@ -1672,18 +1674,18 @@ SPP, f 30;
 #X obj 10 65 p \$0 vibes 12;
 #X obj 10 140 p \$0 wave 13;
 #X obj 10 165 p \$0 shred 14;
-#X restore 380 330 pd more...;
-#X text 220 21 off;
+#X restore 392 340 pd more...;
+#X text 232 31 off;
 #N canvas 732 125 462 516 looper 0;
-#X floatatom 40 82 3 0 99 0 - - -, f 3;
+#X floatatom 40 82 3 0 99 0 - - -;
 #X obj 70 82 bng 15 250 50 0 empty \$0-loop-file load/save 17 7 0 10
-#e0e0e0 #202020 #202020;
+-233017 -33289 -33289;
 #X obj 260 40 r \$0-loop;
 #X obj 260 65 route set;
 #X obj 260 90 != 0;
-#X obj 260 115 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
-#X floatatom 280 277 5 0 0 0 - - -, f 5;
+#X obj 260 115 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 280 277 5 0 0 0 - - -;
 #X msg 280 301 color \$1 12 12;
 #X obj 260 220 sel 1 0;
 #X msg 300 247 0;
@@ -1691,11 +1693,11 @@ SPP, f 30;
 #X obj 330 40 r \$0-arp;
 #X obj 330 65 route loop;
 #X obj 170 30 r \$0-preset;
-#X symbolatom 170 75 10 0 0 0 - - -, f 10;
+#X symbolatom 170 75 10 0 0 0 - - -;
 #X obj 170 55 t b a;
-#X obj 126 66 bng 15 150 10 0 empty \$0-loopstart empty 17 7 0 10 #a0a0a0
-#202020 #202020;
-#X floatatom 102 65 3 0 0 0 - #0-loopcounter -, f 3;
+#X obj 126 66 bng 15 150 10 0 empty \$0-loopstart empty 17 7 0 10 -166441
+-33289 -33289;
+#X floatatom 102 65 3 0 0 0 - #0-loopcounter -;
 #X obj 30 106 t b f;
 #N canvas 650 217 453 353 filename 0;
 #X obj 40 80 symbol;
@@ -1747,8 +1749,8 @@ SPP, f 30;
 #X obj 70 156 t b a;
 #X obj 340 168 change;
 #X obj 260 138 t f f;
-#X obj 340 193 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X obj 340 193 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X msg 380 247 14;
 #X connect 0 0 18 0;
 #X connect 0 0 22 1;
@@ -1796,9 +1798,9 @@ SPP, f 30;
 #X connect 37 0 19 0;
 #X connect 38 0 6 0;
 #X coords 0 -1 1 1 107 36 1 36 64;
-#X restore 177 283 pd looper;
-#X obj 252 239 ggee/image lib/autodom.gif;
-#X obj 290 3 namecanvas \$1;
+#X restore 189 293 pd looper;
+#X obj 264 249 ggee/image lib/autodom.gif;
+#X obj 302 13 namecanvas \$1;
 #X connect 2 0 29 0;
 #X connect 3 0 19 0;
 #X connect 4 0 19 0;

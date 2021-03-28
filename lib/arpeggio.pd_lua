@@ -43,6 +43,9 @@ local arpeggio = pd.Class:new():register("arpeggio")
 -- kikito's inspect, cf. https://github.com/kikito/inspect.lua
 local inspect = require 'inspect'
 
+-- live-coding support, see the pd-lua tutorial for details
+local pdx = require 'pdx'
+
 function arpeggio:initialize(_, atoms)
    -- 1st inlet takes bang for next pulse and note-vel pairs
    -- 2nd inlet takes stratified meter
@@ -51,6 +54,8 @@ function arpeggio:initialize(_, atoms)
    -- 2nd outlet outputs the note weight (Barlow indispensability)
    -- 3rd outlet outputs total number of pulses
    self.outlets = 3
+   -- live-coding support
+   pdx.reload(self)
    -- debugging (bitmask): 1 = pattern, 2 = input, 4 = output
    self.debug = 0
    -- internal state variables
